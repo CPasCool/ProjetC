@@ -3,14 +3,34 @@
 
 
 void generateBoard(){
-    for(int i = 0; i<30; i++){
-        for(int j = 0; j<30; j++){
-            if(i == 0 || i == 29 || j==0 || j == 29){
-                printf("#");
-            }else{
-                printf("%c", ' ');
-            }
-        }
-        printf("%c", '\n');
-    }
+    printf("##############################\n"
+                   "#                            #\n"
+                   "#                            #\n"
+                   "#                            #\n"
+                   "#                            #\n"
+                   "#                            #\n"
+                   "#                            #\n"
+                   "#                            #\n"
+                   "#                            #\n"
+                   "#                            #\n"
+                   "#                            #\n"
+                   "#                            #\n"
+                   "#  Bonjour et bienvenue dans #\n"
+                   "#  notre labyrinthe infini,  #\n"
+                   "#   vous allez experimente   #\n"
+                   "#      des niveaux d'une     #\n"
+                   "#      difficulte extreme    #\n"
+                   "#                            #\n"
+                   "#                            #\n"
+                   "#                            #\n"
+                   "#                            #\n"
+                   "#        Bon chance :)       #\n"
+                   "#                            #\n"
+                   "#                            #\n"
+                   "#                            #\n"
+                   "#                            #\n"
+                   "#                            #\n"
+                   "#                            #\n"
+                   "#                            #\n"
+                   "##############################");
 }
