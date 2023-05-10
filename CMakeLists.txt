@@ -3,4 +3,4 @@ project(ProjetC C)
 
 set(CMAKE_C_STANDARD 11)
 
-add_executable(ProjetC main.c Board/CreateBoard.c)
+add_executable(ProjetC main.c Board/CreateBoard.c Character/Character.c Character/Character.h)
