@@ -44,7 +44,7 @@ int setAttack(Character* character, int newAttack){
 }
 
 int setDefence(Character* character, int newDefence){
-    character->stat->attack = newDefence;
+    character->stat->defence = newDefence;
     return 0;
 }
 
