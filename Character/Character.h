@@ -4,9 +4,24 @@
 
 #ifndef PROJETC_CHARACTER_H
 #define PROJETC_CHARACTER_H
-typedef struct character_ Character;
-typedef struct statistics_ stats;
-typedef struct coordonees_ coordonees;
+typedef struct coordonees_ {
+    int x;
+    int y;
+} coordonees;
+
+typedef struct statistics_  {
+    int maxLifePoint;
+    int currentLifePoint;
+    int attack;
+    int defence;
+    int keys;
+} stats;
+
+typedef struct character_ {
+    coordonees* coo;
+    char *name;
+    stats* stat;
+} Character;
 
 // functions
 // initializer
