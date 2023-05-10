@@ -25,7 +25,7 @@ typedef struct character_ {
 
 // functions
 // initializer
-Character* createCharacter();
+Character* createCharacter(char* name);
 stats* createStats();
 // Setter
 int setLifePoint(Character* character, int newLifePoint);

@@ -8,10 +8,11 @@
 
 
 // initializers
-Character* createCharacter() {
+Character* createCharacter(char* name) {
     Character* player = malloc(sizeof (Character));
     player -> coo = malloc(sizeof (coordonees));
     player -> stat = createStats();
+    player -> name = name;
     return player;
 };
 
