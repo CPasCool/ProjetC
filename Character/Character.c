@@ -25,13 +25,26 @@ typedef struct character_ {
 } Character;
 
 
+// initializers
 Character* createCharacter() {
     Character* player = malloc(sizeof (Character));
     player -> coo = malloc(sizeof (coordonees));
-    player -> stat = malloc(sizeof (stats));
+    player -> stat = createStats();
     return player;
 };
 
+stats* createStats(){
+    stats* stat = malloc(sizeof (stats));
+    stat->attack = 5;
+    stat->maxLifePoint=10;
+    stat->keys=0;
+    stat->currentLifePoint = stat->maxLifePoint;
+    stat->defence = 5;
+    return stat;
+}
+
+
+// setters
 int setLifePoint(Character* character, int newLifePoint){
     character->stat->currentLifePoint = newLifePoint;
     return 0;

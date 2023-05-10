@@ -11,7 +11,7 @@ typedef struct coordonees_ coordonees;
 // functions
 // initializer
 Character* createCharacter();
-
+stats* createStats();
 // Setter
 int setLifePoint(Character* character, int newLifePoint);
 int setKeys(Character* character, int keyNumber);
