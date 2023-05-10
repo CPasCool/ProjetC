@@ -16,14 +16,11 @@ typedef struct statistics_{
     int attack;
     int defence;
     int keys;
-};
+}stats;
 
 typedef struct character_{
     coordonees coo;
     char* name;
-    int maxLifePoint;
-    int currentLifePoint;
-    int attack;
-    int defence;
+    stats stat;
 } Character;
 
