@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "CreateBoard.h"
+#include "Board/CreateBoard.h"
 
 int main() {
     printf("Hello, World!\n");
