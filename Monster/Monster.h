@@ -1,1 +1,1 @@
-typedef struct monster *PtrMonster;
+typedef struct monster_ monster;

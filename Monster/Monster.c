@@ -1,15 +1,15 @@
 #include <stdio.h>
 #include "Monster\Monster.h"
-struct monster{
+typedef struct monster_{
     char name;
     int hp;
     int strenght;
     int shield;
-};
+}monster;
 
-PtrMonster createNewMonster(char name, int hp, int strenght, int shield)
+monster createNewMonster(char name, int hp, int strenght, int shield)
 {
-    PtrMonster newMonster = malloc(sizeof(newMonster));
+    monster newMonster = malloc(sizeof(newMonster));
     newMonster->name = name;
     newMonster->hp = hp;
     newMonster->strenght = strenght;
