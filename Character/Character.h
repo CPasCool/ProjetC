@@ -4,5 +4,21 @@
 
 #ifndef PROJETC_CHARACTER_H
 #define PROJETC_CHARACTER_H
-struct character_;
+typedef struct character_ Character;
+typedef struct statistics_ stats;
+typedef struct coordonees_ coordonees;
+
+// functions
+// initializer
+Character* createCharacter();
+
+// Setter
+int setLifePoint(Character* character, int newLifePoint);
+int setKeys(Character* character, int keyNumber);
+int setAttack(Character* character, int newAttack);
+int setDefence(Character* character, int newDefence);
+int setName(Character* character, char* name);
+int changeCoordonnes(Character* character, int x, int y);
+int setMaximumLifePoint(Character* character , int newMax);
+
 #endif //PROJETC_CHARACTER_H
