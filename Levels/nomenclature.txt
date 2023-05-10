@@ -1,0 +1,8 @@
+T = player
+# = wall
+o = door
+A,B,C,D,E,F = monsters
+P = potion
+! = key
+V, >, <, ^= exit level
+1, 2, 3 = bonuses

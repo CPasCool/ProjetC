@@ -3,4 +3,4 @@ project(ProjetC C)
 
 set(CMAKE_C_STANDARD 11)
 
-add_executable(ProjetC main.c Board/CreateBoard.c Monster/Monster.c Monster/Monster.h)
+add_executable(ProjetC main.c Board/CreateBoard.c Monster/Monster.c Board/DisplayLevels.c)
