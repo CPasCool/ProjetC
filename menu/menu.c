@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "menu.h"
 
 void afficheCredit(){
     printf(
@@ -67,6 +68,7 @@ void afficheMenu(){
             "##############################"
     );
 }
+
 int menu(){
     int choix;
     afficheMenu();
@@ -83,7 +85,7 @@ int menu(){
     }   
 }
 
-void credit(){
+void credit() {
     int choix;
     afficheCredit();
     printf("Entrer votre choix : ");
