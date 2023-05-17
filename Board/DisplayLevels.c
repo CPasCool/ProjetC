@@ -30,4 +30,5 @@ monster* createLevelMonsters(char* levelFile){
     }
     printf("Monsters are setted\n");
     fclose(levelpointer);
+    return NULL;
 }
