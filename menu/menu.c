@@ -82,7 +82,8 @@ int menu(){
         credit();
     } else {
         return 1;
-    }   
+    }
+    return 0;
 }
 
 void credit() {

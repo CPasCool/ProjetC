@@ -19,7 +19,7 @@ int testCharacter() {
     setDefence(chara, 10);
     result += testDefence(chara, 10);
 
-    setAttack(chara, 10);
+    setStrength(chara, 10);
     result += testAttack(chara, 10);
 
     setKeys(chara, 5);
@@ -37,7 +37,7 @@ int testCharacter() {
 }
 
 int testDefence(Character *pCharacter, int i) {
-    if (pCharacter->stat->defence != i) {
+    if (getDefence(pCharacter) != i) {
         perror("The defence have not correctly set");
         return 1;
     }
@@ -45,7 +45,7 @@ int testDefence(Character *pCharacter, int i) {
 }
 
 int testKeysNumber(Character *pCharacter, int i) {
-    if (pCharacter->stat->keys != i) {
+    if (getKeys(pCharacter) != i) {
         perror("The key number have not correctly set");
         return 1;
     }
@@ -53,7 +53,7 @@ int testKeysNumber(Character *pCharacter, int i) {
 }
 
 int testLifePoint(Character *pCharacter, int i) {
-    if (pCharacter->stat->defence != i) {
+    if (getLifePoint(pCharacter) != i) {
         perror("The life point number have not correctly set");
         return 1;
     }
@@ -61,15 +61,15 @@ int testLifePoint(Character *pCharacter, int i) {
 }
 
 int testAttack(Character *pCharacter, int i) {
-    if (pCharacter->stat->defence != i) {
-        perror("The attack have not correctly set");
+    if (getStrength(pCharacter)!= i) {
+        perror("The strength have not correctly set");
         return 1;
     }
     return 0;
 }
 
 int testCharacterName(Character *player, const char *name) {
-    if (player->name != name) {
+    if (getName(player) != name) {
         perror("Name is not equals to");
         perror(name);
         return 1;
@@ -78,7 +78,7 @@ int testCharacterName(Character *player, const char *name) {
 }
 
 int testCoordonnes(Character *player, int x, int y) {
-    if (player->coo->x != x || player->coo->y != y) {
+    if (getX(player) != x || getY(player) != y) {
         perror("La fonction \" changeCoordonnes ne fonctionne pas \"");
         return 1;
     }
@@ -86,7 +86,7 @@ int testCoordonnes(Character *player, int x, int y) {
 }
 
 int testMaximumLife(Character *player, int maxLife) {
-    if (player->stat->maxLifePoint != maxLife) {
+    if (getMaximumLifePoint(player) != maxLife) {
         perror("The maxLife have not correctly set");
         return 1;
     }
