@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include "menu.h"
 
 void afficheCredit(){
     printf(
@@ -16,7 +15,7 @@ void afficheCredit(){
             "#                            #\n"
             "#                            #\n"
             "#       Jeu réalisé par      #\n"
-            "#      Korentin KOLACZEK     #\n"
+            "#      Korentin Kolaczek     #\n"
             "#       Benoit Fardoux       #\n"
             "#        Edouard Hoest       #\n"
             "#      Baptiste Lemattre     #\n"
@@ -34,7 +33,7 @@ void afficheCredit(){
             "#                            #\n"
             "##############################");
 }
-void afficheMenu(){
+void afficheMenuLancer(){
     printf(
             "##############################\n"
             "#                            #\n"
@@ -47,11 +46,11 @@ void afficheMenu(){
             "#                            #\n"
             "#                            #\n"
             "#                            #\n"
-            "#                            #\n"
-            "#    1 -   lancer le jeu     #\n"
-            "#    2 -    credit           #\n"
-            "#    3 -    quitter          #\n"
-            "#                            #\n"
+            "#  ########################  #\n"
+            "#  # 1 -   lancer le jeu  #  #\n"
+            "#  ########################  #\n"
+            "#   2 -    credit            #\n"
+            "#   3 -    quitter           #\n"
             "#                            #\n"
             "#                            #\n"
             "#                            #\n"
@@ -68,7 +67,6 @@ void afficheMenu(){
             "##############################"
     );
 }
-
 int menu(){
     int choix;
     afficheMenu();
@@ -76,16 +74,16 @@ int menu(){
     scanf("%d", &choix);
     if (choix == 1)
     {
-        printf("jeu lancer");
+        afficheMenuLancer();
     }else if (choix == 2)
     {
-        credit();
+        afficheMenuCredit();
     } else {
-        return 1;
+        afficheMenuQuit();
     }   
 }
 
-void credit() {
+void credit(){
     int choix;
     afficheCredit();
     printf("Entrer votre choix : ");

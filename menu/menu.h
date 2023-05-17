@@ -1,8 +1,11 @@
-#ifndef PROJETC_MONSTERSTESTS_H
-#define PROJETC_MONSTERSTESTS_H
-
+typedef struct choixMenu_ choixMenu;
 int menu();
-void credit();
 
-#endif //PROJETC_MONSTERSTESTS_H
 
+void lancementMenu(choixMenu*);
+void setChoixMenu(choixMenu*,int);
+choixMenu* createChoixMenu();
+void setChoixMenu(choixMenu*, int);
+choixMenu* getChoixMenu(choixMenu*);
+int getChoix(choixMenu*);
+void afficheMenu(int);
