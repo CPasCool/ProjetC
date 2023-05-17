@@ -6,9 +6,9 @@
 #include "TestCharacter.h"
 
 
-int TestCharacter() {
+int testCharacter() {
     Character *chara = createCharacter("testUser");
-    int result = testName(chara, "testUser");
+    int result = testCharacterName(chara, "testUser");
 
     changeCoordonnes(chara, 5, 5);
     result += testCoordonnes(chara, 5, 5);
@@ -32,7 +32,7 @@ int TestCharacter() {
         perror("The process encouter an error please check log");
         return 1;
     }
-    printAll(chara);
+    //printAll(chara);
     return 0;
 }
 
@@ -68,7 +68,7 @@ int testAttack(Character *pCharacter, int i) {
     return 0;
 }
 
-int testName(Character *player, const char *name) {
+int testCharacterName(Character *player, const char *name) {
     if (player->name != name) {
         perror("Name is not equals to");
         perror(name);
