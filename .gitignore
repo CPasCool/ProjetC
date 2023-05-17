@@ -29,7 +29,7 @@
 *.so.*
 *.dylib
 
-# Executables
+# itcutables
 *.exe
 *.out
 *.app
