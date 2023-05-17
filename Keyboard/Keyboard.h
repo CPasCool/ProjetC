@@ -4,5 +4,8 @@
 
 #ifndef PROJETC_KEYBOARD_H
 #define PROJETC_KEYBOARD_H
-char catchInput();
+
+#include "../Character/Character.h"
+
+int catchInput(int count, ...);
 #endif //PROJETC_KEYBOARD_H

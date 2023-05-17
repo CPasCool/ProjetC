@@ -40,4 +40,8 @@ int printDefence(Stats *stat);
 int printAttack(Stats *stat);
 int printKeysNumber(Stats *stats);
 int printAll(Character*);
+int moveLeft(Character *character);
+int moveRight(Character *character);
+int moveDown(Character *character);
+int moveUp(Character *character);
 #endif //PROJETC_CHARACTER_H
