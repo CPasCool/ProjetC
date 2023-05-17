@@ -7,5 +7,9 @@ main.exe : board.exe
 board.exe : Board\CreateBoard.c Board\CreateBoard.h
 	$(CC)  -o board.exe -c Board\CreateBoard.c $(CFLAGS)
 
+
+Board\CreateBoard.c:
+
+Board\CreateBoard.h:
 clean :
 	del main.exe board.exe
