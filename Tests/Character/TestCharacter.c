@@ -30,7 +30,9 @@ int TestCharacter() {
 
     if (result != 0) {
         perror("The process encouter an error please check log");
+        return 1;
     }
+    printAll(chara);
     return 0;
 }
 
@@ -73,13 +75,13 @@ int testName(Character *player, const char *name) {
         return 1;
     }
     return 0;
-};
+}
 
 int testCoordonnes(Character *player, int x, int y) {
     if (player->coo->x != x || player->coo->y != y) {
         perror("La fonction \" changeCoordonnes ne fonctionne pas \"");
         return 1;
-    };
+    }
     return 0;
 }
 

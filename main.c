@@ -3,7 +3,6 @@
 #include "Tests/Character/TestCharacter.h"
 
 int main() {
-    printf("Hello, World!\n");
     TestCharacter();
 
     generateBoard();
