@@ -13,8 +13,6 @@ monster* createNewMonster(char* name, int hp, int strength, int shield){
     return newMonster;
 }
 
-monster*
-
 char* generateRandomName() {
     const char* prefixes[] = {
             "Dark",

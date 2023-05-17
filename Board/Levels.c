@@ -13,8 +13,9 @@ monster* getLevelMonsters(char* levelFile){
     fopen_s(&levelpointer, levelFile, "r");
     if (fopen_s(&levelpointer, levelFile, "r") != 0) {
         printf("Error opening the file.\n");
-        return board;
+        return NULL;
     }
+    //TODO create monsters tab to add monsters coordinates
     char letter = (char)  fgetc(levelpointer);
     while(letter != EOF && letter != 'E'){
         board+=letter;
@@ -71,7 +72,6 @@ monster* createLevelMonsters(char* levelFile, int nbMonsterA, int nbMonsterB, in
                 }
             }
         }
-        printf("%s", line);
         line = fgets(line, 32, levelpointer);
         counter++;
     }
@@ -93,12 +93,20 @@ char** getLevelBoard(char* levelFile){
     }
     char letter = (char)  fgetc(levelpointer);
 
-    char* line = malloc(sizeof (char) * 32);
-    fgets(line, 32, levelpointer);
+    //char* line = malloc(sizeof (char) * 32);
+    //fgets(line, 32, levelpointer);
 
-    while(line != NULL){
-        printf("%s", line);
-        line = fgets(line, 32, levelpointer);
+    //while(line != NULL){
+    while(letter != EOF && letter != 'E'){
+        //Print the § character --> -62 = special character ascii then skip the ° symbol because the § is split in UTF-8
+        if(letter == (char)-62){
+            printf("%c", 21);
+            letter = (char)  fgetc(levelpointer);
+        }else{
+            printf("%c", letter);
+        }
+        letter = (char)  fgetc(levelpointer);
+        //line = fgets(line, 32, levelpointer);
     }
     printf("Board is displayed\n");
     fclose(levelpointer);

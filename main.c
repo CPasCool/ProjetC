@@ -10,7 +10,7 @@ int main() {
     testCharacter();
     testMonster();
     generateBoard();
-    printf("\n");
-    char* board = createLevelBoard("../Levels/levelOne.txt");
+    getLevelBoard("../Levels/levelOne.txt");
+    char** board = getLevelBoard("../Levels/levelOne.txt");
     return 0;
 }
