@@ -1,8 +1,15 @@
 #ifndef PROJETC_MONSTER_H
 #define PROJETC_MONSTER_H
 
-typedef struct Monster monster;
+typedef struct Monster{
+    char* name;
+    int hp;
+    int strength;
+    int shield;
+} monster;
+
 monster* createNewMonster(char* name, int hp, int strenght, int shield);
+char* generateRandomName();
 monster* setMonster(monster* monster, char* name, int hp, int strength, int shield);
 monster* setMonsterName(monster* monster, char* name);
 monster* setMonsterHealth(monster* monster, int hp);

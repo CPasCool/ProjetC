@@ -1,13 +1,8 @@
 #include <stdlib.h>
+#include <string.h>
 #include <stdio.h>
 #include "Monster.h"
 
-typedef struct Monster{
-    char* name;
-    int hp;
-    int strength;
-    int shield;
-}monster;
 
 monster* createNewMonster(char* name, int hp, int strength, int shield){
     monster *newMonster = (monster*) malloc(sizeof(struct Monster));
@@ -16,6 +11,36 @@ monster* createNewMonster(char* name, int hp, int strength, int shield){
     newMonster->strength = strength;
     newMonster->shield = shield;
     return newMonster;
+}
+
+monster*
+
+char* generateRandomName() {
+    const char* prefixes[] = {
+            "Dark",
+            "Shadow",
+            "Fire",
+            "Ice",
+            "Thunder",
+    };
+    const char* suffixes[] = {
+            "fang",
+            "claw",
+            "scale",
+            "wing",
+            "beast",
+    };
+
+    const int numPrefixes = sizeof(prefixes) / sizeof(prefixes[0]);
+    const int numSuffixes = sizeof(suffixes) / sizeof(suffixes[0]);
+
+    char* name = (char*)malloc(sizeof(char) * 20);
+
+    strcpy(name, prefixes[rand() % numPrefixes]);
+    strcat(name, " ");
+    strcat(name, suffixes[rand() % numSuffixes]);
+
+    return name;
 }
 
 monster* setMonster(monster* monster, char* name, int hp, int strength, int shield){

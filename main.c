@@ -12,6 +12,5 @@ int main() {
     generateBoard();
     printf("\n");
     char* board = createLevelBoard("../Levels/levelOne.txt");
-    monster* monster = createLevelMonsters("../Levels/levelOne.txt");
     return 0;
 }
