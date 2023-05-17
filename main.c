@@ -2,7 +2,7 @@
 #include "Board/CreateBoard.h"
 #include "Tests/Character/TestCharacter.h"
 #include "Tests/Monsters/MonstersTests.h"
-#include "Board/DisplayLevels.h"
+#include "Board/Levels.h"
 #include "Monster/Monster.h"
 
 
@@ -11,7 +11,7 @@ int main() {
     testMonster();
     generateBoard();
     printf("\n");
-    displayLevel("../Levels/levelOne.txt");
-    monster* monster1 = setLevelMonsters("../Levels/levelOne.txt")[0];
+    char* board = createLevelBoard("../Levels/levelOne.txt");
+    monster* monster = createLevelMonsters("../Levels/levelOne.txt");
     return 0;
 }
