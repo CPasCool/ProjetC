@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-void credit(){
+void afficheCredit(){
     printf(
             "##############################\n"
             "#                            #\n"
@@ -23,7 +23,7 @@ void credit(){
             "#                            #\n"
             "#                            #\n"
             "#                            #\n"
-            "#        Bon chance :)       #\n"
+            "#     1 - retour au menu     #\n"
             "#                            #\n"
             "#                            #\n"
             "#                            #\n"
@@ -33,7 +33,7 @@ void credit(){
             "#                            #\n"
             "##############################");
 }
-void menu(){
+void afficheMenu(){
     printf(
             "##############################\n"
             "#                            #\n"
@@ -47,9 +47,9 @@ void menu(){
             "#                            #\n"
             "#                            #\n"
             "#                            #\n"
-            "#    1 - lancer le jeu       #\n"
-            "#    2 -   quitter           #\n"
-            "#    3 -    credit           #\n"
+            "#    1 -   lancer le jeu     #\n"
+            "#    2 -    credit           #\n"
+            "#    3 -    quitter          #\n"
             "#                            #\n"
             "#                            #\n"
             "#                            #\n"
@@ -66,4 +66,27 @@ void menu(){
             "#                            #\n"
             "##############################"
     );
+}
+int menu(){
+    int choix;
+    afficheMenu();
+    printf("Entrer votre choix");
+    scanf("%d", &choix);
+    if (choix == 1)
+    {
+        printf("jeu lancer");
+    }else if (choix == 2)
+    {
+        credit();
+    } else {
+        return 1;
+    }   
+}
+
+void credit(){
+    int choix;
+    afficheCredit();
+    printf("Entrer votre choix : ");
+    scanf("%d", &choix);
+    menu();
 }
