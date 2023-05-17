@@ -4,6 +4,7 @@
 
 int main() {
 //    TestCharacter();
+catchInput();
     generateBoard();
     return 0;
 }

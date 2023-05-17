@@ -8,6 +8,6 @@
 
 char catchInput(){
     int letter = getch();
-    printf("%d",letter);
+    printf("%c",letter);
     return 'a';
 }
