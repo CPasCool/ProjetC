@@ -15,18 +15,18 @@ typedef struct statistics_  {
     int attack;
     int defence;
     int keys;
-} stats;
+} Stats;
 
 typedef struct character_ {
     coordonees* coo;
     char *name;
-    stats* stat;
+    Stats* stat;
 } Character;
 
 // functions
 // initializer
 Character* createCharacter(char* name);
-stats* createStats();
+Stats* createStats();
 // Setter
 int setLifePoint(Character* character, int newLifePoint);
 int setKeys(Character* character, int keyNumber);
@@ -35,5 +35,9 @@ int setDefence(Character* character, int newDefence);
 int setName(Character* character, char* name);
 int changeCoordonnes(Character* character, int x, int y);
 int setMaximumLifePoint(Character* character , int newMax);
-
+int printLifePoint(Stats* stat);
+int printDefence(Stats *stat);
+int printAttack(Stats *stat);
+int printKeysNumber(Stats *stats);
+int printAll(Character*);
 #endif //PROJETC_CHARACTER_H
