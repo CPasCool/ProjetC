@@ -7,5 +7,5 @@
 
 #include "../Character/Character.h"
 
-int catchInput(int count, ...);
+int catchInput(int , ...);
 #endif //PROJETC_KEYBOARD_H

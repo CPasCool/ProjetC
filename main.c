@@ -3,8 +3,8 @@
 #include "Keyboard/Keyboard.h"
 
 int main() {
-//    TestCharacter();
-catchInput();
+    //    TestCharacter();
+//    catchInput(0);
     generateBoard();
     return 0;
 }
