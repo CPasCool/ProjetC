@@ -4,8 +4,8 @@
 #include "Tests/Monsters/MonstersTests.h"
 
 int main() {
-    //    TestCharacter();
-//    catchInput(0);
+    testCharacter();
+    testMonster();
     generateBoard();
     return 0;
 }
