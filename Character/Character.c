@@ -94,7 +94,7 @@ int printAll(Character *character) {
 }
 
 /**
- * move the character up in board
+ * move the character to the up in board
  * @param character : character to move
  * @return
  */
@@ -104,7 +104,7 @@ int moveUp(Character *character){
     return 0;
 }
 /**
- * move the character down in board
+ * move the character to the down in board
  * @param character : character to move
  * @return
  */
@@ -115,7 +115,7 @@ int moveDown(Character *character){
 }
 
 /**
- * move the character right in board
+ * move the character to the right in board
  * @param character : character to move
  * @return
  */
@@ -126,7 +126,7 @@ int moveRight(Character *character){
 };
 
 /**
- * move the character Left in board
+ * move the character to the left in board
  * @param character : character to move
  * @return
  */
