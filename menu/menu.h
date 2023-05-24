@@ -13,5 +13,7 @@ void afficheMenu(int);
 void menu();
 void newGame();
 void displayMenuNewGame(int);
+void displayMenuIngame(int);
+void inGame();
 
 #endif
