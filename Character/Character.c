@@ -193,26 +193,3 @@ int moveLeft(Character *character) {
     character->coo->x += 1;
     return 0;
 }
-
-/**
- * fight with target monster
- * @param character : character of the player
- * @param monster : target monster to fight
- * @return
- */
-int fightWithMonster(Character *character, monster *monster) {
-    // attribue degat au monste
-    if (character->stat->strength - getMonsterShield(monster) > 0) {
-        setMonsterHealth(monster, getMonsterHealth(monster) - (character->stat->strength - getMonsterShield(monster)));
-    } else {
-        setMonsterHealth(monster, getMonsterHealth(monster) - 1);
-    }
-
-    if (getMonsterHealth(monster) > 0) {
-        character->stat->currentLifePoint -= getMonsterStrength(monster) - character->stat->defence;
-        return 1;
-    }
-
-    return 0;
-}
-
