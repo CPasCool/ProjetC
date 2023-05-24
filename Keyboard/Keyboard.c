@@ -19,6 +19,7 @@ int catchInput(int count, ...) {
     character = va_arg(ap, Character*);
     va_end(ap);
     int letter = getch();
+
     if (character != NULL) {
         if (letter == 'Z' || letter == 'z') {
             moveUp(character);
@@ -35,6 +36,7 @@ int catchInput(int count, ...) {
         return letter;
     } else {
         // TODO : use menu
+        int menu ;
         return letter;
     }
 }
