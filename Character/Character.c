@@ -5,12 +5,8 @@
 #include "Character.h"
 # include <stdlib.h>
 #include "stdio.h"
-#include "../Monster/Monster.h"
+#include "../Coodonnees/Coordonees.h"
 
-typedef struct coordonees_ {
-    int x;
-    int y;
-} coordonees;
 
 typedef struct statistics_ {
     int maxLifePoint;
@@ -72,16 +68,16 @@ int getDefence(Character *character) {
     return character->stat->defence;
 }
 
+int getCharaX(Character *character){
+    return character->coo->x;
+}
+
+int getCharaY(Character *character){
+    return character->coo->y;
+}
+
 coordonees *getCoo(Character *character) {
     return character->coo;
-}
-
-int getX(Character *character) {
-    return getCoo(character)->x;
-}
-
-int getY(Character *character) {
-    return getCoo(character)->y;
 }
 
 // setters
