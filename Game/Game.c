@@ -3,6 +3,7 @@
 //
 
 #include <stdbool.h>
+#include "stdio.h"
 #include "Game.h"
 #include "../menu/menu.h"
 #include "../Keyboard/Keyboard.h"
@@ -13,6 +14,10 @@ const int MINIMUM_CHOICE_MENU = 1;
 
 
 int LaunchGame() {
+    printf("Z -> move up\n"
+           "S -> move down\n"
+           "E -> validate choice\n");
+
     choiceMenu* menu = createChoiceMenu();
     bool isChoiced = false;
     do {
@@ -40,5 +45,10 @@ int LaunchGame() {
 }
 
 int play() {
+    printf("Z -> move up\n"
+                  "S -> move down\n"
+                  "Q -> move left\n"
+                  "D -> move right\n"
+                  "P -> pause game");
     return 0;
 }
