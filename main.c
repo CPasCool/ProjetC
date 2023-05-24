@@ -6,9 +6,9 @@
 
 
 int main() {
-    /*testCharacter();
+    testCharacter();
     testMonster();
-    generateBoard();*/
+    generateBoard();
     menu();
     return 0;
 }

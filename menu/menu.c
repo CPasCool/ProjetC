@@ -70,7 +70,7 @@ void afficheMenuLancer(){
             "#                            #\n"
             "#                            #\n"
             "#  ########################  #\n"
-            "#  # 1 -   lancer le jeu  #  #\n"
+            "#  # 1 -   lauch a game   #  #\n"
             "#  ########################  #\n"
             "#   2 -    credit            #\n"
             "#   3 -    quitter           #\n"
