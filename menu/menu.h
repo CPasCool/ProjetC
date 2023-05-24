@@ -11,5 +11,7 @@ choixMenu* getChoixMenu(choixMenu*);
 int getChoix(choixMenu*);
 void afficheMenu(int);
 void menu();
+void newGame();
+void displayMenuNewGame(int);
 
 #endif

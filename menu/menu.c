@@ -42,7 +42,7 @@ void displayNewGame()
             "#  # 1 -   New Game       #  #\n"
             "#  ########################  #\n"
             "#   2 -    Load a save       #\n"
-            "#   3 -    quitter           #\n"
+            "#   3 -    Leave             #\n"
             "#                            #\n"
             "#                            #\n"
             "#                            #\n"
@@ -78,7 +78,41 @@ void displaySave()
             "#  ########################  #\n"
             "#  # 2 -   Load a save    #  #\n"
             "#  ########################  #\n"
-            "#   3 -    quitter           #\n"
+            "#   3 -    Leave             #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "##############################"
+    );
+}
+void displayQuitNewGame(){
+    printf(
+            "##############################\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#    1 -   New Game          #\n"
+            "#    2 -   Load a save       #\n"
+            "#  ########################  #\n"
+            "#  # 3 -    Leave         #  #\n"
+            "#  ########################  #\n"
             "#                            #\n"
             "#                            #\n"
             "#                            #\n"
@@ -163,6 +197,7 @@ void afficheMenuLancer(){
             "##############################"
     );
 }
+
 void afficheMenuCredit(){
     printf(
             "##############################\n"
@@ -243,6 +278,18 @@ void afficheMenu(int choix){
     }   
 }
 
+void displayMenuNewGame(int choice){
+    if (choice == 1)
+    {
+        displayNewGame();
+    }else if (choice == 2)
+    {
+        displaySave();
+    } else {
+        displayQuitNewGame();
+    }
+}
+
 void menu(){
     choixMenu* choixMenu = createChoixMenu();
     bool choixFait = false;
@@ -255,5 +302,19 @@ void menu(){
         
         setChoixMenu(choixMenu,choix);
         afficheMenu(getChoix(choixMenu));
+    }
+}
+
+void newGame(){
+    choixMenu* choiceNewgame = createChoixMenu();
+    bool choiceDo = false;
+    displayMenuNewGame(getChoix(choiceNewgame));
+    int choice;
+    while (choiceDo == false)
+    {
+        printf("entrer votre choix");
+        scanf("%d",&choice);
+        setChoixMenu(choiceNewgame,choice);
+        afficheMenu(getChoix(choiceNewgame));
     }
 }
