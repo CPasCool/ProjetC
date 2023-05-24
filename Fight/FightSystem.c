@@ -14,13 +14,13 @@
 int fightWithMonster(Character *character, monster *monster) {
     // attribue degat au monste
     if (getStrength(character) - getMonsterShield(monster) > 0) {
-        setMonsterHealth(monster, getMonsterHealth(monster) - (character->stat->strength - getMonsterShield(monster)));
+        setMonsterHealth(monster, getMonsterHealth(monster) - (getStrength(character) - getMonsterShield(monster)));
     } else {
         setMonsterHealth(monster, getMonsterHealth(monster) - 1);
     }
 
     if (getMonsterHealth(monster) > 0) {
-        setMonsterHealth(getLifePoint(character) - getMonsterStrength(monster) - getDefence(character));
+        setLifePoint(character,getLifePoint(character) - getMonsterStrength(monster) - getDefence(character));
         return 1;
     }
 
