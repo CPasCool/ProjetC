@@ -3,27 +3,26 @@
 #include <stdbool.h>
 #include "menu.h"
 
-struct choixMenu_
-{
-    int choix;
+struct choice {
+    int choice;
 };
 
-void setChoixMenu(choixMenu* choixMenu, int choix){
-    choixMenu -> choix = choix;
+void setChoice(choiceMenu *choiceMenu, int choice) {
+    choiceMenu->choice = choice;
 }
 
-choixMenu* getChoixMenu (choixMenu* choixMenu){
-    return choixMenu;
+
+int getChoice(choiceMenu *choixMenu) {
+    return choixMenu->choice;
 }
-int getChoix(choixMenu* choixMenu){
-    return choixMenu -> choix;
+
+choiceMenu *createChoiceMenu() {
+    choiceMenu *choiceMenuTmp = malloc(sizeof(choiceMenu));
+    choiceMenuTmp->choice = 1;
+    return choiceMenuTmp;
 }
-choixMenu* createChoixMenu(){
-    choixMenu* choixMenuTemp = malloc(sizeof(choixMenu));
-    choixMenuTemp -> choix = 1;
-    return choixMenuTemp;
-}
-void afficheCredit(){
+
+void displayCredit() {
     printf(
             "##############################\n"
             "#                            #\n"
@@ -56,7 +55,8 @@ void afficheCredit(){
             "#                            #\n"
             "##############################");
 }
-void afficheMenuLancer(){
+
+void displayPlayMenu() {
     printf(
             "##############################\n"
             "#                            #\n"
@@ -90,7 +90,8 @@ void afficheMenuLancer(){
             "##############################"
     );
 }
-void afficheMenuCredit(){
+
+void displayCreditMenu() {
     printf(
             "##############################\n"
             "#                            #\n"
@@ -124,7 +125,8 @@ void afficheMenuCredit(){
             "##############################"
     );
 }
-void afficheMenuQuit(){
+
+void displayExitMenu() {
     printf(
             "##############################\n"
             "#                            #\n"
@@ -158,29 +160,30 @@ void afficheMenuQuit(){
             "##############################"
     );
 }
-void afficheMenu(int choix){    
-    if (choix == 1)
-    {
-        afficheMenuLancer();
-    }else if (choix == 2)
-    {
-        afficheMenuCredit();
+
+void displayMenu(int choice) {
+    if (choice == 1) {
+        displayPlayMenu();
+    } else if (choice == 2) {
+        displayCreditMenu();
     } else {
-        afficheMenuQuit();
-    }   
+        displayExitMenu();
+    }
 }
 
-void menu(){
-    choixMenu* choixMenu = createChoixMenu();
+void menu() {
+    choiceMenu *choixMenu = createChoiceMenu();
     bool choixFait = false;
-    afficheMenu(getChoix(choixMenu));
+    displayMenu(getChoice(choixMenu));
+
     int choix;
-    while (choixFait == false)
-    {
-        printf("entrer votre choix");
-        scanf("%d",&choix);
-        
-        setChoixMenu(choixMenu,choix);
-        afficheMenu(getChoix(choixMenu));
+
+
+    while (choixFait == false) {
+        printf("entrer votre choice");
+        scanf("%d", &choix);
+
+        setChoice(choixMenu, choix);
+        displayMenu(getChoice(choixMenu));
     }
 }
