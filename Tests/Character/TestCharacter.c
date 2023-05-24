@@ -78,7 +78,7 @@ int testCharacterName(Character *player, const char *name) {
 }
 
 int testCoordonnes(Character *player, int x, int y) {
-    if (getX(player) != x || getY(player) != y) {
+    if (getCharaX(player) != x || getCharaY(player) != y) {
         perror("La fonction \" changeCoordonnes ne fonctionne pas \"");
         return 1;
     }

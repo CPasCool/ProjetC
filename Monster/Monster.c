@@ -4,12 +4,13 @@
 #include "Monster.h"
 
 
-monster* createNewMonster(char* name, int hp, int strength, int shield){
+monster* createNewMonster(char* name, int hp, int strength, int shield, coordonees* coo){
     monster *newMonster = (monster*) malloc(sizeof(struct Monster));
     newMonster->name = name;
     newMonster->hp = hp;
     newMonster->strength = strength;
     newMonster->shield = shield;
+    newMonster->MonsterCoordonnees = coo;
     return newMonster;
 }
 
@@ -41,13 +42,20 @@ char* generateRandomName() {
     return name;
 }
 
-monster* setMonster(monster* monster, char* name, int hp, int strength, int shield){
+monster* setMonster(monster* monster, char* name, int hp, int strength, int shield, coordonees *coo){
     monster->name = name;
     monster->hp = hp;
     monster->strength = strength;
     monster->shield = shield;
+    monster->MonsterCoordonnees = coo;
     return monster;
 }
+
+monster* setMonsterCoordonees(monster* monster, coordonees *coo){
+    monster->MonsterCoordonnees = coo;
+    return monster;
+}
+
 
 monster* setMonsterName(monster* monster, char* name){
     monster->name = name;
@@ -85,6 +93,10 @@ int getMonsterShield(monster* monster){
     return monster->shield;
 }
 
+coordonees* getMonsterCoordonees(monster* monster){
+    return monster->MonsterCoordonnees;
+}
+
 void printMonsterName(monster* monster){
     printf("The monster name is %s\n", getMonsterName(monster));
 }
@@ -98,7 +110,11 @@ void printMonsterStrength(monster* monster){
 }
 
 void printMonsterShield(monster* monster){
-    printf("Th monster shield is %d\n", getMonsterShield(monster));
+    printf("The monster shield is %d\n", getMonsterShield(monster));
+}
+
+void printMonsterCoordonees(monster* monster){
+    printf("The monster coordonates are x: %d, y: %d\n", getMonsterCoordonees(monster)->x, getMonsterCoordonees(monster)->y);
 }
 
 void printAllMonster(monster* monster){
