@@ -12,6 +12,6 @@ int main() {
 
     // Start the game
     LaunchGame();
-    generateBoard();
+    //    generateBoard();
     return 0;
 }

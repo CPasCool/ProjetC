@@ -10,7 +10,7 @@ choiceMenu *createChoiceMenu();
 
 int getChoice(choiceMenu *);
 
-void displayMenu(int);
+void displayMenu(choiceMenu*);
 
 void menu();
 

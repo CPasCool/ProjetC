@@ -9,6 +9,7 @@ struct choice {
 
 void setChoice(choiceMenu *choiceMenu, int choice) {
     choiceMenu->choice = choice;
+    displayMenu(choiceMenu);
 }
 
 
@@ -161,10 +162,10 @@ void displayExitMenu() {
     );
 }
 
-void displayMenu(int choice) {
-    if (choice == 1) {
+void displayMenu(choiceMenu *choice) {
+    if (getChoice(choice) == 1) {
         displayPlayMenu();
-    } else if (choice == 2) {
+    } else if (getChoice(choice) == 2) {
         displayCreditMenu();
     } else {
         displayExitMenu();
@@ -174,7 +175,7 @@ void displayMenu(int choice) {
 void menu() {
     choiceMenu *choixMenu = createChoiceMenu();
     bool choixFait = false;
-    displayMenu(getChoice(choixMenu));
+    displayMenu(choixMenu);
 
     int choix;
 
@@ -184,6 +185,6 @@ void menu() {
         scanf("%d", &choix);
 
         setChoice(choixMenu, choix);
-        displayMenu(getChoice(choixMenu));
+        displayMenu(choixMenu);
     }
 }
