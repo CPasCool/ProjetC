@@ -17,6 +17,12 @@ int main() {
     for(int i =0; i<30; i++){
         printf("%s\n", board[i]);
     }
+    monster ** monsters = getLevelMonsters("../Levels/levelOne.txt");
+    for(int i =0; i<10; i++){
+        if(getMonsterType(monsters[i] )!= 'D'){
+            printMonsterStats(monsters[i]);
+        }
+    }
 
     // Start the game
     LaunchGame();
