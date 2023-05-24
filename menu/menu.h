@@ -1,19 +1,22 @@
 #ifndef PROJETC_MENU_H
 #define PROJETC_MENU_H
 
-typedef struct choixMenu_ choixMenu;
+typedef struct choice choiceMenu;
 
 
-void setChoixMenu(choixMenu*,int);
-choixMenu* createChoixMenu();
-void setChoixMenu(choixMenu*, int);
-choixMenu* getChoixMenu(choixMenu*);
-int getChoix(choixMenu*);
-void afficheMenu(int);
+void setChoice(choiceMenu *choiceMenu, int choice);
+
+choiceMenu *createChoiceMenu();
+
+int getChoice(choiceMenu *);
+
+void displayMenu(choiceMenu*);
+
 void menu();
 void newGame();
 void displayMenuNewGame(int);
 void displayMenuIngame(int);
 void inGame();
 
+int pauseMenu();
 #endif
