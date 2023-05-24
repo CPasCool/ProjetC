@@ -402,31 +402,31 @@ void menu() {
 }
 
 void newGame(){
-    choixMenu* choiceNewgame = createChoixMenu();
+    choiceMenu *choiceNewgame = createChoiceMenu();
     bool choiceDo = false;
-    displayMenuNewGame(getChoix(choiceNewgame));
+    displayMenuNewGame(getChoice(choiceNewgame));
     int choice;
     while (choiceDo == false)
     {
         printf("entrer votre choix");
         scanf("%d",&choice);
-        setChoixMenu(choiceNewgame,choice);
-        displayMenuNewGame(getChoix(choiceNewgame));
+        setChoice(choiceNewgame,choice);
+        displayMenuNewGame(getChoice(choiceNewgame));
     }
 }
 
 void inGame()
 {
-    choixMenu* choiceIngame = createChoixMenu();
+    choiceMenu *choiceIngame = createChoiceMenu();
     bool choiceDo = false;
-    displayMenuIngame((getChoix(choiceIngame)));
+    displayMenuIngame((getChoice(choiceIngame)));
     int choice;
     while (choiceDo == false)
     {
         printf("entrer votre choix");
         scanf("%d",&choice);
-        setChoixMenu(choiceIngame,choice);
-        displayMenuIngame(getChoix(choiceIngame));
+        setChoice(choiceIngame,choice);
+        displayMenuIngame(getChoice(choiceIngame));
     }
 
 }
