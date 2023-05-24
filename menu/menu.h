@@ -14,4 +14,5 @@ void displayMenu(choiceMenu*);
 
 void menu();
 
+int pauseMenu();
 #endif

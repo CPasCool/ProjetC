@@ -12,6 +12,12 @@ void setChoice(choiceMenu *choiceMenu, int choice) {
     displayMenu(choiceMenu);
 }
 
+int pauseMenu(){
+    //TODO return 1 si le joueur quitte la partie;
+    return 0;
+}
+
+
 
 int getChoice(choiceMenu *choixMenu) {
     return choixMenu->choice;

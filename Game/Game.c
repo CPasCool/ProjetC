@@ -44,11 +44,33 @@ int LaunchGame() {
     return 0;
 }
 
-int play() {
+
+void play() {
+    // affiche les touches
     printf("Z -> move up\n"
                   "S -> move down\n"
                   "Q -> move left\n"
                   "D -> move right\n"
                   "P -> pause game");
-    return 0;
+    // condition de sortie du jeu
+    bool inGame = true;
+    Character* character = createCharacter("player");
+    // boucle de jeu
+    while (inGame){
+        char input = catchInput();
+        if (input == 'p'){
+            if (pauseMenu() == 1) {
+                inGame = false;
+            };
+        }
+        else if (input == 'q'){
+            moveLeft(character);
+        } else if (input == 'd'){
+            moveRight(character);
+        } else if (input == 'z'){
+            moveUp(character);
+        }else if (input == 's'){
+            moveDown(character);
+        }
+    }
 }
