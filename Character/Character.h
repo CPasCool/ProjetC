@@ -66,7 +66,6 @@ char *getName(Character *character);
 
 int getX(Character *character);
 
-int fightWithMonster(Character *character, monster *monster);
 
 int getY(Character *character);
 
