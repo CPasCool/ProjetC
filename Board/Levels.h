@@ -7,5 +7,6 @@
 monster** getLevelMonsters(char* levelFile);
 void createLevelMonsters(char* levelFile, monster** monsterTab, int nbMonster);
 char** getLevelBoard(char* levelFile);
+char **getOtherLevels(char *levelFile);
 
 #endif //PROJETC_DISPLAYLEVELS_H
