@@ -3,20 +3,25 @@
 #include <stdlib.h>
 #include <ctype.h>
 
-
+// Get an array of monsters set with the monsters data of a given levels
 monster **getLevelMonsters(char *levelFile) {
     FILE *levelpointer;
-    char *board = "";
     int monsterCount = 0;
     fopen_s(&levelpointer, levelFile, "r");
+
+    // Send an error if the file does not exist
     if (fopen_s(&levelpointer, levelFile, "r") != 0) {
         printf("Error opening the file.\n");
         return NULL;
     }
-    monster **monstersTab = malloc(sizeof(struct Monster) * 10);
+    monster **monstersTab = (monster **) malloc(sizeof(struct Monster *) * 40);
+
+    //use to get a monster coordinates
     int counterLine = 0;
     int counterLetter = 0;
     char letter = (char) fgetc(levelpointer);
+
+    // Put all monsters in an array set with their coordinates and type
     while (letter != EOF && letter != 'E') {
         if (letter == 'A' || letter == 'B' || letter == 'C') {
             if (letter == 'A') {
@@ -33,29 +38,36 @@ monster **getLevelMonsters(char *levelFile) {
             }
             monsterCount++;
         }
+
+        // Skip \n
         if (letter != '\n') {
             counterLetter++;
         }
+
+        // reset column
         if (counterLetter - 30 == 0) {
             counterLine++;
             counterLetter = 0;
         }
         letter = (char) fgetc(levelpointer);
     }
-    if (monsterCount < 9) {
-        for (int i = monsterCount; i < 10; i++) {
-            monstersTab[i] = createNewMonster(generateRandomName(), 0, 0, 0, 'D', createCoordonne(-1, -1));
-        }
+    if (monsterCount < 40) {
+        monstersTab = realloc(monstersTab, sizeof(struct Monster *) * monsterCount);
     }
     printf("Board is displayed\n");
     fclose(levelpointer);
+
+    // Set all monsters stats
     createLevelMonsters(levelFile, monstersTab, monsterCount);
+    printf("%d", monsterCount);
     return monstersTab;
 }
 
 void createLevelMonsters(char *levelFile, monster **monsterTab, int nbMonster) {
     FILE *levelpointer;
     fopen_s(&levelpointer, levelFile, "r");
+
+    // Send an error if the file does not exist
     if (fopen_s(&levelpointer, levelFile, "r") != 0) {
         printf("Error opening the file.\n");
         return;
@@ -193,4 +205,8 @@ char **getLevelBoard(char *levelFile) {
     printf("We got the board\n");
     fclose(levelpointer);
     return board;
+}
+
+char** getOtherLevels(char* levelFile){
+
 }
