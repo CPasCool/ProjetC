@@ -13,5 +13,10 @@ int getChoice(choiceMenu *);
 void displayMenu(choiceMenu*);
 
 void menu();
+void newGame();
+void displayMenuNewGame(int);
+void displayMenuIngame(int);
+void inGame();
 
+int pauseMenu();
 #endif

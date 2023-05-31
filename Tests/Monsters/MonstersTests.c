@@ -2,8 +2,10 @@
 #include "MonstersTests.h"
 
 
+
 int testMonster() {
-    monster *testedMonster = createNewMonster("blibli", 5, 4, 5);
+    coordonees * coo = createCoordonne(5,5);
+    monster *testedMonster = createNewMonster("blibli", 5, 4, 5, 'A', coo);
     int result = testName(testedMonster, "blibli");
 
     setMonsterShield(testedMonster, 10);
@@ -19,7 +21,7 @@ int testMonster() {
         perror("The process encouter an error please check log");
         return 1;
     }
-    //printAllMonster(testedMonster);
+    //printMonsterStats(testedMonster);
     return 0;
 }
 

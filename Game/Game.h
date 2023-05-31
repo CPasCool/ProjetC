@@ -5,6 +5,6 @@
 #ifndef PROJETC_GAME_H
 #define PROJETC_GAME_H
 
-int play();
+void play();
 int LaunchGame();
 #endif //PROJETC_GAME_H
