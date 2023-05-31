@@ -19,8 +19,8 @@ int pauseMenu(){
 
 
 
-int getChoice(choiceMenu *choixMenu) {
-    return choixMenu->choice;
+int getChoice(choiceMenu *choiceMenu) {
+    return choiceMenu->choice;
 }
 
 choiceMenu *createChoiceMenu() {
@@ -384,10 +384,10 @@ void displayMenuIngame(int choice)
 }
 
 void menu() {
-    choiceMenu *choixMenu = createChoiceMenu();
+    choiceMenu *choiceMenu = createChoiceMenu();
 
     bool choixFait = false;
-    displayMenu(choixMenu);
+    displayMenu(choiceMenu);
 
     int choix;
 
@@ -396,13 +396,13 @@ void menu() {
         printf("entrer votre choice");
         scanf("%d", &choix);
 
-        setChoice(choixMenu, choix);
-        displayMenu(choixMenu);
+        setChoice(choiceMenu, choix);
+        displayMenu(choiceMenu);
     }
 }
 
 void newGame(){
-    choiceMenu *choiceNewgame = createChoiceMenu();
+    choiceMenu* choiceNewgame = createChoiceMenu();
     bool choiceDo = false;
     displayMenuNewGame(getChoice(choiceNewgame));
     int choice;
@@ -417,7 +417,7 @@ void newGame(){
 
 void inGame()
 {
-    choiceMenu *choiceIngame = createChoiceMenu();
+    choiceMenu* choiceIngame = createChoiceMenu();
     bool choiceDo = false;
     displayMenuIngame((getChoice(choiceIngame)));
     int choice;

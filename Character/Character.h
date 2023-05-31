@@ -7,7 +7,7 @@
 
 #include "../Monster/Monster.h"
 
-typedef struct coordonees_ coordonees;
+typedef struct Coordonees coordonees;
 typedef struct statistics_ Stats;
 typedef struct character_ Character;
 
@@ -64,9 +64,9 @@ coordonees *getCoo(Character *character);
 
 char *getName(Character *character);
 
-int getX(Character *character);
+int getCharaX(Character *character);
 
 
-int getY(Character *character);
+int getCharaY(Character *character);
 
 #endif //PROJETC_CHARACTER_H
