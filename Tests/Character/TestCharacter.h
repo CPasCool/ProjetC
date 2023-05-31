@@ -5,7 +5,8 @@
 #ifndef PROJETC_TESTCHARACTER_H
 #define PROJETC_TESTCHARACTER_H
 
-#include "../../Character/Character.h"
+
+#include "../../include/src/Character.h"
 
 int testCharacter();
 int testCharacterName(Character* player, const char* name);

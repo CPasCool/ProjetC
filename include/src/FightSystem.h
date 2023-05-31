@@ -5,8 +5,8 @@
 #ifndef PROJETC_FIGHTSYSTEM_H
 #define PROJETC_FIGHTSYSTEM_H
 
-#include "../Monster/Monster.h"
-#include "../Character/Character.h"
+#include "Monster.h"
+#include "Character.h"
 
 int fightWithMonster(Character *character, monster *monster);
 

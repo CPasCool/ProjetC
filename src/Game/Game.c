@@ -3,10 +3,10 @@
 //
 
 #include <stdbool.h>
-#include "stdio.h"
-#include "Game.h"
-#include "../menu/menu.h"
-#include "../Keyboard/Keyboard.h"
+#include <stdio.h>
+#include "../../include/src/Game.h"
+#include "../../include/src/menu.h"
+#include "../../include/src/Keyboard.h"
 
 const int MAXIMUM_CHOICE_MENU = 5;
 const int MINIMUM_CHOICE_MENU = 1;

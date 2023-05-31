@@ -2,10 +2,10 @@
 // Created by benfa on 10/05/2023.
 //
 
-#include "Character.h"
+#include "../../include/src/Character.h"
 # include <stdlib.h>
 #include "stdio.h"
-#include "../Monster/Monster.h"
+#include "../../include/src/Monster.h"
 
 typedef struct coordonees_ {
     int x;

@@ -5,7 +5,7 @@
 #ifndef PROJETC_CHARACTER_H
 #define PROJETC_CHARACTER_H
 
-#include "../Monster/Monster.h"
+#include "Monster.h"
 
 typedef struct coordonees_ coordonees;
 typedef struct statistics_ Stats;

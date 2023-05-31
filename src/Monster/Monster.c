@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include "Monster.h"
+#include "../../include/src/Monster.h"
 
 typedef struct Monster{
     char* name;
