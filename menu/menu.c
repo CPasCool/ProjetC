@@ -162,6 +162,52 @@ void displayExitMenu() {
     );
 }
 
+void printPauseMenu(){
+    printf(
+        "##############################\n"
+        "#         Pause Menu         #\n"
+        "#                            #\n"
+        "#                            #\n"
+        "#          Save Game         #\n"
+        "#                            #\n"
+        "#           Quit             #\n"
+        "#                            #\n"
+        "#                            #\n"
+        "#                            #\n"
+        "##############################"
+    );
+}
+void printSave(){
+    printf(
+        "##############################\n"
+        "#         Pause Menu         #\n"
+        "#                            #\n"
+        "#    ####################    #\n"
+        "#    #     Save Game    #    #\n"
+        "#    ####################    #\n"
+        "#           Quit             #\n"
+        "#                            #\n"
+        "#                            #\n"
+        "#                            #\n"
+        "##############################"
+    );
+}
+void printQuitPause(){
+    printf(
+        "##############################\n"
+        "#         Pause Menu         #\n"
+        "#                            #\n"
+        "#                            #\n"
+        "#          Save Game         #\n"
+        "#    ####################    #\n"
+        "#    #      Quit        #    #\n"
+        "#    ####################    #\n"
+        "#                            #\n"
+        "#                            #\n"
+        "##############################"
+    );
+}
+
 void displayMenu(choiceMenu *choice) {
     if (getChoice(choice) == 1) {
         displayPlayMenu();
@@ -172,14 +218,24 @@ void displayMenu(choiceMenu *choice) {
     }
 }
 
+void displayMenuPause(int choix){
+    if (choix == 0){
+        printPauseMenu();
+    }else if (choix == 1)
+    {
+        printSave();
+    }else if (choix == 6)
+    {
+        /* code */
+    }
+    
+    
+}
 void menu() {
     choiceMenu *choixMenu = createChoiceMenu();
     bool choixFait = false;
     displayMenu(choixMenu);
-
     int choix;
-
-
     while (choixFait == false) {
         printf("entrer votre choice");
         scanf("%d", &choix);
@@ -187,4 +243,8 @@ void menu() {
         setChoice(choixMenu, choix);
         displayMenu(choixMenu);
     }
+}
+
+void menuPause(char keyEnter){
+
 }
