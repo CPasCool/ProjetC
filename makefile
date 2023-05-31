@@ -27,6 +27,6 @@ TestsMonster.exe: Tests\Monsters\MonstersTests.c Tests\Monsters\MonstersTests.c
 
 Cheat.exe: Cheat\Cheat.c Cheat\Cheat.h
 	$(CC)  -o Cheat.exe -c Cheat\Cheat.c  $(CFLAGS)
-	
+
 clean :
-	del main.exe board.exe menu.exe character.exe keyboard.exe Fight.exe TestsCharacter.exe TestsMonster.exe
+	del main.exe board.exe menu.exe character.exe keyboard.exe Fight.exe TestsCharacter.exe TestsMonster.exe Cheat.exe
