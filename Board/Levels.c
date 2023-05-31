@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
+#include "string.h"
 
 // Get an array of monsters set with the monsters data of a given levels
 monster **getLevelMonsters(char *levelFile) {
@@ -225,7 +226,7 @@ char **getOtherLevels(char *levelFile) {
     // Initialize the levels array with empty strings
     char **levels = (char **) malloc(sizeof(char *) * 4);
     for (int i = 0; i < 4; i++) {
-        levels[i] = malloc(sizeof(char) * 14);
+        levels[i] = malloc(sizeof(char) * 23);
         levels[i][13] = '\0';
     }
     fopen_s(&levelpointer, levelFile, "r");
@@ -283,7 +284,7 @@ char **getOtherLevels(char *levelFile) {
                 }
             }
             levels[i] = realloc(levels[counterLevel], sizeof(char) * 23);
-            levels[i] = prefixedLevelName;
+            strcpy(levels[i], prefixedLevelName);
         }
         prefix = "../Levels/";
     }
