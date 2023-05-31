@@ -21,71 +21,71 @@ void printCheatHeath(char HeathActive, char strenghActive, char defenceActive){
             "#  ########################  #\n"
             "#  #   ",HeathActive,"  Cheat Heath     #  #\n"
             "#  ########################  #\n"
-            "#        Cheat Strengh       #\n"
-            "#        Cheat Defense       #\n"
+            "#      ",strenghActive," Cheat Strengh       #\n"
+            "#       ",defenceActive," Cheat Defense       #\n"
             "#           Quit             #\n"
             "#                            #\n"
             "#                            #\n"
             "##############################"
     );
 }
-void printCheat(){
+void printCheat(char HeathActive, char strenghActive, char defenceActive){
     printf(
             "##############################\n"
             "#            CHEAT           #\n"
             "#                            #\n"
             "#                            #\n"
-            "#         Cheat Heath        #\n"
-            "#        Cheat Strengh       #\n"
-            "#        Cheat Defense       #\n"
+            "#       ",HeathActive," Cheat Heath        #\n"
+            "#      ",strenghActive," Cheat Strengh       #\n"
+            "#      ",defenceActive," Cheat Defense       #\n"
             "#           Quit             #\n"
             "#                            #\n"
             "#                            #\n"
             "##############################"
     );
 }
-void printCheatwStrengh(){
+void printCheatwStrengh(char HeathActive, char strenghActive, char defenceActive){
     printf(
             "##############################\n"
             "#            CHEAT           #\n"
             "#                            #\n"
             "#                            #\n"
-            "#         Cheat Heath        #\n"
+            "#       ",HeathActive," Cheat Heath        #\n"
             "#  ########################  #\n"
-            "#  #     Cheat Strengh    #  #\n"
+            "#  #    ",strenghActive,"Cheat Strengh    #  #\n"
             "#  ########################  #\n"
-            "#        Cheat Defense       #\n"
+            "#      ",defenceActive," Cheat Defense       #\n"
             "#           Quit             #\n"
             "#                            #\n"
             "#                            #\n"
             "##############################"
     );
 }
-void printCheatDefence(){
+void printCheatDefence(char HeathActive, char strenghActive, char defenceActive){
     printf(
             "##############################\n"
             "#            CHEAT           #\n"
             "#                            #\n"
             "#                            #\n"
-            "#         Cheat Heath        #\n"
-            "#        Cheat Strengh       #\n"
+            "#       ",HeathActive," Cheat Heath        #\n"
+            "#      ",strenghActive," Cheat Strengh       #\n"
             "#  ########################  #\n"
-            "#  #     Cheat Defense    #  #\n"
+            "#  #    ",defenceActive,"Cheat Defense    #  #\n"
             "#  ########################  #\n"
             "#           Quit             #\n"
             "#                            #\n"
             "##############################"
     );
 }
-void printCheatFinish(){
+void printCheatFinish(char HeathActive, char strenghActive, char defenceActive){
     printf(
             "##############################\n"
             "#            CHEAT           #\n"
             "#                            #\n"
             "#                            #\n"
-            "#         Cheat Heath        #\n"
-            "#        Cheat Strengh       #\n"
-            "#        Cheat Defense       #\n"
+            "#       ",HeathActive," Cheat Heath        #\n"
+            "#      ",strenghActive," Cheat Strengh       #\n"
+            "#      ",defenceActive," Cheat Defense       #\n"
             "#  ########################  #\n"
             "#  #         Quit         #  #\n"
             "#  ########################  #\n"
@@ -94,44 +94,47 @@ void printCheatFinish(){
     );
 }
 
-void printMenuCheat (int choixCheat){
+void printMenuCheat (int choixCheat,char HeathActive, char strenghActive, char defenceActive){
     
     if (choixCheat == 0)
     {
-        printCheat();
+        printCheat(HeathActive, strenghActive, defenceActive);
     }else if (choixCheat == 1)
     {
-        printCheatHeath();
+        printCheatHeath(HeathActive, strenghActive, defenceActive);
     }else if (choixCheat == 2)
     {
-        printCheatwStrengh();
+        printCheatwStrengh(HeathActive, strenghActive, defenceActive);
     }else if (choixCheat == 3)
     {
-        printCheatDefence();
+        printCheatDefence(HeathActive, strenghActive, defenceActive);
     }else if (choixCheat == 4)
     {
-        printCheatFinish();
+        printCheatFinish(HeathActive, strenghActive, defenceActive);
     }
     
 }
 void cheatMenu(Character * character, char keyEnter){
     bool choiceCheatDone = false;
     int menuCheatChoice = 0;
+    char HeathActive = " ";
+    char strenghActive = " ";
+    char defenceActive = " ";
     while (choiceCheatDone == false)
     {
-        printMenuCheat(menuCheatChoice);
+        printMenuCheat(menuCheatChoice, HeathActive, strenghActive, defenceActive);
         if (keyEnter == 'e' && menuCheatChoice == 1)
         {
             CheatHeath(character);
-            printf("HeathCheat is activated");
+            HeathActive = "V";
         }else if (keyEnter == 'e' && menuCheatChoice == 2)
         {
             CheatStrength(character);
-            printf("Strength Cheat is activated");
+            strenghActive = "V";
         }else if (keyEnter == 'e' && menuCheatChoice == 3)
         {
             CheatDefence(character);
-            printf("Defense Cheat is activated");
+            defenceActive = "V";
         }else if (keyEnter == 'e' && menuCheatChoice == 4)
         {
             choiceCheatDone = true;
