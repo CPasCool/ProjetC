@@ -1,11 +1,6 @@
-//
-// Created by benfa on 10/05/2023.
-//
-
 #include "Character.h"
 # include <stdlib.h>
 #include "stdio.h"
-#include "../Coodonnees/Coordonees.h"
 
 
 typedef struct statistics_ {
@@ -26,7 +21,7 @@ typedef struct character_ {
 // initializers
 Character *createCharacter(char *name) {
     Character *player = malloc(sizeof(Character));
-    player->coo = malloc(sizeof(coordonees));
+    player->coo = createCoordonne(14,14);
     player->stat = createStats();
     player->name = name;
     return player;

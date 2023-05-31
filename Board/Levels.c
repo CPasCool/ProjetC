@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
-#include "string.h"
 
 // Get an array of monsters set with the monsters data of a given levels
 monster **getLevelMonsters(char *levelFile) {
