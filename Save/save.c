@@ -17,5 +17,7 @@ void createSave(char **board)
         }
         fprintf(saveFile,"%s","/n");
     }
+
     fclose(saveFile);
+    //TODO: faire ressembler au fichier de level
 }
