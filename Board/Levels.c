@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
+#include <strings.h>
 
 // Get an array of monsters set with the monsters data of a given levels
 monster **getLevelMonsters(char *levelFile) {
@@ -194,7 +195,7 @@ char **getLevelBoard(char *levelFile) {
     while (counterLine <= 30 && letter != 'E') {
 
         //Print the § character --> -62 = special character ascii then skip the ° symbol because the § is split in UTF-8
-        if (letter == (char) -62) {
+        if (letter == (char) -62 || letter =='P') {
             letter = (char) fgetc(levelpointer);
             board[counterLine][counterLetter] = 'P';
             counterLetter++;
@@ -291,3 +292,83 @@ char **getOtherLevels(char *levelFile) {
     fclose(levelpointer);
     return levels;
 }
+
+//comme il n'y a que un seul fichier de sauvegarde pas besoin de paramètre
+Character* getCharacterSave()
+{
+    FILE *levelpointer;
+    Character *personnage = createCharacter("");
+    char* name;
+    int countLine=0;
+    int savePos=0;
+    int coordX=0;
+    int coordY=0;
+    char *value = malloc(sizeof(char) * 4);
+    fopen_s(&levelpointer,"../Save/save.txt","r");
+    char *line = malloc(sizeof(char) * 32);
+    while (fgets(line, 32, levelpointer))
+    {
+        countLine+=1;
+        if(countLine==52) {
+            for (int i = 0; i < 32; i++) {
+                if (line[i] == ':') {
+                    i += 2;
+                    savePos = i;
+                    break;
+                }
+            }
+            while(line[savePos] != '.')
+            {
+                name=strcat(name, &line[savePos]);
+                savePos+=1;
+            }
+            setName(personnage,name);
+        }
+        if(countLine>52 && countLine<59)
+        {
+            value[3] = '\0';
+            // Get the stat value
+            for (int i = 0; i < 32; i++) {
+                if (line[i] != '\0' && isdigit(line[i])) {
+                    value[0] = line[i];
+                    value[1] = line[i + 1];
+                    value[2] = line[i + 2];
+                    break;
+                }
+            }
+            }
+        if(countLine==52)
+        {
+            setMaximumLifePoint(personnage, atoi(value));
+        }
+        if(countLine==53)
+        {
+            setLifePoint(personnage, atoi(value));
+        }
+        if(countLine==54)
+        {
+            setStrength(personnage, atoi(value));
+        }
+        if(countLine==55)
+        {
+            setDefence(personnage, atoi(value));
+        }
+        if(countLine==56)
+        {
+            setKeys(personnage, atoi(value));
+        }
+        if(countLine==57)
+        {
+            coordX= atoi(value);
+        }
+        if(countLine==58)
+        {
+            coordY= atoi(value);
+        }
+        changeCoordonnes(personnage,coordX,coordY);
+        }
+    return personnage;
+    }
+
+
+
