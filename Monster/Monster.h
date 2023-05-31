@@ -7,10 +7,11 @@ typedef struct Monster{
     int hp;
     int strength;
     int shield;
+    char type;
     coordonees *MonsterCoordonnees;
 } monster;
 
-monster* createNewMonster(char* name, int hp, int strenght, int shield, coordonees *coo);
+monster* createNewMonster(char* name, int hp, int strenght, int shield, char type, coordonees *coo);
 char* generateRandomName();
 monster* setMonster(monster* monster, char* name, int hp, int strength, int shield, coordonees *coo);
 monster* setMonsterName(monster* monster, char* name);
@@ -22,12 +23,14 @@ char* getMonsterName(monster* monster);
 int getMonsterHealth(monster* monster);
 int getMonsterStrength(monster* monster);
 int getMonsterShield(monster* monster);
+char getMonsterType(monster* monster);
 coordonees* getMonsterCoordonees(monster* monster);
 void printMonsterName(monster* monster);
 void printMonsterHealth(monster* monster);
 void printMonsterStrength(monster* monster);
 void printMonsterShield(monster* monster);
 void printMonsterCoordonees(monster* monster);
-void printAllMonster(monster* monster);
+void printMonsterStats(monster* monster);
+void printMonsterType(monster* monster);
 
 #endif //PROJETC_MONSTER_H

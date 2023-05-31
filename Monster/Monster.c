@@ -4,12 +4,13 @@
 #include "Monster.h"
 
 
-monster* createNewMonster(char* name, int hp, int strength, int shield, coordonees* coo){
+monster* createNewMonster(char* name, int hp, int strength, int shield, char type, coordonees* coo){
     monster *newMonster = (monster*) malloc(sizeof(struct Monster));
     newMonster->name = name;
     newMonster->hp = hp;
     newMonster->strength = strength;
     newMonster->shield = shield;
+    newMonster->type = type;
     newMonster->MonsterCoordonnees = coo;
     return newMonster;
 }
@@ -77,6 +78,10 @@ monster* setMonsterShield(monster* monster, int shield){
     return monster;
 }
 
+char getMonsterType(monster* monster){
+    return monster->type;
+}
+
 char* getMonsterName(monster* monster){
     return monster->name;
 }
@@ -117,9 +122,15 @@ void printMonsterCoordonees(monster* monster){
     printf("The monster coordonates are x: %d, y: %d\n", getMonsterCoordonees(monster)->x, getMonsterCoordonees(monster)->y);
 }
 
-void printAllMonster(monster* monster){
+void printMonsterType(monster* monster){
+    printf("The monster type is %c\n", getMonsterType(monster));
+}
+
+void printMonsterStats(monster* monster){
     printMonsterName(monster);
     printMonsterHealth(monster);
     printMonsterShield(monster);
     printMonsterStrength(monster);
+    printMonsterType(monster);
+    printMonsterCoordonees(monster);
 }
