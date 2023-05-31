@@ -1,5 +1,6 @@
-CC=gcc
-CFLAGS=
+CC = gcc                  # Variable représentant le nom du compilateur.
+CFLAGS = -Wall -I include # Variable représentant les options de compilation.
+LDFLAGS = -L lib -lZDS    # Variable représentant les options d’édition de liens.
 
 main : board.exe menu.exe
 	$(CC) -o main.exe board.exe menu.exe main.c $(CFLAGS)
