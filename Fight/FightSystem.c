@@ -3,6 +3,7 @@
 //
 
 #include "FightSystem.h"
+#include "stdio.h"
 
 
 /**
@@ -12,6 +13,8 @@
  * @return
  */
 int fightWithMonster(Character *character, monster *monster) {
+    printf("FIGHT\n");
+    printMonsterStats(monster);
     // attribue degat au monste
     if (getStrength(character) - getMonsterShield(monster) > 0) {
         setMonsterHealth(monster, getMonsterHealth(monster) - (getStrength(character) - getMonsterShield(monster)));

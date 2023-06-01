@@ -9,13 +9,13 @@
 
 int main() {
     // TESTS
-    testCharacter();
-    testMonster();
-    generateBoard();
-    launchLevelTests();
+    //testCharacter();
+    //testMonster();
+    //generateBoard();
+    //launchLevelTests();
 
-    // Start the game
+    //Start the game
     LaunchGame();
-    //    generateBoard();
+    //generateBoard();
     return 0;
 }

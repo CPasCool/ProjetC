@@ -20,7 +20,9 @@ Stats *createStats();
 // Setter
 int setLifePoint(Character *character, int newLifePoint);
 
-int setKeys(Character *character, int keyNumber);
+int addKeys(Character *character);
+
+int removeKeys(Character *character);
 
 int setStrength(Character *character, int newAttack);
 
@@ -41,14 +43,6 @@ int printStrength(Stats *stat);
 int printKeysNumber(Stats *stats);
 
 int printAll(Character *);
-
-int moveLeft(Character *character);
-
-int moveRight(Character *character);
-
-int moveDown(Character *character);
-
-int moveUp(Character *character);
 
 int getLifePoint(Character *character);
 

@@ -1,12 +1,13 @@
 #include "../Monster/Monster.h"
 #include "../Character/Character.h"
+#include "../Board/Board.h"
 
 #ifndef PROJETC_DISPLAYLEVELS_H
 #define PROJETC_DISPLAYLEVELS_H
 
-monster** getLevelMonsters(char* levelFile);
+void getLevelMonsters(char* levelFile, boardElements *boardElements);
 void createLevelMonsters(char* levelFile, monster** monsterTab, int nbMonster);
-char** getLevelBoard(char* levelFile);
-char **getOtherLevels(char *levelFile);
+void getLevelBoard(char* levelFile, boardElements *boardElements);
+void getOtherLevels(char *levelFile, boardElements *boardElements);
 
 #endif //PROJETC_DISPLAYLEVELS_H
