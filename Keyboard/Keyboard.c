@@ -13,7 +13,7 @@
  * @return
  */
 char catchInput() {
-    int letter = _getch();
+    int letter = getch();
     if (letter == 'Z' || letter == 'z') {
         return 'z';
     } else if (letter == 'S' || letter == 's') {

@@ -78,7 +78,10 @@ int move(Character *character, char move, char **board, monster **monsterTab, in
             break;
 
             //There is a monster
-        case 'A' | 'B' | 'C':
+        case 'A':
+        case 'B':
+        case 'C':
+            printf("element in board is : %c\n", board[coordonees->y][coordonees->x]);
             monster = getSpecificMonster(monsterTab, coordonees,
                                          nbMonster);
             fightWithMonster(character, monster);
@@ -86,7 +89,6 @@ int move(Character *character, char move, char **board, monster **monsterTab, in
                 printf("You killed %s\n", monster->name);
                 moveCharacter(character, move, board);
             }
-            free(monster);
             break;
 
             //There is a wall

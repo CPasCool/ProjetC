@@ -79,6 +79,7 @@ void play() {
     while (inGame) {
         displayBoard(board->board);
         char input = catchInput();
+        printf("%c", input);
         if (input == 'p') {
             if (pauseMenu() == 1) {
                 inGame = false;
