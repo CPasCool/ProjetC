@@ -44,7 +44,7 @@ int getLifePoint(Character *character) {
 }
 
 int getMaximumLifePoint(Character *character) {
-    return character->stat->currentLifePoint;
+    return character->stat->maxLifePoint;
 }
 
 char *getName(Character *character) {
@@ -82,12 +82,12 @@ int setLifePoint(Character *character, int newLifePoint) {
 }
 
 int addKeys(Character *character) {
-    character->stat->keys +=1;
+    character->stat->keys += 1;
     return 0;
 }
 
 int removeKeys(Character *character) {
-    character->stat->keys -=1;
+    character->stat->keys -= 1;
     return 0;
 }
 
@@ -112,8 +112,8 @@ int changeCoordonnes(Character *character, int x, int y) {
     return 0;
 }
 
-int setMaximumLifePoint(Character *character, int newMax) {
-    character->stat->maxLifePoint = newMax;
+int setMaximumLifePoint(Character *character, int addedMax) {
+    character->stat->maxLifePoint = character->stat->maxLifePoint + addedMax;
     return 0;
 }
 

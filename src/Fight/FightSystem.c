@@ -38,11 +38,11 @@ int fightWithMonster(Character *character, monster *monster) {
  * @param monster : monsters we need distances
  * @return
  */
-int *getMonstersDistances(Character *character, monster **monsterTab, int nbMonsters){
+int *getMonstersDistances(Character *character, monster **monstersTab, int nbMonsters){
     int *distances = malloc(sizeof (int)*nbMonsters);
     for (int i=0; i<nbMonsters; i++){
-        if(monsterTab[i]->hp>0){
-            distances[i] = abs(getCharaY(character) - monsterTab[i]->MonsterCoordonnees->y) + abs(getCharaX(character) - monsterTab[i]->MonsterCoordonnees->x);
+        if(monstersTab[i]->hp > 0){
+            distances[i] = abs(getCharaY(character) - monstersTab[i]->MonsterCoordonnees->y) + abs(getCharaX(character) - monstersTab[i]->MonsterCoordonnees->x);
         }else{
             distances[i] = 999999999;
         }
@@ -54,7 +54,7 @@ monster* findClosestMonster(monster **monstersTab, const int* distancesTab, int 
     int val_min;
     val_min = distancesTab[0];
     for (int i=0; i<nbMonsters; i++){
-        if (distancesTab[i] < val_min){
+        if (distancesTab[i] < val_min && monstersTab[i]->hp>0){
             val_min = i;
         }
     }

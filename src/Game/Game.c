@@ -72,7 +72,6 @@ void play() {
     getLevelBoard("./src/Levels/niveau1.level", board);
     getLevelMonsters("./src/Levels/niveau1.level", board);
     getOtherLevels("./src/Levels/niveau1.level", board);
-
     //We put the character at is right position
     board->board[getCharaY(character)][getCharaY(character)] = 'T';
     printf("character is set\n");
@@ -82,20 +81,23 @@ void play() {
         char input = catchInput();
         int *monstersDistances = getMonstersDistances(character, board->monstersTab, board->nbMonsters);
         monster *closestMonster = findClosestMonster(board->monstersTab, monstersDistances, board->nbMonsters);
-        printf("The closest monster is\n");
+        printf("The closest alive monster is\n");
         printMonsterStats(closestMonster);
         if (input == 'p') {
             if (pauseMenu() == 1) {
                 inGame = false;
             };
         } else if (input == 'z' || input == 'q' || input == 's' || input == 'd') {
-            move(character, input, board->board, board->monstersTab, board->nbMonsters);
+            move(character, input, board);
         } else {
             printf("Stop doing this shit !\n");
         }
         if (getLifePoint(character) <= 0) {
             inGame = false;
             printf("You are dead !");
+        }
+        if (board->aliveMonsters == 0) {
+            printf("Congratulation You finished the level !!!!");
         }
     }
 }

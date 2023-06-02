@@ -7,7 +7,7 @@
  * @param character : character to move
  * @return
  */
-int move(Character *character, char move, char **board, monster **monsterTab, int nbMonster) {
+int move(Character *character, char move, boardElements *board) {
     monster *monster;
     coordonees *coordonees = malloc(sizeof(struct Coordonees));
     switch (move) {
@@ -27,43 +27,39 @@ int move(Character *character, char move, char **board, monster **monsterTab, in
             break;
     }
     printf("x = %d, y = %d\n", coordonees->x, coordonees->y);
-    switch (board[coordonees->y][coordonees->x]) {
+    switch (board->board[coordonees->y][coordonees->x]) {
         //No collisions
         case ' ':
             printf("x = %d, y = %d\n", coordonees->x, coordonees->y);
-            moveCharacter(character, move, board);
+            moveCharacter(character, move, board->board);
             //There is an attack bonus
             printAll(character);
             printf("x = %d, y = %d\n", coordonees->x, coordonees->y);
             break;
         case '1':
             setStrength(character, getStrength(character) + 1);
-            moveCharacter(character, move, board);
+            moveCharacter(character, move, board->board);
             printAll(character);
             break;
 
             //There is a Defence bonus
         case '2':
             setDefence(character, getDefence(character) + 1);
-            moveCharacter(character, move, board);
+            moveCharacter(character, move, board->board);
             printAll(character);
             break;
 
             //There is a life bonus
         case '3':
-            printf("current max = %d\n", getMaximumLifePoint(character));
-            printf("expected max = %d\n", getMaximumLifePoint(character) + 3);
-            setMaximumLifePoint(character, getMaximumLifePoint(character) + 3);
-            printf("new max = %d\n", getMaximumLifePoint(character));
-
-            moveCharacter(character, move, board);
+            setMaximumLifePoint(character,  3);
+            moveCharacter(character, move, board->board);
             printAll(character);
             break;
 
             //There is a key
         case '!':
             addKeys(character);
-            moveCharacter(character, move, board);
+            moveCharacter(character, move, board->board);
             printAll(character);
             break;
 
@@ -71,14 +67,14 @@ int move(Character *character, char move, char **board, monster **monsterTab, in
         case 'o':
             if (getKeys(character) != 0) {
                 removeKeys(character);
-                moveCharacter(character, move, board);
+                moveCharacter(character, move, board->board);
             }
             break;
 
             //There is a potion
         case 'P':
             setLifePoint(character, getMaximumLifePoint(character));
-            moveCharacter(character, move, board);
+            moveCharacter(character, move, board->board);
             printAll(character);
             break;
 
@@ -86,20 +82,21 @@ int move(Character *character, char move, char **board, monster **monsterTab, in
         case 'A':
         case 'B':
         case 'C':
-            printf("element in board is : %c\n", board[coordonees->y][coordonees->x]);
-            monster = getSpecificMonster(monsterTab, coordonees,
-                                         nbMonster);
+            printf("element in board is : %c\n", board->board[coordonees->y][coordonees->x]);
+            monster = getSpecificMonster(board->monstersTab, coordonees,
+                                         board->nbMonsters);
             fightWithMonster(character, monster);
             if (monster->hp <= 0) {
                 printf("You killed %s\n", monster->name);
-                moveCharacter(character, move, board);
+                board->aliveMonsters--;
+                moveCharacter(character, move, board->board);
             }
             break;
 
             //There is a wall
         case '#':
             printf("x = %d, y = %d 2\n", coordonees->x, coordonees->y);
-            printf("element in board is : %c\n", board[coordonees->y][coordonees->x]);
+            printf("element in board is : %c\n", board->board[coordonees->y][coordonees->x]);
             printf("You can not go that way\n");
             break;
         default:

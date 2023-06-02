@@ -67,6 +67,7 @@ void getLevelMonsters(char *levelFile, boardElements *board) {
     printf("Monsters are setted\n");
     board->monstersTab = monstersTab;
     board->nbMonsters = monsterCount;
+    board->aliveMonsters = monsterCount;
 }
 
 void createLevelMonsters(char *levelFile, monster **monsterTab, int nbMonster) {

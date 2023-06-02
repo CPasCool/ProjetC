@@ -11,6 +11,7 @@ typedef struct BoardElements{
     monster **monstersTab;
     char **otherLevels;
     int nbMonsters;
+    int aliveMonsters;
 }boardElements;
 
 #endif //PROJETC_BOARD_H

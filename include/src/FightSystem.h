@@ -9,7 +9,7 @@
 #include "Character.h"
 
 int fightWithMonster(Character *character, monster *monster);
-int *getMonstersDistances(Character *character, monster **monsterTab, int nbMonsters);
+int *getMonstersDistances(Character *character, monster **monstersTab, int nbMonsters);
 monster* findClosestMonster(monster **monstersTab, const int* distancesTab, int nbMonsters);
 
 #endif //PROJETC_FIGHTSYSTEM_H
