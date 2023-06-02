@@ -6,6 +6,6 @@
 int CheatLife(Character * character);
 int CheatDefence (Character* character);
 int CheatStrength (Character* character);
-void cheatMenu(Character * character, char keyEnter);
+void cheatMenu(char keyEnter);
 
 #endif
