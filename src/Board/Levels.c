@@ -12,10 +12,18 @@ void getLevelMonsters(char *levelFile, boardElements *board) {
 
     // Send an error if the file does not exist
     if (fopen_s(&levelpointer, levelFile, "r") != 0) {
+        char* newLevelFilename = malloc (sizeof (char)*28);
+        newLevelFilename[27] = '\0';
         char *prefixFile = ".";
-        strcpy(prefixFile, levelFile);
-        fopen_s(&levelpointer, levelFile, "r");
-        if (fopen_s(&levelpointer, levelFile, "r") != 0) {
+        for (int j = 0; j < 27; j++) {
+            if (j < 1) {
+                newLevelFilename[j] = prefixFile[j];
+            } else {
+                newLevelFilename[j] = levelFile[j - 1];
+            }
+        }
+        fopen_s(&levelpointer, newLevelFilename, "r");
+        if (fopen_s(&levelpointer, newLevelFilename, "r") != 0) {
             printf("Error opening the file.\n");
             return;
         }
@@ -76,10 +84,18 @@ void createLevelMonsters(char *levelFile, monster **monsterTab, int nbMonster) {
 
     // Send an error if the file does not exist
     if (fopen_s(&levelpointer, levelFile, "r") != 0) {
+        char* newLevelFilename = malloc (sizeof (char)*28);
+        newLevelFilename[27] = '\0';
         char *prefixFile = ".";
-        strcpy(prefixFile, levelFile);
-        fopen_s(&levelpointer, levelFile, "r");
-        if (fopen_s(&levelpointer, levelFile, "r") != 0) {
+        for (int j = 0; j < 27; j++) {
+            if (j < 1) {
+                newLevelFilename[j] = prefixFile[j];
+            } else {
+                newLevelFilename[j] = levelFile[j - 1];
+            }
+        }
+        fopen_s(&levelpointer, newLevelFilename, "r");
+        if (fopen_s(&levelpointer, newLevelFilename, "r") != 0) {
             printf("Error opening the file.\n");
             return;
         }
@@ -195,10 +211,18 @@ void getLevelBoard(char *levelFile, boardElements *boardElements) {
     fopen_s(&levelpointer, levelFile, "r");
     // Send an error if the file does not exist
     if (fopen_s(&levelpointer, levelFile, "r") != 0) {
+        char* newLevelFilename = malloc (sizeof (char)*28);
+        newLevelFilename[27] = '\0';
         char *prefixFile = ".";
-        strcpy(prefixFile, levelFile);
-        fopen_s(&levelpointer, levelFile, "r");
-        if (fopen_s(&levelpointer, levelFile, "r") != 0) {
+        for (int j = 0; j < 27; j++) {
+            if (j < 1) {
+                newLevelFilename[j] = prefixFile[j];
+            } else {
+                newLevelFilename[j] = levelFile[j - 1];
+            }
+        }
+        fopen_s(&levelpointer, newLevelFilename, "r");
+        if (fopen_s(&levelpointer, newLevelFilename, "r") != 0) {
             printf("Error opening the file.\n");
             return;
         }
@@ -248,10 +272,18 @@ void getOtherLevels(char *levelFile, boardElements *boardElements) {
     // Send an error if the file does not exist
     if (fopen_s(&levelpointer, levelFile, "r") != 0) {
         errorCount++;
+        char* newLevelFilename = malloc (sizeof (char)*28);
+        newLevelFilename[27] = '\0';
         char *prefixFile = ".";
-        strcpy(prefixFile, levelFile);
-        fopen_s(&levelpointer, levelFile, "r");
-        if (fopen_s(&levelpointer, levelFile, "r") != 0) {
+        for (int j = 0; j < 27; j++) {
+            if (j < 1) {
+                newLevelFilename[j] = prefixFile[j];
+            } else {
+                newLevelFilename[j] = levelFile[j - 1];
+            }
+        }
+        fopen_s(&levelpointer, newLevelFilename, "r");
+        if (fopen_s(&levelpointer, newLevelFilename, "r") != 0) {
             printf("Error opening the file.\n");
             return;
         }
@@ -320,7 +352,6 @@ void getOtherLevels(char *levelFile, boardElements *boardElements) {
         }
         if (errorCount > 0) {
             prefix = "../src/Levels/";
-            sizePrefix ++;
         }else{
             prefix = "./src/Levels/";
         }
