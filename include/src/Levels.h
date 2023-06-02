@@ -1,6 +1,6 @@
-#include "../Monster/Monster.h"
-#include "../Character/Character.h"
-#include "../Board/Board.h"
+#include "Monster.h"
+#include "Character.h"
+#include "Board.h"
 
 #ifndef PROJETC_DISPLAYLEVELS_H
 #define PROJETC_DISPLAYLEVELS_H

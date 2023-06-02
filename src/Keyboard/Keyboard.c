@@ -2,7 +2,7 @@
 // Created by benfa on 17/05/2023.
 //
 
-#include "Keyboard.h"
+#include "../../include/src/Keyboard.h"
 #include <conio.h>
 #include <stdarg.h>
 
@@ -24,6 +24,8 @@ char catchInput() {
         return 'd';
     } else if (letter == 'E' || letter == 'e') {
         return 'e';
+    }else if (letter == 'P' || letter == 'p') {
+        return 'p';
     } else {
         return ' ';
     }

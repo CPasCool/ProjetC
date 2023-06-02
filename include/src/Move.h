@@ -1,7 +1,7 @@
-#include "../Character/Character.h"
-#include "../Coodonnees/Coordonees.h"
-#include "../Fight/FightSystem.h"
-#include "../Monster/Monster.h"
+#include "Character.h"
+#include "Coordonees.h"
+#include "FightSystem.h"
+#include "Monster.h"
 
 #ifndef PROJETC_MOVE_H
 #define PROJETC_MOVE_H

@@ -1,4 +1,4 @@
-#include "Character.h"
+#include "../../include/src/Character.h"
 #include <stdlib.h>
 #include "stdio.h"
 
@@ -32,7 +32,7 @@ Stats *createStats() {
     stat->strength = 2;
     stat->maxLifePoint = 10;
     stat->keys = 0;
-    stat->currentLifePoint = stat->maxLifePoint;
+    stat->currentLifePoint = 10;
     stat->defence = 1;
     return stat;
 }

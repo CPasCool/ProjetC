@@ -1,4 +1,4 @@
-#include "Move.h"
+#include "../../include/src/Move.h"
 #include "stdlib.h"
 #include "stdio.h"
 
@@ -51,7 +51,11 @@ int move(Character *character, char move, char **board, monster **monsterTab, in
 
             //There is a life bonus
         case '3':
+            printf("current max = %d\n", getMaximumLifePoint(character));
+            printf("expected max = %d\n", getMaximumLifePoint(character) + 3);
             setMaximumLifePoint(character, getMaximumLifePoint(character) + 3);
+            printf("new max = %d\n", getMaximumLifePoint(character));
+
             moveCharacter(character, move, board);
             printAll(character);
             break;
@@ -73,8 +77,9 @@ int move(Character *character, char move, char **board, monster **monsterTab, in
 
             //There is a potion
         case 'P':
-            moveCharacter(character, move, board);
             setLifePoint(character, getMaximumLifePoint(character));
+            moveCharacter(character, move, board);
+            printAll(character);
             break;
 
             //There is a monster

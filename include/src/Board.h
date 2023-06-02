@@ -1,5 +1,5 @@
-#include "../Character/Character.h"
-#include "../Monster/Monster.h"
+#include "Character.h"
+#include "Monster.h"
 
 
 #ifndef PROJETC_BOARD_H

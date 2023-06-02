@@ -5,12 +5,13 @@
 #include <stdbool.h>
 #include "stdio.h"
 #include "stdlib.h"
-#include "Game.h"
-#include "../menu/menu.h"
-#include "../Keyboard/Keyboard.h"
-#include "../MoveCharacter/Move.h"
-#include "../Board/Levels.h"
-#include "../Board/Board.h"
+#include "../../include/src/Game.h"
+#include "../../include/src/menu.h"
+#include "../../include/src/Keyboard.h"
+#include "../../include/src/Move.h"
+#include "../../include/src/Levels.h"
+#include "../../include/src/Board.h"
+#include "../../include/src/FightSystem.h"
 
 
 const int MAXIMUM_CHOICE_MENU = 5;
@@ -28,7 +29,7 @@ int LaunchGame() {
         int choice = getChoice(menu);
 
         displayMenu(menu);
-        char result = 'e';//catchInput();
+        char result = catchInput();
         if (result == 'z') {
             if (choice != MINIMUM_CHOICE_MENU) {
                 setChoice(menu, choice - 1);
@@ -60,7 +61,7 @@ void play() {
            "S -> move down\n"
            "Q -> move left\n"
            "D -> move right\n"
-           "P -> pause game");
+           "P -> pause game\n");
     // condition de sortie du jeu
     bool inGame = true;
     Character *character = createCharacter("player");
@@ -68,29 +69,33 @@ void play() {
     boardElements *board = malloc(sizeof(struct BoardElements));
     board->character = character;
     //We get/set every element we have on the file
-    getLevelBoard("../Levels/niveau1.level", board);
-    getLevelMonsters("../Levels/niveau1.level", board);
-    getOtherLevels("../Levels/niveau1.level", board);
+    getLevelBoard("./src/Levels/niveau1.level", board);
+    getLevelMonsters("./src/Levels/niveau1.level", board);
+    getOtherLevels("./src/Levels/niveau1.level", board);
 
     //We put the character at is right position
     board->board[getCharaY(character)][getCharaY(character)] = 'T';
-    int cpt = 0;
+    printf("character is set\n");
     // boucle de jeu
     while (inGame) {
         displayBoard(board->board);
         char input = catchInput();
-        printf("%c", input);
+        int *monstersDistances = getMonstersDistances(character, board->monstersTab, board->nbMonsters);
+        monster *closestMonster = findClosestMonster(board->monstersTab, monstersDistances, board->nbMonsters);
+        printf("The closest monster is\n");
+        printMonsterStats(closestMonster);
         if (input == 'p') {
             if (pauseMenu() == 1) {
                 inGame = false;
             };
+        } else if (input == 'z' || input == 'q' || input == 's' || input == 'd') {
+            move(character, input, board->board, board->monstersTab, board->nbMonsters);
         } else {
-                move(character, input, board->board, board->monstersTab, board->nbMonsters);
+            printf("Stop doing this shit !\n");
         }
-        if(getLifePoint(character) == 0) {
+        if (getLifePoint(character) <= 0) {
             inGame = false;
+            printf("You are dead !");
         }
-        cpt++;
-        printf("%d", cpt);
     }
 }
