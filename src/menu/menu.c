@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include "menu.h"
+#include "../../include/src/menu.h"
 
 struct choice {
     int choice;
@@ -61,7 +61,7 @@ void displayNewGame()
             "#                            #\n"
             "#                            #\n"
             "#                            #\n"
-            "##############################"
+            "##############################\n"
     );
 }
 
@@ -97,7 +97,7 @@ void displaySave()
             "#                            #\n"
             "#                            #\n"
             "#                            #\n"
-            "##############################"
+            "##############################\n"
     );
 }
 void displayQuitNewGame(){
@@ -131,7 +131,7 @@ void displayQuitNewGame(){
             "#                            #\n"
             "#                            #\n"
             "#                            #\n"
-            "##############################"
+            "##############################\n"
     );
 }
 void displayPlayIngame()
@@ -155,7 +155,7 @@ void displayPlayIngame()
             "#                            #\n"
             "#                            #\n"
             "#                            #\n"
-            "##############################"
+            "##############################\n"
     );
 }
 
@@ -181,7 +181,7 @@ void displayLeaveIngame()
             "#                            #\n"
             "#                            #\n"
             "#                            #\n"
-            "##############################"
+            "##############################\n"
     );
 }
 void displaySaveIngame()
@@ -205,7 +205,7 @@ void displaySaveIngame()
             "#                            #\n"
             "#                            #\n"
             "#                            #\n"
-            "##############################"
+            "##############################\n"
     );
 }
 void displayCredit(){
@@ -240,7 +240,7 @@ void displayCredit(){
             "#                            #\n"
             "#                            #\n"
             "#                            #\n"
-            "##############################");
+            "##############################\n");
 }
 
 void displayPlayMenu() {
@@ -274,7 +274,7 @@ void displayPlayMenu() {
             "#                            #\n"
             "#                            #\n"
             "#                            #\n"
-            "##############################"
+            "##############################\n"
     );
 }
 
@@ -309,7 +309,7 @@ void displayCreditMenu() {
             "#                            #\n"
             "#                            #\n"
             "#                            #\n"
-            "##############################"
+            "##############################\n"
     );
 }
 
@@ -344,7 +344,7 @@ void displayExitMenu() {
             "#                            #\n"
             "#                            #\n"
             "#                            #\n"
-            "##############################"
+            "##############################\n"
     );
 }
 
@@ -393,7 +393,7 @@ void menu() {
 
 
     while (choixFait == false) {
-        printf("entrer votre choice");
+        printf("entrer votre choice\n");
         scanf("%d", &choix);
 
         setChoice(choiceMenu, choix);
@@ -408,7 +408,7 @@ void newGame(){
     int choice;
     while (choiceDo == false)
     {
-        printf("entrer votre choix");
+        printf("entrer votre choix\n");
         scanf("%d",&choice);
         setChoice(choiceNewgame,choice);
         displayMenuNewGame(getChoice(choiceNewgame));
@@ -423,7 +423,7 @@ void inGame()
     int choice;
     while (choiceDo == false)
     {
-        printf("entrer votre choix");
+        printf("entrer votre choix\n");
         scanf("%d",&choice);
         setChoice(choiceIngame,choice);
         displayMenuIngame(getChoice(choiceIngame));

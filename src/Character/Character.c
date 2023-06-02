@@ -1,5 +1,5 @@
-#include "Character.h"
-# include <stdlib.h>
+#include "../../include/src/Character.h"
+#include <stdlib.h>
 #include "stdio.h"
 
 
@@ -21,7 +21,7 @@ typedef struct character_ {
 // initializers
 Character *createCharacter(char *name) {
     Character *player = malloc(sizeof(Character));
-    player->coo = createCoordonne(14,14);
+    player->coo = createCoordonne(14, 14);
     player->stat = createStats();
     player->name = name;
     return player;
@@ -32,7 +32,7 @@ Stats *createStats() {
     stat->strength = 2;
     stat->maxLifePoint = 10;
     stat->keys = 0;
-    stat->currentLifePoint = stat->maxLifePoint;
+    stat->currentLifePoint = 10;
     stat->defence = 1;
     return stat;
 }
@@ -44,7 +44,7 @@ int getLifePoint(Character *character) {
 }
 
 int getMaximumLifePoint(Character *character) {
-    return character->stat->currentLifePoint;
+    return character->stat->maxLifePoint;
 }
 
 char *getName(Character *character) {
@@ -63,11 +63,11 @@ int getDefence(Character *character) {
     return character->stat->defence;
 }
 
-int getCharaX(Character *character){
+int getCharaX(Character *character) {
     return character->coo->x;
 }
 
-int getCharaY(Character *character){
+int getCharaY(Character *character) {
     return character->coo->y;
 }
 
@@ -81,8 +81,13 @@ int setLifePoint(Character *character, int newLifePoint) {
     return 0;
 }
 
-int setKeys(Character *character, int keyNumber) {
-    character->stat->keys = keyNumber;
+int addKeys(Character *character) {
+    character->stat->keys += 1;
+    return 0;
+}
+
+int removeKeys(Character *character) {
+    character->stat->keys -= 1;
     return 0;
 }
 
@@ -107,8 +112,8 @@ int changeCoordonnes(Character *character, int x, int y) {
     return 0;
 }
 
-int setMaximumLifePoint(Character *character, int newMax) {
-    character->stat->maxLifePoint = newMax;
+int setMaximumLifePoint(Character *character, int addedMax) {
+    character->stat->maxLifePoint = character->stat->maxLifePoint + addedMax;
     return 0;
 }
 
@@ -138,53 +143,5 @@ int printAll(Character *character) {
     printKeysNumber(character->stat);
     printStrength(character->stat);
     printDefence(character->stat);
-    return 0;
-}
-
-/**
- * move the character to the up in board
- * @param character : character to move
- * @return
- */
-int moveUp(Character *character) {
-    // TODO : verifier les collisions
-    // TODO : verifier si il y a un monstre
-    character->coo->y += 1;
-    return 0;
-}
-
-/**
- * move the character to the down in board
- * @param character : character to move
- * @return
- */
-int moveDown(Character *character) {
-    // TODO : verifier les collisions
-    // TODO : verifier si il y a un monstre
-    character->coo->y -= 1;
-    return 0;
-}
-
-/**
- * move the character to the right in board
- * @param character : character to move
- * @return
- */
-int moveRight(Character *character) {
-    // TODO : verifier les collisions
-    // TODO : verifier si il y a un monstre
-    character->coo->x += 1;
-    return 0;
-}
-
-/**
- * move the character to the left in board
- * @param character : character to move
- * @return
- */
-int moveLeft(Character *character) {
-    // TODO : verifier les collisions
-    // TODO : verifier si il y a un monstre
-    character->coo->x += 1;
     return 0;
 }

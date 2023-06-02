@@ -1,5 +1,5 @@
 # include <stdlib.h>
-#include "Coordonees.h"
+#include "../../include/src/Coordonees.h"
 
 coordonees *createCoordonne(int x, int y){
     coordonees *coo = (coordonees*)malloc(sizeof (struct Coordonees));

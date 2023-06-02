@@ -1,14 +1,10 @@
 CC=gcc
 CFLAGS=
 
-main : board.exe menu.exe
-	$(CC) -o main.exe board.exe menu.exe main.c $(CFLAGS)
+SRC_C = $(wildcard *.c */*/*.c)
 
-board.exe: Board\CreateBoard.c Board\CreateBoard.h
-	$(CC)  -o board.exe -c Board\CreateBoard.c $(CFLAGS)
-
-menu.exe: menu\menu.c menu\menu.h
-	$(CC)  -o menu.exe -c menu\menu.c $(CFLAGS)
+main: $(SRC_C)
+	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
 
 clean :
-	del main.exe board.exe menu.exe
+	rm -rf *.o
