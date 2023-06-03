@@ -1,146 +1,139 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include "menuPause.h"
-#include "..\Cheat\Cheat.h"
+#include "../../include/src/menuPause.h"
 
-void printPauseMenu(){
+void printPauseMenu() {
     printf(
-        "##############################\n"
-        "#         Pause Menu         #\n"
-        "#                            #\n"
-        "#          Continue          #\n"
-        "#          Save Game         #\n"
-        "#          Load Game         #\n"
-        "#                            #\n"
-        "#           Quit             #\n"
-        "#                            #\n"
-        "#                            #\n"
-        "#                            #\n"
-        "##############################\n"
-    );
-}
-void printCotinue(){
-    printf(
-        "##############################\n"
-        "#         Pause Menu         #\n"
-        "#                            #\n"
-        "#    ####################    #\n"
-        "#    #     Continue     #    #\n"
-        "#    ####################    #\n"
-        "#          Save Game         #\n"
-        "#          Load Game         #\n"
-        "#                            #\n"
-        "#           Quit             #\n"
-        "#                            #\n"
-        "#                            #\n"
-        "#                            #\n"
-        "##############################\n"
+            "##############################\n"
+            "#         Pause Menu         #\n"
+            "#                            #\n"
+            "#          Continue          #\n"
+            "#          Save Game         #\n"
+            "#          Load Game         #\n"
+            "#                            #\n"
+            "#           Quit             #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "##############################\n"
     );
 }
 
-void printSave(){
+void printContinue() {
     printf(
-        "##############################\n"
-        "#         Pause Menu         #\n"
-        "#                            #\n"
-        "#          Continue          #\n"
-        "#    ####################    #\n"
-        "#    #     Save Game    #    #\n"
-        "#    ####################    #\n"
-        "#          Load Game         #\n"
-        "#           Quit             #\n"
-        "#                            #\n"
-        "#                            #\n"
-        "##############################\n"
+            "##############################\n"
+            "#         Pause Menu         #\n"
+            "#                            #\n"
+            "#    ####################    #\n"
+            "#    #     Continue     #    #\n"
+            "#    ####################    #\n"
+            "#          Save Game         #\n"
+            "#          Load Game         #\n"
+            "#                            #\n"
+            "#           Quit             #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "##############################\n"
     );
 }
-void printLoadGame(){
+
+void printSave() {
     printf(
-        "##############################\n"
-        "#         Pause Menu         #\n"
-        "#                            #\n"
-        "#          Continue          #\n"
-        "#          Save Game         #\n"
-        "#    ####################    #\n"
-        "#    #     Load Game    #    #\n"
-        "#    ####################    #\n"
-        "#           Quit             #\n"
-        "#                            #\n"
-        "#                            #\n"
-        "##############################\n"
+            "##############################\n"
+            "#         Pause Menu         #\n"
+            "#                            #\n"
+            "#          Continue          #\n"
+            "#    ####################    #\n"
+            "#    #     Save Game    #    #\n"
+            "#    ####################    #\n"
+            "#          Load Game         #\n"
+            "#           Quit             #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "##############################\n"
     );
 }
-void printQuitPause(){
+
+void printLoadGame() {
     printf(
-        "##############################\n"
-        "#         Pause Menu         #\n"
-        "#                            #\n"
-        "#          Cotinue          #\n"
-        "#          Save Game         #\n"
-        "#          Load Game         #\n"
-        "#    ####################    #\n"
-        "#    #      Quit        #    #\n"
-        "#    ####################    #\n"
-        "#                            #\n"
-        "#                            #\n"
-        "##############################\n"
+            "##############################\n"
+            "#         Pause Menu         #\n"
+            "#                            #\n"
+            "#          Continue          #\n"
+            "#          Save Game         #\n"
+            "#    ####################    #\n"
+            "#    #     Load Game    #    #\n"
+            "#    ####################    #\n"
+            "#           Quit             #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "##############################\n"
     );
 }
-int setCompteur(int Compt){
-    return Compt+=1; 
+
+void printQuitPause() {
+    printf(
+            "##############################\n"
+            "#         Pause Menu         #\n"
+            "#                            #\n"
+            "#          Cotinue          #\n"
+            "#          Save Game         #\n"
+            "#          Load Game         #\n"
+            "#    ####################    #\n"
+            "#    #      Quit        #    #\n"
+            "#    ####################    #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "##############################\n"
+    );
 }
-int setZeroCompt(int Compt){
+
+int setCompteur(int Compt) {
+    return Compt += 1;
+}
+
+int setZeroCompt(int Compt) {
     return 0;
 }
-int setChoicesPlus (int choice){
-    return choice+=1;
+
+int setChoicesPlus(int choice) {
+    return choice += 1;
 }
-int setChoicesMinus (int choice){
-    return choice-=1;
+
+int setChoicesMinus(int choice) {
+    return choice -= 1;
 }
-int mouvementPauseMenu(int choice){
-    if (choice == 0)
-    {
-        printPauseMenu;
-    } else if (choice == 1)
-    {
-        printCotinue;
-    }else if(choice == 2){
-        printSave;
-    }else if (choice == 3)
-    {
-        printLoadGame;
-    }else if (choice == 4)
-    {
-        printQuitPause;
+
+int mouvementPauseMenu(int choice) {
+    if (choice == 0) {
+        printPauseMenu();
+    } else if (choice == 1) {
+        printContinue();
+    } else if (choice == 2) {
+        printSave();
+    } else if (choice == 3) {
+        printLoadGame();
+    } else if (choice == 4) {
+        printQuitPause();
     }
-    return choice;    
+    return choice;
 }
 
-void printCheat(int choice, int compteur){
-    
-}
-
-void displayMenuPause(char keyEnter){
+void displayMenuPause(char keyEnter, Character *character) {
     int choice = 0;
     int compt = 0;
     bool choiceDone = false;
-    printPauseMenu;
-    while (!choiceDone)
-    {
+    printPauseMenu();
+    while (!choiceDone) {
         choice = mouvementPauseMenu(choice);
-        if (keyEnter == 'z' && choice != 0)
-        {
+        if (keyEnter == 'z' && choice != 0) {
             compt = setChoicesMinus(compt);
-        } else if (keyEnter == 's' && choice != 4)
-        {
+        } else if (keyEnter == 's' && choice != 4) {
             compt = setChoicesPlus(compt);
         }
-        if (compt == 9)
-        {
-            cheatMenu(keyEnter);
+        if (compt == 9) {
+            cheatMenu(keyEnter, character);
         }
     }
-    
+
 }

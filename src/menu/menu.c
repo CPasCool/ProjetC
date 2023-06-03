@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include "menu.h"
+#include "../../include/src/menu.h"
 
 struct choice {
     int choice;
@@ -240,8 +240,7 @@ void displayCredit(){
             "#                            #\n"
             "#                            #\n"
             "#                            #\n"
-            "##############################\n"
-        );
+            "##############################\n");
 }
 
 void displayPlayMenu() {
@@ -391,8 +390,10 @@ void menu() {
     displayMenu(choiceMenu);
 
     int choix;
+
+
     while (choixFait == false) {
-        printf("entrer votre choice");
+        printf("entrer votre choice\n");
         scanf("%d", &choix);
 
         setChoice(choiceMenu, choix);
@@ -407,7 +408,7 @@ void newGame(){
     int choice;
     while (choiceDo == false)
     {
-        printf("entrer votre choix");
+        printf("entrer votre choix\n");
         scanf("%d",&choice);
         setChoice(choiceNewgame,choice);
         displayMenuNewGame(getChoice(choiceNewgame));
@@ -422,7 +423,7 @@ void inGame()
     int choice;
     while (choiceDo == false)
     {
-        printf("entrer votre choix");
+        printf("entrer votre choix\n");
         scanf("%d",&choice);
         setChoice(choiceIngame,choice);
         displayMenuIngame(getChoice(choiceIngame));

@@ -1,21 +1,21 @@
-#include "Board/CreateBoard.h"
+#include "include/src/CreateBoard.h"
 #include "Tests/Character/TestCharacter.h"
 #include "Tests/Monsters/MonstersTests.h"
-#include "Board/Levels.h"
-#include "Monster/Monster.h"
+#include "include/src/Levels.h"
+#include "include/src/Monster.h"
 #include "Tests/Levels/LevelsTests.h"
-#include "Game/Game.h"
+#include "include/src/Game.h"
 
 
 int main() {
     // TESTS
-    testCharacter();
-    testMonster();
-    generateBoard();
-    launchLevelTests();
+    //testCharacter();
+    //testMonster();
+    //generateBoard();
+    //launchLevelTests();
 
-    // Start the game
+    //Start the game
     LaunchGame();
-    //    generateBoard();
+    //generateBoard();
     return 0;
 }
