@@ -119,7 +119,7 @@ int mouvementPauseMenu(int choice) {
     return choice;
 }
 
-void displayMenuPause(char keyEnter, Character *character) {
+int pauseMenu(char keyEnter, Character *character) {
     int choice = 0;
     int compt = 0;
     bool choiceDone = false;
@@ -135,5 +135,5 @@ void displayMenuPause(char keyEnter, Character *character) {
             cheatMenu(keyEnter, character);
         }
     }
-
+    return 0;
 }

@@ -7,6 +7,7 @@
 #include "stdlib.h"
 #include "../../include/src/Game.h"
 #include "../../include/src/menu.h"
+#include "../../include/src/menuPause.h"
 #include "../../include/src/Keyboard.h"
 #include "../../include/src/Move.h"
 #include "../../include/src/Levels.h"
@@ -84,7 +85,7 @@ void play() {
         printf("The closest alive monster is\n");
         printMonsterStats(closestMonster);
         if (input == 'p') {
-            if (pauseMenu() == 1) {
+            if (pauseMenu(input, board->character) == 1) {
                 inGame = false;
             };
         } else if (input == 'z' || input == 'q' || input == 's' || input == 'd') {
