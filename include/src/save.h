@@ -1,5 +1,7 @@
-#include "../Character/Character.h"
-#include "../Monster/Monster.h"
+#include "Character.h"
+#include "Monster.h"
+#include "Board.h"
+
 #ifndef PROJETC_SAVE_H
 #define PROJETC_SAVE_H
 void createSave();
