@@ -7,7 +7,7 @@
 
 #include "Monster.h"
 
-typedef struct coordonees_ coordonees;
+typedef struct Coordonees coordonees;
 typedef struct statistics_ Stats;
 typedef struct character_ Character;
 
@@ -20,7 +20,9 @@ Stats *createStats();
 // Setter
 int setLifePoint(Character *character, int newLifePoint);
 
-int setKeys(Character *character, int keyNumber);
+int addKeys(Character *character);
+
+int removeKeys(Character *character);
 
 int setStrength(Character *character, int newAttack);
 
@@ -42,14 +44,6 @@ int printKeysNumber(Stats *stats);
 
 int printAll(Character *);
 
-int moveLeft(Character *character);
-
-int moveRight(Character *character);
-
-int moveDown(Character *character);
-
-int moveUp(Character *character);
-
 int getLifePoint(Character *character);
 
 int getKeys(Character *character);
@@ -64,9 +58,9 @@ coordonees *getCoo(Character *character);
 
 char *getName(Character *character);
 
-int getX(Character *character);
+int getCharaX(Character *character);
 
 
-int getY(Character *character);
+int getCharaY(Character *character);
 
 #endif //PROJETC_CHARACTER_H

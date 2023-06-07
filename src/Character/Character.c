@@ -1,16 +1,7 @@
-//
-// Created by benfa on 10/05/2023.
-//
-
 #include "../../include/src/Character.h"
-# include <stdlib.h>
+#include <stdlib.h>
 #include "stdio.h"
-#include "../../include/src/Monster.h"
 
-typedef struct coordonees_ {
-    int x;
-    int y;
-} coordonees;
 
 typedef struct statistics_ {
     int maxLifePoint;
@@ -30,7 +21,7 @@ typedef struct character_ {
 // initializers
 Character *createCharacter(char *name) {
     Character *player = malloc(sizeof(Character));
-    player->coo = malloc(sizeof(coordonees));
+    player->coo = createCoordonne(14, 14);
     player->stat = createStats();
     player->name = name;
     return player;
@@ -38,11 +29,11 @@ Character *createCharacter(char *name) {
 
 Stats *createStats() {
     Stats *stat = malloc(sizeof(Stats));
-    stat->strength = 5;
+    stat->strength = 2;
     stat->maxLifePoint = 10;
     stat->keys = 0;
-    stat->currentLifePoint = stat->maxLifePoint;
-    stat->defence = 5;
+    stat->currentLifePoint = 10;
+    stat->defence = 1;
     return stat;
 }
 

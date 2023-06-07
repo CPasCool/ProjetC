@@ -19,8 +19,8 @@ int pauseMenu(){
 
 
 
-int getChoice(choiceMenu *choixMenu) {
-    return choixMenu->choice;
+int getChoice(choiceMenu *choiceMenu) {
+    return choiceMenu->choice;
 }
 
 choiceMenu *createChoiceMenu() {
@@ -28,8 +28,188 @@ choiceMenu *createChoiceMenu() {
     choiceMenuTmp->choice = 1;
     return choiceMenuTmp;
 }
+//affichage du menu avant de lancer la partie
+void displayNewGame()
+{
+    printf(
+            "##############################\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#  ########################  #\n"
+            "#  # 1 -   New Game       #  #\n"
+            "#  ########################  #\n"
+            "#   2 -    Load Game         #\n"
+            "#   3 -    Quit              #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "##############################\n"
+    );
+}
 
-void displayCredit() {
+void displaySave()
+{
+    printf(
+            "##############################\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#    1 -   New Game          #\n"
+            "#  ########################  #\n"
+            "#  # 2 -   Load Game      #  #\n"
+            "#  ########################  #\n"
+            "#   3 -    Quit              #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "##############################\n"
+    );
+}
+void displayQuitNewGame(){
+    printf(
+            "##############################\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#    1 -   New Game          #\n"
+            "#    2 -   Load Game         #\n"
+            "#  ########################  #\n"
+            "#  # 3 -    Quit          #  #\n"
+            "#  ########################  #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "##############################\n"
+    );
+}
+void displayPlayIngame()
+{
+    printf(
+            "##############################\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#  ########################  #\n"
+            "#  # 1 -   Play           #  #\n"
+            "#  ########################  #\n"
+            "#   2 -    Save              #\n"
+            "#   3 -    Leave             #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "##############################\n"
+    );
+}
+
+void displayLeaveIngame()
+{
+    printf(
+            "##############################\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#   1 -    Play              #\n"
+            "#   2 -    Save              #\n"
+            "#  ########################  #\n"
+            "#  # 3 -   Leave          #  #\n"
+            "#  ########################  #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "##############################\n"
+    );
+}
+void displaySaveIngame()
+{
+    printf(
+            "##############################\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#  # 1 -   Play           #  #\n"
+            "#  ########################  #\n"
+            "#  # 2 -   Save           #  #\n"
+            "#  ########################  #\n"
+            "#   3 -    Leave             #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "##############################\n"
+    );
+}
+void displayCredit(){
+
     printf(
             "##############################\n"
             "#                            #\n"
@@ -60,7 +240,7 @@ void displayCredit() {
             "#                            #\n"
             "#                            #\n"
             "#                            #\n"
-            "##############################");
+            "##############################\n");
 }
 
 void displayPlayMenu() {
@@ -94,7 +274,7 @@ void displayPlayMenu() {
             "#                            #\n"
             "#                            #\n"
             "#                            #\n"
-            "##############################"
+            "##############################\n"
     );
 }
 
@@ -129,7 +309,7 @@ void displayCreditMenu() {
             "#                            #\n"
             "#                            #\n"
             "#                            #\n"
-            "##############################"
+            "##############################\n"
     );
 }
 
@@ -164,7 +344,7 @@ void displayExitMenu() {
             "#                            #\n"
             "#                            #\n"
             "#                            #\n"
-            "##############################"
+            "##############################\n"
     );
 }
 
@@ -178,19 +358,75 @@ void displayMenu(choiceMenu *choice) {
     }
 }
 
+void displayMenuNewGame(int choice){
+    if (choice == 1)
+    {
+        displayNewGame();
+    }else if (choice == 2)
+    {
+        displaySave();
+    } else {
+        displayQuitNewGame();
+    }
+}
+
+void displayMenuIngame(int choice)
+{
+    if (choice == 1)
+    {
+        displayPlayIngame();
+    }else if (choice == 2)
+    {
+        displaySaveIngame();
+    } else {
+        displayLeaveIngame();
+    }
+}
+
 void menu() {
-    choiceMenu *choixMenu = createChoiceMenu();
+    choiceMenu *choiceMenu = createChoiceMenu();
+
     bool choixFait = false;
-    displayMenu(choixMenu);
+    displayMenu(choiceMenu);
 
     int choix;
 
 
     while (choixFait == false) {
-        printf("entrer votre choice");
+        printf("entrer votre choice\n");
         scanf("%d", &choix);
 
-        setChoice(choixMenu, choix);
-        displayMenu(choixMenu);
+        setChoice(choiceMenu, choix);
+        displayMenu(choiceMenu);
     }
+}
+
+void newGame(){
+    choiceMenu* choiceNewgame = createChoiceMenu();
+    bool choiceDo = false;
+    displayMenuNewGame(getChoice(choiceNewgame));
+    int choice;
+    while (choiceDo == false)
+    {
+        printf("entrer votre choix\n");
+        scanf("%d",&choice);
+        setChoice(choiceNewgame,choice);
+        displayMenuNewGame(getChoice(choiceNewgame));
+    }
+}
+
+void inGame()
+{
+    choiceMenu* choiceIngame = createChoiceMenu();
+    bool choiceDo = false;
+    displayMenuIngame((getChoice(choiceIngame)));
+    int choice;
+    while (choiceDo == false)
+    {
+        printf("entrer votre choix\n");
+        scanf("%d",&choice);
+        setChoice(choiceIngame,choice);
+        displayMenuIngame(getChoice(choiceIngame));
+    }
+
 }

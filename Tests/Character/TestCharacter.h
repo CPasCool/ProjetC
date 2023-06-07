@@ -5,7 +5,6 @@
 #ifndef PROJETC_TESTCHARACTER_H
 #define PROJETC_TESTCHARACTER_H
 
-
 #include "../../include/src/Character.h"
 
 int testCharacter();

@@ -22,8 +22,8 @@ int testCharacter() {
     setStrength(chara, 10);
     result += testAttack(chara, 10);
 
-    setKeys(chara, 5);
-    result += testKeysNumber(chara, 5);
+    addKeys(chara);
+    result += testKeysNumber(chara, 1);
 
     setLifePoint(chara, 10);
     result += testLifePoint(chara,10);
@@ -78,7 +78,7 @@ int testCharacterName(Character *player, const char *name) {
 }
 
 int testCoordonnes(Character *player, int x, int y) {
-    if (getX(player) != x || getY(player) != y) {
+    if (getCharaX(player) != x || getCharaY(player) != y) {
         perror("La fonction \" changeCoordonnes ne fonctionne pas \"");
         return 1;
     }
