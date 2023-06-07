@@ -63,4 +63,5 @@ int getCharaX(Character *character);
 
 int getCharaY(Character *character);
 
+int setKeys(Character *character,int keys);
 #endif //PROJETC_CHARACTER_H

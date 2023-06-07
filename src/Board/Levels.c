@@ -1,4 +1,4 @@
-#include "Levels.h"
+#include "../../include/src/Levels.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
@@ -12,7 +12,7 @@ void getLevelMonsters(char *levelFile, boardElements *board) {
 
     // Send an error if the file does not exist
     if (fopen_s(&levelpointer, levelFile, "r") != 0) {
-        char* newLevelFilename = malloc (sizeof (char)*28);
+        char *newLevelFilename = malloc(sizeof(char) * 28);
         newLevelFilename[27] = '\0';
         char *prefixFile = ".";
         for (int j = 0; j < 27; j++) {
@@ -84,7 +84,7 @@ void createLevelMonsters(char *levelFile, monster **monsterTab, int nbMonster) {
 
     // Send an error if the file does not exist
     if (fopen_s(&levelpointer, levelFile, "r") != 0) {
-        char* newLevelFilename = malloc (sizeof (char)*28);
+        char *newLevelFilename = malloc(sizeof(char) * 28);
         newLevelFilename[27] = '\0';
         char *prefixFile = ".";
         for (int j = 0; j < 27; j++) {
@@ -211,7 +211,7 @@ void getLevelBoard(char *levelFile, boardElements *boardElements) {
     fopen_s(&levelpointer, levelFile, "r");
     // Send an error if the file does not exist
     if (fopen_s(&levelpointer, levelFile, "r") != 0) {
-        char* newLevelFilename = malloc (sizeof (char)*28);
+        char *newLevelFilename = malloc(sizeof(char) * 28);
         newLevelFilename[27] = '\0';
         char *prefixFile = ".";
         for (int j = 0; j < 27; j++) {
@@ -272,7 +272,7 @@ void getOtherLevels(char *levelFile, boardElements *boardElements) {
     // Send an error if the file does not exist
     if (fopen_s(&levelpointer, levelFile, "r") != 0) {
         errorCount++;
-        char* newLevelFilename = malloc (sizeof (char)*28);
+        char *newLevelFilename = malloc(sizeof(char) * 28);
         newLevelFilename[27] = '\0';
         char *prefixFile = ".";
         for (int j = 0; j < 27; j++) {
@@ -336,7 +336,7 @@ void getOtherLevels(char *levelFile, boardElements *boardElements) {
     int sizePrefix = 13;
     if (errorCount > 0) {
         prefix = "../src/Levels/";
-        sizePrefix ++;
+        sizePrefix++;
     }
     char *prefixedLevelName = malloc(sizeof(char) * size);
     for (int i = 0; i < 4; i++) {
@@ -352,7 +352,7 @@ void getOtherLevels(char *levelFile, boardElements *boardElements) {
         }
         if (errorCount > 0) {
             prefix = "../src/Levels/";
-        }else{
+        } else {
             prefix = "./src/Levels/";
         }
     }
@@ -362,22 +362,38 @@ void getOtherLevels(char *levelFile, boardElements *boardElements) {
 }
 
 //comme il n'y a que un seul fichier de sauvegarde pas besoin de paramètre
-Character* getCharacterSave()
-{
+void getCharacterSave() {
+    char *levelFile = "./levels/save.level";
     FILE *levelpointer;
     Character *personnage = createCharacter("");
-    char* name;
-    int countLine=0;
-    int savePos=0;
-    int coordX=0;
-    int coordY=0;
+    char *name;
+    int countLine = 0;
+    int savePos = 0;
+    int coordX = 0;
+    int coordY = 0;
     char *value = malloc(sizeof(char) * 4);
-    fopen_s(&levelpointer,"../Save/save.txt","r");
+    fopen_s(&levelpointer, levelFile, "r");
+    if (fopen_s(&levelpointer, levelFile, "r") != 0) {
+        char* newLevelFilename = malloc (sizeof (char)*28);
+        newLevelFilename[27] = '\0';
+        char *prefixFile = ".";
+        for (int j = 0; j < 27; j++) {
+            if (j < 1) {
+                newLevelFilename[j] = prefixFile[j];
+            } else {
+                newLevelFilename[j] = levelFile[j - 1];
+            }
+        }
+        fopen_s(&levelpointer, newLevelFilename, "r");
+        if (fopen_s(&levelpointer, newLevelFilename, "r") != 0) {
+            printf("Error opening the file.\n");
+            return;
+        }
+    }
     char *line = malloc(sizeof(char) * 32);
-    while (fgets(line, 32, levelpointer))
-    {
-        countLine+=1;
-        if(countLine==52) {
+    while (fgets(line, 32, levelpointer)) {
+        countLine += 1;
+        if (countLine == 52) {
             for (int i = 0; i < 32; i++) {
                 if (line[i] == ':') {
                     i += 2;
@@ -385,15 +401,13 @@ Character* getCharacterSave()
                     break;
                 }
             }
-            while(line[savePos] != '.')
-            {
-                name=strcat(name, &line[savePos]);
-                savePos+=1;
+            while (line[savePos] != '.') {
+                name = strcat(name, &line[savePos]);
+                savePos += 1;
             }
-            setName(personnage,name);
+            setName(personnage, name);
         }
-        if(countLine>52 && countLine<59)
-        {
+        if (countLine > 52 && countLine < 59) {
             value[3] = '\0';
             // Get the stat value
             for (int i = 0; i < 32; i++) {
@@ -404,39 +418,32 @@ Character* getCharacterSave()
                     break;
                 }
             }
-            }
-        if(countLine==52)
-        {
+        }
+        if (countLine == 52) {
             setMaximumLifePoint(personnage, atoi(value));
         }
-        if(countLine==53)
-        {
+        if (countLine == 53) {
             setLifePoint(personnage, atoi(value));
         }
-        if(countLine==54)
-        {
+        if (countLine == 54) {
             setStrength(personnage, atoi(value));
         }
-        if(countLine==55)
-        {
+        if (countLine == 55) {
             setDefence(personnage, atoi(value));
         }
-        if(countLine==56)
-        {
+        if (countLine == 56) {
             setKeys(personnage, atoi(value));
         }
-        if(countLine==57)
-        {
-            coordX= atoi(value);
+        if (countLine == 57) {
+            coordX = atoi(value);
         }
-        if(countLine==58)
-        {
-            coordY= atoi(value);
+        if (countLine == 58) {
+            coordY = atoi(value);
         }
-        changeCoordonnes(personnage,coordX,coordY);
-        }
-    return personnage;
+        changeCoordonnes(personnage, coordX, coordY);
     }
+    return personnage;
+}
 
 
 

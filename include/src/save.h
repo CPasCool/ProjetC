@@ -4,5 +4,7 @@
 
 #ifndef PROJETC_SAVE_H
 #define PROJETC_SAVE_H
-void createSave();
+
+void createSave(boardElements* boardElements);
+
 #endif //PROJETC_SAVE_H
