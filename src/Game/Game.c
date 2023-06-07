@@ -12,6 +12,7 @@
 #include "../../include/src/Levels.h"
 #include "../../include/src/Board.h"
 #include "../../include/src/FightSystem.h"
+#include "../../include/src/save.h"
 
 
 const int MAXIMUM_CHOICE_MENU = 5;
@@ -84,9 +85,8 @@ void play() {
         printf("The closest alive monster is\n");
         printMonsterStats(closestMonster);
         if (input == 'p') {
-            if (pauseMenu() == 1) {
-                inGame = false;
-            };
+            createSave(board);
+            inGame = false;
         } else if (input == 'z' || input == 'q' || input == 's' || input == 'd') {
             move(character, input, board);
         } else {
