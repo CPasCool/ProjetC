@@ -1,4 +1,5 @@
 #include "Cheat.h"
+#include "Keyboard.h"
 
 int pauseMenu(char keyEnter, Character *character);
 int pauseMenuChange(int choice);

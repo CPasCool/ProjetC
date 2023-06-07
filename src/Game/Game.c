@@ -86,7 +86,6 @@ void play() {
         printMonsterStats(closestMonster);
         if (input == 'p') {
             if (pauseMenu(input, board->character) == 1) {
-                printf("test");
                 inGame = false;
             };
         } else if (input == 'z' || input == 'q' || input == 's' || input == 'd') {
