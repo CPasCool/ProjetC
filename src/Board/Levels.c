@@ -363,7 +363,7 @@ void getOtherLevels(char *levelFile, boardElements *boardElements) {
 
 //comme il n'y a que un seul fichier de sauvegarde pas besoin de paramètre
 void getCharacterSave() {
-    char *levelFile = "./levels/save.level";
+    char *levelFile = "./levels/save.txt";
     FILE *levelpointer;
     Character *personnage = createCharacter("");
     char *name;

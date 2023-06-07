@@ -5,6 +5,6 @@
 #ifndef PROJETC_SAVE_H
 #define PROJETC_SAVE_H
 
-void createSave(boardElements* boardElements);
+int createSave(boardElements* boardElements);
 
 #endif //PROJETC_SAVE_H
