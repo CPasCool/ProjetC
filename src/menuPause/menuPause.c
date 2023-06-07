@@ -3,6 +3,7 @@
 #include <stdbool.h>
 #include "../../include/src/menuPause.h"
 
+
 void printPauseMenu() {
     printf(
             "##############################\n"
@@ -76,7 +77,7 @@ void printQuitPause() {
             "##############################\n"
             "#         Pause Menu         #\n"
             "#                            #\n"
-            "#          Cotinue          #\n"
+            "#          Continue          #\n"
             "#          Save Game         #\n"
             "#          Load Game         #\n"
             "#    ####################    #\n"
@@ -118,26 +119,53 @@ int pauseMenuChange(int choice) {
     }
     return choice;
 }
-
+int checkChoices(int choice){
+    if(choice == 1){
+        return 0;
+    }
+    else if (choice == 2){
+        //savefonction
+        printf("game saved");
+        return 2;
+    } else if (choice == 3){
+        //loadGameFonction
+        printf("load game");
+        return 3;
+    }else if (choice == 4){
+        return 1;
+    }
+}
+bool checkPauseCode(int pauseCode){
+    if(pauseCode == 0 || pauseCode == 1){
+        return true;
+    }else
+    {
+        return false;
+    }
+}
 int pauseMenu(char keyEnter, Character *character) {
-    int choice = 0;
     int compt = 0;
+    int pauseCode;
+    int cheatReturn;
     bool choiceDone = false;
     printPauseMenu();
-    printf("test 1");
     while (!choiceDone) {
-        choice = pauseMenuChange(choice);
-        if (keyEnter == 'z' && choice != 0) {
-            compt = setChoicesMinus(compt);
+        keyEnter = catchInput();
+        if (keyEnter == 'z' && compt != 0) {
+            compt = setChoicesMinus(compt); 
         } else if (keyEnter == 's') {
             compt = setChoicesPlus(compt);
-        }else if (keyEnter == 'e'){
-            choiceDone = true;
+            
+        }else if (keyEnter =='e')
+        {
+            pauseCode = checkChoices(compt);
         }
-        pauseMenuChange(choice);
         if (compt == 9) {
-            cheatMenu(' ', character);
+            cheatReturn = cheatMenu(' ', character);
+            printf("test15452212");
         }
+        pauseMenuChange(compt);
+        choiceDone = checkPauseCode(pauseCode);
     }
-    return 0;
+    return pauseCode;
 }
