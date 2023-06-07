@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
-#include "Monster.h"
+#include "../../include/src/Monster.h"
 
 
 monster* createNewMonster(char* name, int hp, int strength, int shield, char type, coordonees* coo){

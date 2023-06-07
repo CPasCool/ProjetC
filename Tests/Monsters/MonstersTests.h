@@ -1,5 +1,5 @@
-#include "../../Monster/Monster.h"
-#include "../../Coodonnees/Coordonees.h"
+#include "../../include/src/Monster.h"
+#include "../../include/src/Coordonees.h"
 
 #ifndef PROJETC_MONSTERSTESTS_H
 #define PROJETC_MONSTERSTESTS_H
