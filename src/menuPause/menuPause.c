@@ -8,6 +8,7 @@ void printPauseMenu() {
             "##############################\n"
             "#         Pause Menu         #\n"
             "#                            #\n"
+            "#                            #\n"
             "#          Continue          #\n"
             "#          Save Game         #\n"
             "#          Load Game         #\n"
@@ -31,7 +32,6 @@ void printContinue() {
             "#          Load Game         #\n"
             "#                            #\n"
             "#           Quit             #\n"
-            "#                            #\n"
             "#                            #\n"
             "##############################\n"
     );
@@ -104,7 +104,7 @@ int setChoicesMinus(int choice) {
     return choice -= 1;
 }
 
-int mouvementPauseMenu(int choice) {
+int pauseMenuChange(int choice) {
     if (choice == 0) {
         printPauseMenu();
     } else if (choice == 1) {
@@ -124,15 +124,19 @@ int pauseMenu(char keyEnter, Character *character) {
     int compt = 0;
     bool choiceDone = false;
     printPauseMenu();
+    printf("test 1");
     while (!choiceDone) {
-        choice = mouvementPauseMenu(choice);
+        choice = pauseMenuChange(choice);
         if (keyEnter == 'z' && choice != 0) {
             compt = setChoicesMinus(compt);
-        } else if (keyEnter == 's' && choice != 4) {
+        } else if (keyEnter == 's') {
             compt = setChoicesPlus(compt);
+        }else if (keyEnter == 'e'){
+            choiceDone = true;
         }
+        pauseMenuChange(choice);
         if (compt == 9) {
-            cheatMenu(keyEnter, character);
+            cheatMenu(' ', character);
         }
     }
     return 0;
