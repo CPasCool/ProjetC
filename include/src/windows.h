@@ -7,6 +7,7 @@
 
 #include "../../SDL2/SDL.h"
 
-SDL_Window* init();
+SDL_Window* createWindow();
 SDL_Renderer *createRenderer(SDL_Window *window);
+int setIcon(SDL_Window* window);
 #endif //PROJETC_WINDOWS_H
