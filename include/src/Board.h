@@ -23,5 +23,6 @@ typedef struct LevelChain{
 
 levelChain *createLevelChain(boardElements *board);
 boardElements *createBoardElement();
+boardElements *copyBoardElement(boardElements *board);
 
 #endif //PROJETC_BOARD_H

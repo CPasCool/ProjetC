@@ -21,7 +21,7 @@ typedef struct character_ {
 // initializers
 Character *createCharacter(char *name) {
     Character *player = malloc(sizeof(Character));
-    player->coo = createCoordonne(14, 14);
+    player->coo = createCoordonne(14, 1);
     player->stat = createStats();
     player->name = name;
     return player;
@@ -143,5 +143,6 @@ int printAll(Character *character) {
     printKeysNumber(character->stat);
     printStrength(character->stat);
     printDefence(character->stat);
+    printf("x = %d, y = %d\n", getCharaX(character), getCharaY(character));
     return 0;
 }

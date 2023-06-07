@@ -5,7 +5,7 @@
 void launchLevelTests() {
     levelChain *levelChain = malloc(sizeof (struct LevelChain));
     boardElements *board = malloc(sizeof (struct BoardElements));
-    getLevelBoard("../Levels/niveau1.level", board, levelChain);
+    getLevelBoard("../Levels/niveau1.level", levelChain);
     for (int i = 0; i < 30; i++) {
         printf("%s\n", board->board[i]);
     }
@@ -18,7 +18,7 @@ void launchLevelTests() {
     for (int i = 0; i < 4; i++) {
         printf("%s\n", board->otherLevels[i]);
     }
-    getLevelBoard(board->otherLevels[3], board, levelChain);
+    getLevelBoard(board->otherLevels[3], levelChain);
     for (int i = 0; i < 30; i++) {
         printf("%s\n", board->board[i]);
     }

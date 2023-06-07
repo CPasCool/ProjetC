@@ -21,3 +21,16 @@ boardElements *createBoardElement() {
 
     return boardElements;
 }
+
+boardElements *copyBoardElement(boardElements *board){
+    boardElements *boardElements = malloc(sizeof(struct BoardElements));
+    boardElements->board = board->board;
+    boardElements->character = board->character;
+    boardElements->otherLevels = board->otherLevels;
+    boardElements->monstersTab = board->monstersTab;
+    boardElements->nbMonsters = board->nbMonsters;
+    boardElements->levelNumber = board->levelNumber;
+    boardElements->aliveMonsters = board->aliveMonsters;
+
+    return boardElements;
+}

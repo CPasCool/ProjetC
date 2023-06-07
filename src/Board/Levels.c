@@ -5,7 +5,6 @@
 #include "string.h"
 
 void getLevelNumber(char *levelFile, boardElements *board) {
-    if (board->levelNumber == -1) {
         int i = 0;
         while (levelFile[i] != '\0') {
             if (isdigit(levelFile[i])) {
@@ -21,7 +20,6 @@ void getLevelNumber(char *levelFile, boardElements *board) {
                 return;
             }
             i++;
-        }
     }
 }
 
@@ -235,7 +233,8 @@ void createLevelMonsters(char *levelFile, monster **monsterTab, int nbMonster) {
     fclose(levelpointer);
 }
 
-levelChain *getLevelBoard(char *levelFile, boardElements *boardElements, levelChain *levelChain) {
+levelChain *getLevelBoard(char *levelFile, levelChain *levelChain) {
+    boardElements *boardElements = createBoardElement();
     getLevelNumber(levelFile, boardElements);
     // go to first
     while (levelChain != NULL && levelChain->previous != NULL) {
@@ -309,7 +308,7 @@ levelChain *getLevelBoard(char *levelFile, boardElements *boardElements, levelCh
     boardElements->board = board;
     printf("We got the board\n");
     if(levelChain == NULL){
-        levelChain = createLevelChain(boardElements);
+        levelChain = createLevelChain(copyBoardElement(boardElements));
         return levelChain;
     }
     levelChain->next = createLevelChain(boardElements);
@@ -326,7 +325,7 @@ levelChain * getOtherLevels(char *levelFile, boardElements *boardElements, level
     while (levelChain->next != NULL && levelChain->next->current != NULL && levelChain->current->levelNumber != boardElements->levelNumber) {
         levelChain = levelChain->next;
     }
-    if (levelChain->current->levelNumber == boardElements->levelNumber && levelChain->current->otherLevels == NULL ) {
+    if (levelChain->current->levelNumber == boardElements->levelNumber && levelChain->current->otherLevels != NULL) {
         boardElements->otherLevels = levelChain->current->otherLevels;
         return levelChain;
     }
@@ -414,6 +413,7 @@ levelChain * getOtherLevels(char *levelFile, boardElements *boardElements, level
                     prefixedLevelName[j] = levels[i][j - sizePrefix];
                 }
             }
+            prefixedLevelName[size-1] = '\0';
             strcpy(levels[i], prefixedLevelName);
         }
         if (errorCount > 0) {
