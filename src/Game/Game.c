@@ -66,12 +66,15 @@ void play() {
     bool inGame = true;
     Character *character = createCharacter("player");
 
-    boardElements *board = malloc(sizeof(struct BoardElements));
+    boardElements *board = createBoardElement();
+    levelChain *levelChain = NULL;
     board->character = character;
+
     //We get/set every element we have on the file
-    getLevelBoard("./src/Levels/niveau1.level", board);
-    getLevelMonsters("./src/Levels/niveau1.level", board);
-    getOtherLevels("./src/Levels/niveau1.level", board);
+    levelChain = getLevelBoard("./src/Levels/niveau1.level", board, levelChain);
+    levelChain = getLevelMonsters("./src/Levels/niveau1.level", board, levelChain);
+    levelChain = getOtherLevels("./src/Levels/niveau1.level", board, levelChain);
+
     //We put the character at is right position
     board->board[getCharaY(character)][getCharaY(character)] = 'T';
     printf("character is set\n");
@@ -88,7 +91,7 @@ void play() {
                 inGame = false;
             };
         } else if (input == 'z' || input == 'q' || input == 's' || input == 'd') {
-            move(character, input, board);
+            move(character, input, board, levelChain);
         } else {
             printf("Stop doing this shit !\n");
         }

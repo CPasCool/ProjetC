@@ -4,15 +4,49 @@
 #include <ctype.h>
 #include "string.h"
 
+void getLevelNumber(char *levelFile, boardElements *board) {
+    if (board->levelNumber == -1) {
+        int i = 0;
+        while (levelFile[i] != '\0') {
+            if (isdigit(levelFile[i])) {
+                if(isdigit(levelFile[i+1])){
+                    char* value = "  ";
+                    value[0] = levelFile[i];
+                    value[1] = levelFile[i+1];
+                    board->levelNumber = atoi(value);
+                    return;
+                }
+                board->levelNumber = levelFile[i] - '0';
+
+                return;
+            }
+            i++;
+        }
+    }
+}
+
 // Get an array of monsters set with the monsters data of a given levels
-void getLevelMonsters(char *levelFile, boardElements *board) {
+levelChain * getLevelMonsters(char *levelFile, boardElements *board, levelChain *levelChain) {
+    getLevelNumber(levelFile, board);
+    while (levelChain != NULL && levelChain->previous != NULL) {
+        levelChain = levelChain->previous;
+    }
+    while (levelChain->next != NULL && levelChain->next->current != NULL && levelChain->current->levelNumber != board->levelNumber) {
+        levelChain = levelChain->next;
+    }
+    if (levelChain->current->levelNumber == board->levelNumber && levelChain->current->aliveMonsters != -1 && levelChain->current->nbMonsters != -1 && levelChain->current->monstersTab != NULL) {
+        board->aliveMonsters = levelChain->current->aliveMonsters;
+        board->nbMonsters = levelChain->current->nbMonsters;
+        board->monstersTab = levelChain->current->monstersTab;
+        return levelChain;
+    }
     FILE *levelpointer;
     int monsterCount = 0;
     fopen_s(&levelpointer, levelFile, "r");
 
     // Send an error if the file does not exist
     if (fopen_s(&levelpointer, levelFile, "r") != 0) {
-        char* newLevelFilename = malloc (sizeof (char)*28);
+        char *newLevelFilename = malloc(sizeof(char) * 28);
         newLevelFilename[27] = '\0';
         char *prefixFile = ".";
         for (int j = 0; j < 27; j++) {
@@ -25,7 +59,7 @@ void getLevelMonsters(char *levelFile, boardElements *board) {
         fopen_s(&levelpointer, newLevelFilename, "r");
         if (fopen_s(&levelpointer, newLevelFilename, "r") != 0) {
             printf("Error opening the file.\n");
-            return;
+            return levelChain;
         }
     }
     monster **monstersTab = (monster **) malloc(sizeof(struct Monster *) * 40);
@@ -72,10 +106,12 @@ void getLevelMonsters(char *levelFile, boardElements *board) {
 
     // Set all monsters stats
     createLevelMonsters(levelFile, monstersTab, monsterCount);
+
     printf("Monsters are setted\n");
-    board->monstersTab = monstersTab;
-    board->nbMonsters = monsterCount;
-    board->aliveMonsters = monsterCount;
+    levelChain->current->monstersTab = monstersTab;
+    levelChain->current->nbMonsters = monsterCount;
+    levelChain->current->aliveMonsters = monsterCount;
+    return levelChain;
 }
 
 void createLevelMonsters(char *levelFile, monster **monsterTab, int nbMonster) {
@@ -84,7 +120,7 @@ void createLevelMonsters(char *levelFile, monster **monsterTab, int nbMonster) {
 
     // Send an error if the file does not exist
     if (fopen_s(&levelpointer, levelFile, "r") != 0) {
-        char* newLevelFilename = malloc (sizeof (char)*28);
+        char *newLevelFilename = malloc(sizeof(char) * 28);
         newLevelFilename[27] = '\0';
         char *prefixFile = ".";
         for (int j = 0; j < 27; j++) {
@@ -199,7 +235,20 @@ void createLevelMonsters(char *levelFile, monster **monsterTab, int nbMonster) {
     fclose(levelpointer);
 }
 
-void getLevelBoard(char *levelFile, boardElements *boardElements) {
+levelChain *getLevelBoard(char *levelFile, boardElements *boardElements, levelChain *levelChain) {
+    getLevelNumber(levelFile, boardElements);
+    // go to first
+    while (levelChain != NULL && levelChain->previous != NULL) {
+        levelChain = levelChain->previous;
+    }
+    // go to correct element or last
+    while (levelChain != NULL && levelChain->current != NULL && levelChain->current->levelNumber != boardElements->levelNumber) {
+        levelChain = levelChain->next;
+    }
+    if (levelChain != NULL && levelChain->current != NULL && levelChain->current->levelNumber == boardElements->levelNumber) {
+        boardElements->board = levelChain->current->board;
+        return levelChain;
+    }
     FILE *levelpointer;
     // Initialize board with 0 values except \0 for end of line
     char **board = (char **) malloc(sizeof(char *) * 30);
@@ -211,7 +260,7 @@ void getLevelBoard(char *levelFile, boardElements *boardElements) {
     fopen_s(&levelpointer, levelFile, "r");
     // Send an error if the file does not exist
     if (fopen_s(&levelpointer, levelFile, "r") != 0) {
-        char* newLevelFilename = malloc (sizeof (char)*28);
+        char *newLevelFilename = malloc(sizeof(char) * 28);
         newLevelFilename[27] = '\0';
         char *prefixFile = ".";
         for (int j = 0; j < 27; j++) {
@@ -224,7 +273,7 @@ void getLevelBoard(char *levelFile, boardElements *boardElements) {
         fopen_s(&levelpointer, newLevelFilename, "r");
         if (fopen_s(&levelpointer, newLevelFilename, "r") != 0) {
             printf("Error opening the file.\n");
-            return;
+            return levelChain;
         }
     }
     char letter = (char) fgetc(levelpointer);
@@ -256,14 +305,31 @@ void getLevelBoard(char *levelFile, boardElements *boardElements) {
         }
         letter = (char) fgetc(levelpointer);
     }
-    printf("We got the board\n");
     fclose(levelpointer);
     boardElements->board = board;
+    printf("We got the board\n");
+    if(levelChain == NULL){
+        levelChain = createLevelChain(boardElements);
+        return levelChain;
+    }
+    levelChain->next = createLevelChain(boardElements);
+    return levelChain;
 }
 
 // get all the possible levels in an array, string is set to \0 if there is no level on this way
 // the levels file locations are in the same order that in the original file, so 0 = East, 1 = South, 2 = West, 3 = North
-void getOtherLevels(char *levelFile, boardElements *boardElements) {
+levelChain * getOtherLevels(char *levelFile, boardElements *boardElements, levelChain *levelChain) {
+    getLevelNumber(levelFile, boardElements);
+    while (levelChain != NULL && levelChain->previous != NULL) {
+        levelChain = levelChain->previous;
+    }
+    while (levelChain->next != NULL && levelChain->next->current != NULL && levelChain->current->levelNumber != boardElements->levelNumber) {
+        levelChain = levelChain->next;
+    }
+    if (levelChain->current->levelNumber == boardElements->levelNumber && levelChain->current->otherLevels == NULL ) {
+        boardElements->otherLevels = levelChain->current->otherLevels;
+        return levelChain;
+    }
     FILE *levelpointer;
     // Initialize the levels array with empty strings
     int errorCount = 0;
@@ -272,7 +338,7 @@ void getOtherLevels(char *levelFile, boardElements *boardElements) {
     // Send an error if the file does not exist
     if (fopen_s(&levelpointer, levelFile, "r") != 0) {
         errorCount++;
-        char* newLevelFilename = malloc (sizeof (char)*28);
+        char *newLevelFilename = malloc(sizeof(char) * 28);
         newLevelFilename[27] = '\0';
         char *prefixFile = ".";
         for (int j = 0; j < 27; j++) {
@@ -285,7 +351,7 @@ void getOtherLevels(char *levelFile, boardElements *boardElements) {
         fopen_s(&levelpointer, newLevelFilename, "r");
         if (fopen_s(&levelpointer, newLevelFilename, "r") != 0) {
             printf("Error opening the file.\n");
-            return;
+            return levelChain;
         }
     }
     int size = 27;
@@ -336,7 +402,7 @@ void getOtherLevels(char *levelFile, boardElements *boardElements) {
     int sizePrefix = 13;
     if (errorCount > 0) {
         prefix = "../src/Levels/";
-        sizePrefix ++;
+        sizePrefix++;
     }
     char *prefixedLevelName = malloc(sizeof(char) * size);
     for (int i = 0; i < 4; i++) {
@@ -352,11 +418,12 @@ void getOtherLevels(char *levelFile, boardElements *boardElements) {
         }
         if (errorCount > 0) {
             prefix = "../src/Levels/";
-        }else{
+        } else {
             prefix = "./src/Levels/";
         }
     }
     printf("We got the other levels\n");
     fclose(levelpointer);
-    boardElements->otherLevels = levels;
+    levelChain->current->otherLevels = levels;
+    return levelChain;
 }

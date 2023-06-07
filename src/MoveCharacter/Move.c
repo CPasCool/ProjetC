@@ -2,12 +2,13 @@
 #include "stdlib.h"
 #include "stdio.h"
 
+
 /**
  * move the character on the board
  * @param character : character to move
  * @return
  */
-int move(Character *character, char move, boardElements *board) {
+int move(Character *character, char move, boardElements *board, levelChain *levelChain) {
     monster *monster;
     coordonees *coordonees = malloc(sizeof(struct Coordonees));
     switch (move) {
@@ -51,7 +52,7 @@ int move(Character *character, char move, boardElements *board) {
 
             //There is a life bonus
         case '3':
-            setMaximumLifePoint(character,  3);
+            setMaximumLifePoint(character, 3);
             moveCharacter(character, move, board->board);
             printAll(character);
             break;
@@ -99,6 +100,9 @@ int move(Character *character, char move, boardElements *board) {
             printf("element in board is : %c\n", board->board[coordonees->y][coordonees->x]);
             printf("You can not go that way\n");
             break;
+        case '?':
+            moveCharacter(character, move, board->board);
+            changeLevel(move, board, character, levelChain);
         default:
             break;
     }
@@ -131,6 +135,30 @@ int *moveCharacter(Character *character, char move, char **board) {
             break;
     }
     return 0;
+}
+
+void changeLevel(char direction, boardElements *boardElements, Character *character, levelChain *levelChain) {
+    switch (direction) {
+        case 'z':
+            printf("test");
+            getLevelBoard(boardElements->otherLevels[3], boardElements, levelChain);
+            getOtherLevels(boardElements->otherLevels[3], boardElements, levelChain);
+            getLevelMonsters(boardElements->otherLevels[3], boardElements, levelChain);
+        case 'q':
+            getLevelBoard(boardElements->otherLevels[2], boardElements, levelChain);
+            getOtherLevels(boardElements->otherLevels[2], boardElements, levelChain);
+            getLevelMonsters(boardElements->otherLevels[2], boardElements, levelChain);
+        case 's':
+            getLevelBoard(boardElements->otherLevels[1], boardElements, levelChain);
+            getOtherLevels(boardElements->otherLevels[1], boardElements, levelChain);
+            getLevelMonsters(boardElements->otherLevels[1], boardElements, levelChain);
+        case 'd':
+            getLevelBoard(boardElements->otherLevels[0], boardElements, levelChain);
+            getOtherLevels(boardElements->otherLevels[0], boardElements, levelChain);
+            getLevelMonsters(boardElements->otherLevels[0], boardElements, levelChain);
+        default:
+            return;
+    }
 }
 
 monster *getSpecificMonster(monster **monsterTab, coordonees *coordonees, int nbMonster) {
