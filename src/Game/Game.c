@@ -66,38 +66,46 @@ void play() {
     bool inGame = true;
     Character *character = createCharacter("player");
 
-    boardElements *board = malloc(sizeof(struct BoardElements));
+    boardElements *board = createBoardElement();
+    levelChain *levelChain = NULL;
     board->character = character;
+    printAll(character);
     //We get/set every element we have on the file
-    getLevelBoard("./src/Levels/niveau1.level", board);
-    getLevelMonsters("./src/Levels/niveau1.level", board);
-    getOtherLevels("./src/Levels/niveau1.level", board);
+    levelChain = getLevelBoard("./src/Levels/niveau1.level", levelChain);
+    levelChain = getLevelMonsters("./src/Levels/niveau1.level", board, levelChain);
+    levelChain = getOtherLevels("./src/Levels/niveau1.level", board, levelChain);
+
     //We put the character at is right position
-    board->board[getCharaY(character)][getCharaY(character)] = 'T';
+    levelChain->current->board[getCharaY(character)][getCharaX(character)] = 'T';
     printf("character is set\n");
     // boucle de jeu
     while (inGame) {
-        displayBoard(board->board);
+        displayBoard(levelChain->current->board);
         char input = catchInput();
-        int *monstersDistances = getMonstersDistances(character, board->monstersTab, board->nbMonsters);
-        monster *closestMonster = findClosestMonster(board->monstersTab, monstersDistances, board->nbMonsters);
+        for (int i = 0; i < 4; i++) {
+            printf("%s\n", levelChain->current->otherLevels[i]);
+        }
+        int *monstersDistances = getMonstersDistances(character, levelChain->current->monstersTab,
+                                                      levelChain->current->nbMonsters);
+        monster *closestMonster = findClosestMonster(levelChain->current->monstersTab, monstersDistances,
+                                                     levelChain->current->nbMonsters, levelChain->current->aliveMonsters);
         printf("The closest alive monster is\n");
         printMonsterStats(closestMonster);
         if (input == 'p') {
             if (pauseMenu() == 1) {
                 inGame = false;
-            };
+            }
         } else if (input == 'z' || input == 'q' || input == 's' || input == 'd') {
-            move(character, input, board);
+            levelChain = move(character, input, levelChain->current, levelChain);
         } else {
             printf("Stop doing this shit !\n");
         }
         if (getLifePoint(character) <= 0) {
             inGame = false;
-            printf("You are dead !");
+            printf("You are dead !\n");
         }
         if (board->aliveMonsters == 0) {
-            printf("Congratulation You finished the level !!!!");
+            printf("Congratulation You finished the level !!!!\n");
         }
     }
 }

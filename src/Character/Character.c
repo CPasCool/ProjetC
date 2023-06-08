@@ -143,5 +143,6 @@ int printAll(Character *character) {
     printKeysNumber(character->stat);
     printStrength(character->stat);
     printDefence(character->stat);
+    printf("x = %d, y = %d\n", getCharaX(character), getCharaY(character));
     return 0;
 }
