@@ -1,6 +1,5 @@
 #include "../../include/src/Keyboard.h"
 #include <conio.h>
-#include <stdarg.h>
 
 /**
  *  catch input and use on player or menu
