@@ -58,7 +58,6 @@ void play() {
     boardElements *board = createBoardElement();
     levelChain *levelChain = NULL;
     board->character = character;
-    printAll(character);
     //We get/set every element we have on the file
     levelChain = getLevelBoard("./src/Levels/niveau1.level", levelChain);
     levelChain = getLevelMonsters("./src/Levels/niveau1.level", board, levelChain);
@@ -69,32 +68,30 @@ void play() {
     printf("character is set\n");
     // boucle de jeu
     while (inGame) {
-        if(levelChain->current->character == NULL) {
-            levelChain->current->character = character;
-        }
+        levelChain->current->character = character;
         displayBoard(levelChain->current->board);
         char input = catchInput();
         if (input == 'p') {
-            if (pauseMenu() == 1) {
+            if (pauseMenu(input, board->character) == 1) {
                 inGame = false;
             }
         } else if (input == 'z' || input == 'q' || input == 's' || input == 'd') {
             levelChain = move(character, input, levelChain->current, levelChain);
         } else if (input == 'm') {
             printf("Here are all monsters\n");
-            for(int i =0; i<levelChain->current->nbMonsters; i++) {
+            for (int i = 0; i < levelChain->current->nbMonsters; i++) {
                 printMonsterStats(levelChain->current->monstersTab[i]);
                 printf("\n");
             }
         } else {
             printf("Stop doing this shit !\n");
         }
-    }
-    if (getLifePoint(character) <= 0) {
-        inGame = false;
-        printf("You are dead !\n");
-    }
-    if (board->aliveMonsters == 0) {
-        printf("Congratulation You finished the level !!!!\n");
+        if (getLifePoint(character) <= 0) {
+            inGame = false;
+            printf("You are dead !\n");
+        }
+        if (board->aliveMonsters == 0) {
+            printf("Congratulation You finished the level !!!!\n");
+        }
     }
 }

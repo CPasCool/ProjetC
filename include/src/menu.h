@@ -18,5 +18,4 @@ void displayMenuNewGame(int);
 void displayMenuIngame(int);
 void inGame();
 
-int pauseMenu();
 #endif
