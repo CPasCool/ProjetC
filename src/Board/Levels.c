@@ -178,15 +178,17 @@ void createLevelMonsters(char *levelFile, monster **monsterTab, int nbMonster) {
             }
 
             // We know at which line we have which stat, so we check those lines
-            if (counter == 36 || counter == 41 || counter == 46) {
-                if (counter == 36) {
-                    for (int i = 0; i < nbMonster; i++) {
-                        if (monsterTab[i]->type == 'A') {
-                            setMonsterHealth(monsterTab[i], atoi(value));
+            switch (counter) {
+                case 36:
+                case 41:
+                case 46:
+                    if (counter == 36) {
+                        for (int i = 0; i < nbMonster; i++) {
+                            if (monsterTab[i]->type == 'A') {
+                                setMonsterHealth(monsterTab[i], atoi(value));
+                            }
                         }
-                    }
-                } else {
-                    if (counter == 41) {
+                    } else if (counter == 41) {
                         for (int i = 0; i < nbMonster; i++) {
                             if (monsterTab[i]->type == 'B') {
                                 setMonsterHealth(monsterTab[i], atoi(value));
@@ -199,55 +201,58 @@ void createLevelMonsters(char *levelFile, monster **monsterTab, int nbMonster) {
                             }
                         }
                     }
-                }
-            } else {
-                if (counter == 37 || counter == 42 || counter == 47) {
+                    break;
+
+                case 37:
+                case 42:
+                case 47:
                     if (counter == 37) {
                         for (int i = 0; i < nbMonster; i++) {
                             if (monsterTab[i]->type == 'A') {
                                 setMonsterStrength(monsterTab[i], atoi(value));
                             }
                         }
+                    } else if (counter == 42) {
+                        for (int i = 0; i < nbMonster; i++) {
+                            if (monsterTab[i]->type == 'B') {
+                                setMonsterStrength(monsterTab[i], atoi(value));
+                            }
+                        }
                     } else {
-                        if (counter == 42) {
-                            for (int i = 0; i < nbMonster; i++) {
-                                if (monsterTab[i]->type == 'B') {
-                                    setMonsterStrength(monsterTab[i], atoi(value));
-                                }
-                            }
-                        } else {
-                            for (int i = 0; i < nbMonster; i++) {
-                                if (monsterTab[i]->type == 'C') {
-                                    setMonsterStrength(monsterTab[i], atoi(value));
-                                }
+                        for (int i = 0; i < nbMonster; i++) {
+                            if (monsterTab[i]->type == 'C') {
+                                setMonsterStrength(monsterTab[i], atoi(value));
                             }
                         }
                     }
-                } else {
-                    if (counter == 38 || counter == 43 || counter == 48) {
-                        if (counter == 38) {
-                            for (int i = 0; i < nbMonster; i++) {
-                                if (monsterTab[i]->type == 'A') {
-                                    setMonsterShield(monsterTab[i], atoi(value));
-                                }
+                    break;
+
+                case 38:
+                case 43:
+                case 48:
+                    if (counter == 38) {
+                        for (int i = 0; i < nbMonster; i++) {
+                            if (monsterTab[i]->type == 'A') {
+                                setMonsterShield(monsterTab[i], atoi(value));
                             }
-                        } else {
-                            if (counter == 43) {
-                                for (int i = 0; i < nbMonster; i++) {
-                                    if (monsterTab[i]->type == 'B') {
-                                        setMonsterShield(monsterTab[i], atoi(value));
-                                    }
-                                }
-                            } else {
-                                for (int i = 0; i < nbMonster; i++) {
-                                    if (monsterTab[i]->type == 'C') {
-                                        setMonsterShield(monsterTab[i], atoi(value));
-                                    }
-                                }
+                        }
+                    } else if (counter == 43) {
+                        for (int i = 0; i < nbMonster; i++) {
+                            if (monsterTab[i]->type == 'B') {
+                                setMonsterShield(monsterTab[i], atoi(value));
+                            }
+                        }
+                    } else {
+                        for (int i = 0; i < nbMonster; i++) {
+                            if (monsterTab[i]->type == 'C') {
+                                setMonsterShield(monsterTab[i], atoi(value));
                             }
                         }
                     }
-                }
+                    break;
+
+                default:
+                    break;
             }
         }
         line = fgets(line, 32, levelpointer);
