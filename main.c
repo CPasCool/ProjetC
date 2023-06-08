@@ -21,12 +21,12 @@ int main(int argc, char *argv[]) {
     SDL_Window *window = createWindow();
     // Status of exec
     int status = EXIT_FAILURE;
-    if ( window == NULL){
+    if (window == NULL) {
         goto Quit;
     }
     // create the renderer
     SDL_Renderer *renderer = createRenderer(window);
-    if (renderer == NULL){
+    if (renderer == NULL) {
         goto Quit;
     }
     // set the icon of the current window
@@ -34,20 +34,34 @@ int main(int argc, char *argv[]) {
     // set background color
     setBackgroundToWhite(renderer);
 
+    // load textures
+    SDL_Texture *tiles = loadImage(renderer, "assets/Images/TileSet.bmp");
+    SDL_Texture *characters = loadImage(renderer, "assets/Images/Character.bmp");
+    SDL_Texture *characters2 = loadImage(renderer, "assets/Images/Character2.bmp");
+    // check if import is ok
+    if (tiles == NULL || characters == NULL || characters2 == NULL) {
+        goto Quit;
+    }
 
-    handleEvent(renderer);
 
-
+    SDL_RenderPresent(renderer);
     //Start the game
     //generateBoard();
+    handleEvent(renderer);
 
     status = EXIT_SUCCESS;
     Quit:
-        if(NULL != renderer)
-            SDL_DestroyRenderer(renderer);
-        if(NULL != window)
-            SDL_DestroyWindow(window);
-        SDL_Quit();
+    if (NULL != renderer)
+        SDL_DestroyRenderer(renderer);
+    if (NULL != window)
+        SDL_DestroyWindow(window);
+    if (NULL != tiles)
+        SDL_DestroyTexture(tiles);
+    if (NULL != characters)
+        SDL_DestroyTexture(characters);
+    if (NULL != characters2)
+        SDL_DestroyTexture(characters2);
+    SDL_Quit();
     return status;
     // Start the game
 //    LaunchGame();

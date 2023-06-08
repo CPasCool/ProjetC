@@ -37,6 +37,7 @@ int getFileLevelNumber(char *levelFile) {
         }
         i++;
     }
+    return 0;
 }
 
 // Get an array of monsters set with the monsters data of a given levels

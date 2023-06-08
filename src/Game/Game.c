@@ -1,5 +1,5 @@
 #include <stdbool.h>
-#include "stdio.h"
+#include <stdio.h>
 #include "../../include/src/Game.h"
 
 
@@ -93,5 +93,7 @@ void play() {
         if (board->aliveMonsters == 0) {
             printf("Congratulation You finished the level !!!!\n");
         }
+        fflush(stdout);
+
     }
 }

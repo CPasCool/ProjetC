@@ -1,0 +1,8 @@
+//
+// Created by benfa on 08/06/2023.
+//
+
+#ifndef PROJETC_TEXTURECONST_H
+#define PROJETC_TEXTURECONST_H
+
+#endif //PROJETC_TEXTURECONST_H

@@ -118,6 +118,7 @@ int checkChoices(int choice){
     }else if (choice == 4){
         return 1;
     }
+    return 0;
 }
 bool checkPauseCode(int pauseCode){
     if(pauseCode == 0 || pauseCode == 1){

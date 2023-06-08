@@ -54,7 +54,7 @@ int setBackgroundToWhite(SDL_Renderer* renderer){
 }
 
 /**
- *
+ * load bmp image and return the texture
  * @param renderer
  * @param pathToFile
  * @return
