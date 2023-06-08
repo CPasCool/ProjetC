@@ -26,6 +26,8 @@ char catchInput() {
         return 'e';
     }else if (letter == 'P' || letter == 'p') {
         return 'p';
+    }else if (letter == 'M' || letter == 'm') {
+        return 'm';
     } else {
         return ' ';
     }

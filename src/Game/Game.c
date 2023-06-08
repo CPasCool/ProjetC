@@ -80,32 +80,32 @@ void play() {
     printf("character is set\n");
     // boucle de jeu
     while (inGame) {
+        if(levelChain->current->character == NULL) {
+            levelChain->current->character = character;
+        }
         displayBoard(levelChain->current->board);
         char input = catchInput();
-        for (int i = 0; i < 4; i++) {
-            printf("%s\n", levelChain->current->otherLevels[i]);
-        }
-        int *monstersDistances = getMonstersDistances(character, levelChain->current->monstersTab,
-                                                      levelChain->current->nbMonsters);
-        monster *closestMonster = findClosestMonster(levelChain->current->monstersTab, monstersDistances,
-                                                     levelChain->current->nbMonsters, levelChain->current->aliveMonsters);
-        printf("The closest alive monster is\n");
-        printMonsterStats(closestMonster);
         if (input == 'p') {
             if (pauseMenu() == 1) {
                 inGame = false;
             }
         } else if (input == 'z' || input == 'q' || input == 's' || input == 'd') {
             levelChain = move(character, input, levelChain->current, levelChain);
+        } else if (input == 'm') {
+            printf("Here are all monsters\n");
+            for(int i =0; i<levelChain->current->nbMonsters; i++) {
+                printMonsterStats(levelChain->current->monstersTab[i]);
+                printf("\n");
+            }
         } else {
             printf("Stop doing this shit !\n");
         }
-        if (getLifePoint(character) <= 0) {
-            inGame = false;
-            printf("You are dead !\n");
-        }
-        if (board->aliveMonsters == 0) {
-            printf("Congratulation You finished the level !!!!\n");
-        }
+    }
+    if (getLifePoint(character) <= 0) {
+        inGame = false;
+        printf("You are dead !\n");
+    }
+    if (board->aliveMonsters == 0) {
+        printf("Congratulation You finished the level !!!!\n");
     }
 }
