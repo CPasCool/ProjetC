@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <stdbool.h>
 #include "../../include/src/menuPause.h"
 
@@ -131,7 +130,6 @@ bool checkPauseCode(int pauseCode){
 int pauseMenu(char keyEnter, Character *character) {
     int compt = 1;
     int pauseCode;
-    int cheatReturn;
     bool choiceDone = false;
     printContinue();
     while (!choiceDone) {
