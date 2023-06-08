@@ -10,13 +10,13 @@ int cheatStrength (Character* character);
 int cheatNoHealth(Character * character);
 int setCheatMinus(int compt);
 int setCheatPlus(int compt);
-void printCheatHealth(char healthActive, char strenghActive, char defenceActive, char noHealthActive);
-void printCheat(char healthActive, char strenghActive, char defenceActive,char noHealthActive);
-void printCheatwStrengh(char healthActive, char strenghActive, char defenceActive,char noHealthActive);
-void printCheatDefence(char healthActive, char strenghActive, char defenceActive, char noHealthActive);
-void printCheatNoHealth(char healthActive, char strenghActive, char defenceActive, char noHealthActive);
-void printCheatFinish(char healthActive, char strenghActive, char defenceActive,char noHealthActive);
-void printMenuCheat (int choixCheat,char healthActive, char strenghActive, char defenceActive,char noHealthActive);
+void printCheatHealth(char keysActive,char healthActive, char strengthActive, char defenceActive,char noHealthActive);
+void printCheat(char keysActive,char healthActive, char strengthActive, char defenceActive,char noHealthActive);
+void printCheatwStrengh(char keysActive,char healthActive, char strengthActive, char defenceActive,char noHealthActive);
+void printCheatDefence(char keysActive,char healthActive, char strengthActive, char defenceActive,char noHealthActive);
+void printCheatNoHealth(char keysActive,char healthActive, char strengthActive, char defenceActive,char noHealthActive);
+void printCheatFinish(char keysActive,char healthActive, char strengthActive, char defenceActive,char noHealthActive);
+void printMenuCheat (int choixCheat, char keysActive, char healthActive, char strengthActive, char defenceActive, char noHealthActive);
 int cheatMenu(char input, Character *character);
 
 #endif
