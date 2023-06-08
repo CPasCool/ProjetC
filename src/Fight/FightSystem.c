@@ -1,10 +1,5 @@
-//
-// Created by benfa on 24/05/2023.
-//
-
 #include "../../include/src/FightSystem.h"
 #include "stdio.h"
-#include <stdlib.h>
 
 
 /**
@@ -25,38 +20,10 @@ int fightWithMonster(Character *character, monster *monster) {
     }
 
     if (getMonsterHealth(monster) > 0) {
-        setLifePoint(character,getLifePoint(character) - (getMonsterStrength(monster) - getDefence(character)));
+        setLifePoint(character, getLifePoint(character) - (getMonsterStrength(monster) - getDefence(character)));
         return 1;
     }
 
     return 0;
 }
 
-/**
- * get the distances between player and all monsters
- * @param character : character of the player
- * @param monster : monsters we need distances
- * @return
- */
-int *getMonstersDistances(Character *character, monster **monstersTab, int nbMonsters){
-    int *distances = malloc(sizeof (int)*nbMonsters);
-    for (int i=0; i<nbMonsters; i++){
-        if(monstersTab[i]->hp > 0){
-            distances[i] = abs(getCharaY(character) - monstersTab[i]->MonsterCoordonnees->y) + abs(getCharaX(character) - monstersTab[i]->MonsterCoordonnees->x);
-        }else{
-            distances[i] = 999999999;
-        }
-    }
-    return distances;
-}
-
-monster* findClosestMonster(monster **monstersTab, const int* distancesTab, int nbMonsters){
-    int val_min;
-    val_min = distancesTab[0];
-    for (int i=0; i<nbMonsters; i++){
-        if (distancesTab[i] < val_min && monstersTab[i]->hp>0){
-            val_min = i;
-        }
-    }
-    return monstersTab[val_min];
-}

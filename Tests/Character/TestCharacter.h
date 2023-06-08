@@ -1,7 +1,3 @@
-//
-// Created by benfa on 10/05/2023.
-//
-
 #ifndef PROJETC_TESTCHARACTER_H
 #define PROJETC_TESTCHARACTER_H
 

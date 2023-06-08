@@ -1,10 +1,5 @@
-//
-// Created by benfa on 17/05/2023.
-//
-
 #include "../../include/src/Keyboard.h"
 #include <conio.h>
-#include <stdarg.h>
 
 /**
  *  catch input and use on player or menu
@@ -26,6 +21,8 @@ char catchInput() {
         return 'e';
     }else if (letter == 'P' || letter == 'p') {
         return 'p';
+    }else if (letter == 'M' || letter == 'm') {
+        return 'm';
     } else {
         return ' ';
     }

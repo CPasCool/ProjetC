@@ -1,17 +1,6 @@
-//
-// Created by benfa on 24/05/2023.
-//
-
 #include <stdbool.h>
 #include "stdio.h"
-#include "stdlib.h"
 #include "../../include/src/Game.h"
-#include "../../include/src/menu.h"
-#include "../../include/src/Keyboard.h"
-#include "../../include/src/Move.h"
-#include "../../include/src/Levels.h"
-#include "../../include/src/Board.h"
-#include "../../include/src/FightSystem.h"
 
 
 const int MAXIMUM_CHOICE_MENU = 5;
@@ -66,38 +55,46 @@ void play() {
     bool inGame = true;
     Character *character = createCharacter("player");
 
-    boardElements *board = malloc(sizeof(struct BoardElements));
+    boardElements *board = createBoardElement();
+    levelChain *levelChain = NULL;
     board->character = character;
+    printAll(character);
     //We get/set every element we have on the file
-    getLevelBoard("./src/Levels/niveau1.level", board);
-    getLevelMonsters("./src/Levels/niveau1.level", board);
-    getOtherLevels("./src/Levels/niveau1.level", board);
+    levelChain = getLevelBoard("./src/Levels/niveau1.level", levelChain);
+    levelChain = getLevelMonsters("./src/Levels/niveau1.level", board, levelChain);
+    levelChain = getOtherLevels("./src/Levels/niveau1.level", board, levelChain);
+
     //We put the character at is right position
-    board->board[getCharaY(character)][getCharaY(character)] = 'T';
+    levelChain->current->board[getCharaY(character)][getCharaX(character)] = 'T';
     printf("character is set\n");
     // boucle de jeu
     while (inGame) {
-        displayBoard(board->board);
+        if(levelChain->current->character == NULL) {
+            levelChain->current->character = character;
+        }
+        displayBoard(levelChain->current->board);
         char input = catchInput();
-        int *monstersDistances = getMonstersDistances(character, board->monstersTab, board->nbMonsters);
-        monster *closestMonster = findClosestMonster(board->monstersTab, monstersDistances, board->nbMonsters);
-        printf("The closest alive monster is\n");
-        printMonsterStats(closestMonster);
         if (input == 'p') {
             if (pauseMenu() == 1) {
                 inGame = false;
-            };
+            }
         } else if (input == 'z' || input == 'q' || input == 's' || input == 'd') {
-            move(character, input, board);
+            levelChain = move(character, input, levelChain->current, levelChain);
+        } else if (input == 'm') {
+            printf("Here are all monsters\n");
+            for(int i =0; i<levelChain->current->nbMonsters; i++) {
+                printMonsterStats(levelChain->current->monstersTab[i]);
+                printf("\n");
+            }
         } else {
             printf("Stop doing this shit !\n");
         }
-        if (getLifePoint(character) <= 0) {
-            inGame = false;
-            printf("You are dead !");
-        }
-        if (board->aliveMonsters == 0) {
-            printf("Congratulation You finished the level !!!!");
-        }
+    }
+    if (getLifePoint(character) <= 0) {
+        inGame = false;
+        printf("You are dead !\n");
+    }
+    if (board->aliveMonsters == 0) {
+        printf("Congratulation You finished the level !!!!\n");
     }
 }
