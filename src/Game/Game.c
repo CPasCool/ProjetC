@@ -29,7 +29,7 @@ int LaunchGame() {
         int choice = getChoice(menu);
 
         displayMenu(menu);
-        char result = 'e';//catchInput();
+        char result = catchInput();
         if (result == 'z') {
             if (choice != MINIMUM_CHOICE_MENU) {
                 setChoice(menu, choice - 1);
@@ -81,29 +81,31 @@ void play() {
     // boucle de jeu
     while (inGame) {
         displayBoard(levelChain->current->board);
-        char input = 'z';//catchInput();
-        int *monstersDistances = getMonstersDistances(character, levelChain->current->monstersTab, levelChain->current->nbMonsters);
-        monster *closestMonster = findClosestMonster(levelChain->current->monstersTab, monstersDistances, levelChain->current->nbMonsters);
-        printf("The closest alive monster is\n");
-        printMonsterStats(closestMonster);
+        char input = catchInput();
         for (int i = 0; i < 4; i++) {
             printf("%s\n", levelChain->current->otherLevels[i]);
         }
+        int *monstersDistances = getMonstersDistances(character, levelChain->current->monstersTab,
+                                                      levelChain->current->nbMonsters);
+        monster *closestMonster = findClosestMonster(levelChain->current->monstersTab, monstersDistances,
+                                                     levelChain->current->nbMonsters, levelChain->current->aliveMonsters);
+        printf("The closest alive monster is\n");
+        printMonsterStats(closestMonster);
         if (input == 'p') {
             if (pauseMenu() == 1) {
                 inGame = false;
-            };
+            }
         } else if (input == 'z' || input == 'q' || input == 's' || input == 'd') {
-            move(character, input, levelChain->current, levelChain);
+            levelChain = move(character, input, levelChain->current, levelChain);
         } else {
             printf("Stop doing this shit !\n");
         }
         if (getLifePoint(character) <= 0) {
             inGame = false;
-            printf("You are dead !");
+            printf("You are dead !\n");
         }
         if (board->aliveMonsters == 0) {
-            printf("Congratulation You finished the level !!!!");
+            printf("Congratulation You finished the level !!!!\n");
         }
     }
 }

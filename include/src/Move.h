@@ -8,11 +8,11 @@
 #ifndef PROJETC_MOVE_H
 #define PROJETC_MOVE_H
 
-int move(Character *character, char move, boardElements *board, levelChain *levelChain);
+levelChain *move(Character *character, char move, boardElements *board, levelChain *levelChain);
 
-int *moveCharacter(Character *character, char move, char **board);
+int *moveCharacter(Character *character, char move, char **board, levelChain *levelChain);
 
-void changeLevel(char direction, boardElements *boardElements, Character *character, levelChain *levelChain);
+levelChain *changeLevel(char direction, boardElements *boardElements, Character *character, levelChain *levelChain);
 
 monster *getSpecificMonster(monster **monsterTab, coordonees *coordonees, int nbMonster);
 
