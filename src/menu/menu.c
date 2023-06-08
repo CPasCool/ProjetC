@@ -430,3 +430,8 @@ void inGame()
     }
 
 }
+
+
+int graphicMenu(){
+    return 0;
+}

@@ -67,17 +67,27 @@ coordonees *getCoo(Character *character) {
     return character->coo;
 }
 
-int getX(Character *character) {
+int getCharaX(Character *character) {
     return getCoo(character)->x;
 }
 
-int getY(Character *character) {
+int getCharaY(Character *character) {
     return getCoo(character)->y;
 }
 
 // setters
 int setLifePoint(Character *character, int newLifePoint) {
     character->stat->currentLifePoint = newLifePoint;
+    return 0;
+}
+
+int addKeys(Character *character) {
+    character->stat->keys += 1;
+    return 0;
+}
+
+int removeKeys(Character *character) {
+    character->stat->keys -= 1;
     return 0;
 }
 

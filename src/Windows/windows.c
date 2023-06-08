@@ -1,7 +1,13 @@
 
 
 #include <stdio.h>
+#include <stdbool.h>
 #include "../../include/src/windows.h"
+
+typedef struct button_{
+    SDL_Texture* texture;
+    bool isPressed;
+}button;
 
 SDL_Window *createWindow() {
     SDL_Window *window = NULL;
@@ -31,12 +37,41 @@ SDL_Renderer *createRenderer(SDL_Window *window) {
 }
 
 int setIcon(SDL_Window* window){
-    SDL_Surface *icon = SDL_LoadBMP("Images\\Icon.bmp");
+    SDL_Surface *icon = SDL_LoadBMP("assets/Images\\Icon.bmp");
     if (icon == NULL){
         printf("error file not fund\n");
         return 1;
     }
     SDL_SetWindowIcon(window,icon);
-
     return 0;
+}
+
+int setBackgroundToWhite(SDL_Renderer* renderer){
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+    SDL_RenderClear(renderer);
+    SDL_RenderPresent(renderer);
+    return 0;
+}
+
+/**
+ *
+ * @param renderer
+ * @param pathToFile
+ * @return
+ */
+SDL_Texture* loadImage(SDL_Renderer* renderer, char* pathToFile){
+    SDL_Surface *image = NULL;
+    SDL_Texture *texture = NULL;
+    image = SDL_LoadBMP(pathToFile);
+    if (image == NULL){
+        fprintf(stderr, "Erreur SDL_LoadBMP : %s", SDL_GetError());
+        return NULL;
+    }
+    texture = SDL_CreateTextureFromSurface(renderer,image);
+    SDL_FreeSurface(image);
+    if (texture == NULL){
+        fprintf(stderr, "Erreur SDL_CreateTextireFromSurface : %s", SDL_GetError());
+        return NULL;
+    }
+    return texture;
 }

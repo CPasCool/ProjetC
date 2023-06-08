@@ -19,26 +19,26 @@ int main(int argc, char *argv[]) {
     testCharacter();
     testMonster();
     SDL_Window *window = createWindow();
+    // Status of exec
     int status = EXIT_FAILURE;
     if ( window == NULL){
         goto Quit;
     }
+    // create the renderer
     SDL_Renderer *renderer = createRenderer(window);
     if (renderer == NULL){
         goto Quit;
     }
+    // set the icon of the current window
     setIcon(window);
     // set background color
-    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-    SDL_RenderClear(renderer);
-    SDL_RenderPresent(renderer);
+    setBackgroundToWhite(renderer);
 
 
     handleEvent(renderer);
 
 
     //Start the game
-    LaunchGame();
     //generateBoard();
 
     status = EXIT_SUCCESS;
