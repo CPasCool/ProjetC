@@ -86,12 +86,8 @@ levelChain *move(Character *character, char move, boardElements *board, levelCha
         case 'A':
         case 'B':
         case 'C':
-            printf("%d", levelChain->current->levelNumber);
             monster = getSpecificMonster(levelChain->current->monstersTab, coordonees,
                                          levelChain->current->nbMonsters);
-            printf("x = %d, y = %d", coordonees->x, coordonees->y);
-            printf("x = %d, y = %d", getCharaX(levelChain->current->character),
-                   getCharaY(levelChain->current->character));
             printMonsterStats(monster);
             fightWithMonster(character, monster);
             if (monster->hp <= 0) {
@@ -164,8 +160,6 @@ levelChain *changeLevel(char direction, boardElements *boardElements, Character 
             break;
     }
     levelChain = getLevelBoard(boardElements->otherLevels[digitDirection], levelChain);
-    levelChain = getLevelMonsters(boardElements->otherLevels[digitDirection], boardElements, levelChain);
-    levelChain = getOtherLevels(boardElements->otherLevels[digitDirection], boardElements, levelChain);
     return levelChain;
 }
 

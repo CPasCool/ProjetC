@@ -5,11 +5,10 @@
 #ifndef PROJETC_DISPLAYLEVELS_H
 #define PROJETC_DISPLAYLEVELS_H
 
-int getFileLevelNumber(char *levelFile);
 void getLevelNumber(char *levelFile, boardElements *board);
 levelChain *getLevelBoard(char* levelFile, levelChain *levelChain);
-void createLevelMonsters(char* levelFile, monster** monsterTab, int nbMonster);
-levelChain *getLevelMonsters(char* levelFile, boardElements *boardElements, levelChain *levelChain);
-levelChain * getOtherLevels(char *levelFile, boardElements *boardElements , levelChain *levelChain);
+void createLevelMonsters(char *levelFile, monster **monsterTab, int nbMonster);
+
+char **addPrefix(char **levels, int errorCount, int size);
 
 #endif //PROJETC_DISPLAYLEVELS_H

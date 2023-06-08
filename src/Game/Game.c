@@ -60,8 +60,6 @@ void play() {
     board->character = character;
     //We get/set every element we have on the file
     levelChain = getLevelBoard("./src/Levels/niveau1.level", levelChain);
-    levelChain = getLevelMonsters("./src/Levels/niveau1.level", board, levelChain);
-    levelChain = getOtherLevels("./src/Levels/niveau1.level", board, levelChain);
 
     //We put the character at is right position
     levelChain->current->board[getCharaY(character)][getCharaX(character)] = 'T';
