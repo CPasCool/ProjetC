@@ -114,6 +114,9 @@ levelChain *getLevelMonsters(char *levelFile, boardElements *board, levelChain *
             counterLetter = 0;
         }
         letter = (char) fgetc(levelpointer);
+        if (letter == -62) {
+            letter = (char) fgetc(levelpointer);
+        }
     }
     if (monsterCount < 40) {
         monstersTab = realloc(monstersTab, sizeof(struct Monster *) * monsterCount);
@@ -307,7 +310,7 @@ levelChain *getLevelBoard(char *levelFile, levelChain *levelChain) {
     //read the file util the board ended so until we see the E of East(Est)
     while (counterLine < 30) {
         //Print the § character --> -62 = special character ascii then skip the ° symbol because the § is split in UTF-8
-        if (letter == (char) -62 || letter == 'P') {
+        if (letter == (char) -62 || letter == 'P' || letter == '*') {
             if (letter != 'P') {
                 letter = (char) fgetc(levelpointer);
             }
