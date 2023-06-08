@@ -86,6 +86,11 @@ int addKeys(Character *character) {
     return 0;
 }
 
+int setMaxKeys(Character *character){
+    character -> stat -> keys = 999;
+    return 0
+}
+
 int removeKeys(Character *character) {
     character->stat->keys -= 1;
     return 0;

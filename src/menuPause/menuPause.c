@@ -4,6 +4,7 @@
 #include "../../include/src/menuPause.h"
 
 
+
 void printPauseMenu() {
     printf(
             "##############################\n"
@@ -161,11 +162,12 @@ int pauseMenu(char keyEnter, Character *character) {
             pauseCode = checkChoices(compt);
         }
         if (compt == 9) {
-            cheatReturn = cheatMenu(' ', character);
-            printf("test15452212");
+            cheatMenu(' ', character);
+            compt = 1;
         }
         pauseMenuChange(compt);
         choiceDone = checkPauseCode(pauseCode);
     }
+    printAll(character);
     return pauseCode;
 }

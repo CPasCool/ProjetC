@@ -23,15 +23,20 @@ int cheatStrength(Character *character) {
 }
 
 int cheatNoHealth (Character * character){
-    setLifePoint(character, 0);
+    return setLifePoint(character, 0);
 }
 
-void printCheat(char healthActive, char strengthActive, char defenceActive, char noHealthActive) {
+int cheatKeys(Character *character){
+    return setMaxKeys(character);
+}
+
+void printCheat(char keysActive, char healthActive, char strengthActive, char defenceActive, char noHealthActive) {
     printf(
             "##############################\n"
             "#            CHEAT           #\n"
             "#                            #\n"
             "#                            #\n"
+            "#    %c  Max Keys             #\n"
             "#    %c  Cheat Max Health     #\n"
             "#    %c  Cheat Max Strength   #\n"
             "#    %c  Cheat Max Defense    #\n"
@@ -40,15 +45,32 @@ void printCheat(char healthActive, char strengthActive, char defenceActive, char
             "#                            #\n"
             "#                            #\n"
             "#                            #\n"
-            "##############################\n", healthActive, strengthActive, defenceActive, noHealthActive
+            "##############################\n", keysActive, healthActive, strengthActive, defenceActive, noHealthActive
     );
 }
-
-void printCheatHealth(char healthActive, char strengthActive, char defenceActive, char noHealthActive) {
+void printCheatKey(char keyActive,char healthActive, char strengthActive, char defenceActive, char noHealthActive) {
     printf(
             "##############################\n"
             "#            CHEAT           #\n"
             "#                            #\n"
+            "#  ######################### #\n"
+            "#  #  %c  Max Keys          # #\n"
+            "#  ######################### #\n"
+            "#    %c  Cheat Max Health     #\n"
+            "#    %c  Cheat Max Strength   #\n"
+            "#    %c  Cheat Max Defense    #\n"
+            "#    %c  Cheat No Health      #\n"
+            "#           Quit             #\n"
+            "#                            #\n"
+            "##############################\n", keyActive, healthActive, strengthActive, defenceActive, noHealthActive
+    );
+}
+void printCheatHealth(char keyActive,char healthActive, char strengthActive, char defenceActive, char noHealthActive) {
+    printf(
+            "##############################\n"
+            "#            CHEAT           #\n"
+            "#                            #\n"
+            "#    %c  Max Keys             #\n"
             "#  ######################### #\n"
             "#  # %c  Cheat Max Health   # #\n"
             "#  ######################### #\n"
@@ -57,15 +79,16 @@ void printCheatHealth(char healthActive, char strengthActive, char defenceActive
             "#    %c  Cheat No Health      #\n"
             "#           Quit             #\n"
             "#                            #\n"
-            "##############################\n", healthActive, strengthActive, defenceActive, noHealthActive
+            "##############################\n", keyActive,healthActive, strengthActive, defenceActive, noHealthActive
     );
 }
 
-void printCheatwStrength(char healthActive, char strengthActive, char defenceActive, char noHealthActive) {
+void printCheatwStrength(char keyActive, char healthActive, char strengthActive, char defenceActive, char noHealthActive) {
     printf(
             "##############################\n"
             "#            CHEAT           #\n"
             "#                            #\n"
+            "#    %c  Max Keys             #\n"
             "#    %c  Cheat Max Health     #\n"
             "#  ######################### #\n"
             "#  # %c  Cheat Max Strength # #\n"
@@ -74,15 +97,16 @@ void printCheatwStrength(char healthActive, char strengthActive, char defenceAct
             "#    %c  Cheat No Health      #\n"
             "#           Quit             #\n"
             "#                            #\n"
-            "##############################\n", healthActive, strengthActive, defenceActive, noHealthActive
+            "##############################\n", keyActive,healthActive, strengthActive, defenceActive, noHealthActive
     );
 }
 
-void printCheatDefence(char healthActive, char strengthActive, char defenceActive, char noHealthActive) {
+void printCheatDefence(char keyActive, char healthActive, char strengthActive, char defenceActive, char noHealthActive) {
     printf(
             "##############################\n"
             "#            CHEAT           #\n"
             "#                            #\n"
+            "#    %c  Max Keys             #\n"
             "#    %c  Cheat Max Health     #\n"
             "#    %c  Cheat Max Strength   #\n"
             "#  ######################### #\n"
@@ -91,14 +115,15 @@ void printCheatDefence(char healthActive, char strengthActive, char defenceActiv
             "#    %c  Cheat No Health      #\n"
             "#           Quit             #\n"
             "#                            #\n"
-            "##############################\n", healthActive, strengthActive, defenceActive, noHealthActive
+            "##############################\n", keyActive, healthActive, strengthActive, defenceActive, noHealthActive
     );
 }
-void printCheatNoHealth(char healthActive, char strengthActive, char defenceActive, char noHealthActive) {
+void printCheatNoHealth(char keyActive,char healthActive, char strengthActive, char defenceActive, char noHealthActive) {
     printf(
             "##############################\n"
             "#            CHEAT           #\n"
             "#                            #\n"
+            "#    %c  Max Keys             #\n"
             "#    %c  Cheat Max Health     #\n"
             "#    %c  Cheat Max Strength   #\n"
             "#    %c  Cheat Max Defense    #\n"
@@ -107,14 +132,15 @@ void printCheatNoHealth(char healthActive, char strengthActive, char defenceActi
             "#  ######################### #\n"
             "#           Quit             #\n"
             "#                            #\n"
-            "##############################\n", healthActive, strengthActive, defenceActive, noHealthActive
+            "##############################\n", keyActive,healthActive, strengthActive, defenceActive, noHealthActive
     );
 }
-void printCheatFinish(char healthActive, char strengthActive, char defenceActive,char noHealthActive) {
+void printCheatFinish(char keyActive,char healthActive, char strengthActive, char defenceActive,char noHealthActive) {
     printf(
             "##############################\n"
             "#            CHEAT           #\n"
             "#                            #\n"
+            "#    %c  Max Keys             #\n"
             "#    %c  Cheat Max Health     #\n"
             "#    %c  Cheat Max Strength   #\n"
             "#    %c  Cheat Max Defense    #\n"
@@ -123,31 +149,33 @@ void printCheatFinish(char healthActive, char strengthActive, char defenceActive
             "#  #         Quit         #  #\n"
             "#  ########################  #\n"
             "#                            #\n"
-            "##############################\n", healthActive, strengthActive, defenceActive, noHealthActive
+            "##############################\n", keyActive, healthActive, strengthActive, defenceActive, noHealthActive
     );
 }
 
 /**
  * cette fonction permet d'afficher le bon menu en fonction du choix
 */
-void printMenuCheat(int choixCheat, char healthActive, char strengthActive, char defenceActive, char noHealthActive) {
+void printMenuCheat(int choixCheat, char keyActive, char healthActive, char strengthActive, char defenceActive, char noHealthActive) {
     if (choixCheat == 0) {
-        printCheat(healthActive, strengthActive, defenceActive,noHealthActive);
-    } 
-    else if (choixCheat == 1) {
-        printCheatHealth(healthActive, strengthActive, defenceActive,noHealthActive);
+        printCheat(keyActive,healthActive, strengthActive, defenceActive,noHealthActive);
+    } else if (choixCheat == 1) {
+        printCheatKey(keyActive,healthActive, strengthActive, defenceActive,noHealthActive);
     } 
     else if (choixCheat == 2) {
-        printCheatwStrength(healthActive, strengthActive, defenceActive,noHealthActive);
+        printCheatHealth(keyActive,healthActive, strengthActive, defenceActive,noHealthActive);
     } 
     else if (choixCheat == 3) {
-        printCheatDefence(healthActive, strengthActive, defenceActive,noHealthActive);
-    }
+        printCheatwStrength(keyActive,healthActive, strengthActive, defenceActive,noHealthActive);
+    } 
     else if (choixCheat == 4) {
-        printCheatNoHealth(healthActive, strengthActive, defenceActive,noHealthActive);
-    }  
+        printCheatDefence(keyActive,healthActive, strengthActive, defenceActive,noHealthActive);
+    }
     else if (choixCheat == 5) {
-        printCheatFinish(healthActive, strengthActive, defenceActive,noHealthActive);
+        printCheatNoHealth(keyActive,healthActive, strengthActive, defenceActive,noHealthActive);
+    }  
+    else if (choixCheat == 6) {
+        printCheatFinish(keyActive,healthActive, strengthActive, defenceActive,noHealthActive);
     }
 }
 /**
@@ -160,33 +188,39 @@ int cheatMenu(char input, Character *character) {
     char strengthActive = 'x';
     char defenceActive = 'x';
     char noHealthActive= 'x';
-    printMenuCheat(menuCheatChoice, healthActive, strengthActive, defenceActive,noHealthActive);
+    char keyActive = 'x';
+    printMenuCheat(menuCheatChoice, keyActive,healthActive, strengthActive, defenceActive,noHealthActive);
     while (choiceCheatDone == false) {
         input = catchInput();
         if (input == 's' && menuCheatChoice != 6){
             menuCheatChoice += 1;
-            printMenuCheat(menuCheatChoice,healthActive, strengthActive, defenceActive,noHealthActive);
+            printMenuCheat(menuCheatChoice,keyActive,healthActive, strengthActive, defenceActive,noHealthActive);
         } else if (input == 'z' && menuCheatChoice !=0){
             menuCheatChoice -= 1;
-            printMenuCheat(menuCheatChoice,healthActive, strengthActive, defenceActive,noHealthActive);
+            printMenuCheat(menuCheatChoice,keyActive, healthActive, strengthActive, defenceActive,noHealthActive);
         }
         else if (input == 'e' && menuCheatChoice == 1) {
+            cheatKeys(character);
+            healthActive = 'V';
+            printMenuCheat(menuCheatChoice, keyActive,healthActive, strengthActive, defenceActive,noHealthActive);
+        }
+        else if (input == 'e' && menuCheatChoice == 2) {
             cheatHealth(character);
             healthActive = 'V';
-            printMenuCheat(menuCheatChoice,healthActive, strengthActive, defenceActive,noHealthActive);
-        } else if (input == 'e' && menuCheatChoice == 2) {
+            printMenuCheat(menuCheatChoice, keyActive,healthActive, strengthActive, defenceActive,noHealthActive);
+        } else if (input == 'e' && menuCheatChoice == 3) {
             cheatStrength(character);
             strengthActive = 'V';
-            printMenuCheat(menuCheatChoice,healthActive, strengthActive, defenceActive,noHealthActive);
-        } else if (input == 'e' && menuCheatChoice == 3) {
+            printMenuCheat(menuCheatChoice,keyActive, healthActive, strengthActive, defenceActive,noHealthActive);
+        } else if (input == 'e' && menuCheatChoice == 4) {
             cheatDefence(character);
             defenceActive = 'V';
-            printMenuCheat(menuCheatChoice,healthActive, strengthActive, defenceActive,noHealthActive);
-        } else if (input == 'e' && menuCheatChoice == 4) {
+            printMenuCheat(menuCheatChoice,keyActive, healthActive, strengthActive, defenceActive,noHealthActive);
+        } else if (input == 'e' && menuCheatChoice == 5) {
             cheatNoHealth(character);
             noHealthActive = 'V';
-            printMenuCheat(menuCheatChoice,healthActive, strengthActive, defenceActive,noHealthActive);
-        } else if (input == 'e' && menuCheatChoice == 5) {
+            printMenuCheat(menuCheatChoice,keyActive, healthActive, strengthActive, defenceActive,noHealthActive);
+        } else if (input == 'e' && menuCheatChoice == 6) {
             choiceCheatDone = true;
             printf("%s", choiceCheatDone ? "true" : "false");
         }
