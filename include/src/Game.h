@@ -1,4 +1,5 @@
 #include "../../include/src/menu.h"
+#include "../../include/src/menuPause.h"
 #include "../../include/src/Keyboard.h"
 #include "../../include/src/Move.h"
 #include "../../include/src/Levels.h"

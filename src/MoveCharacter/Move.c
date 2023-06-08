@@ -2,7 +2,6 @@
 #include "stdlib.h"
 #include "stdio.h"
 
-
 /**
  * move the character on the board
  * @param character : character to move
