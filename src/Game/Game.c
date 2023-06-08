@@ -68,9 +68,7 @@ void play() {
     printf("character is set\n");
     // boucle de jeu
     while (inGame) {
-        if (levelChain->current->character == NULL) {
-            levelChain->current->character = character;
-        }
+        levelChain->current->character = character;
         displayBoard(levelChain->current->board);
         char input = catchInput();
         if (input == 'p') {
