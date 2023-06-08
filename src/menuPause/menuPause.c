@@ -4,26 +4,9 @@
 #include "../../include/src/menuPause.h"
 
 
-
-void printPauseMenu() {
-    printf(
-            "##############################\n"
-            "#         Pause Menu         #\n"
-            "#                            #\n"
-            "#                            #\n"
-            "#          Continue          #\n"
-            "#          Save Game         #\n"
-            "#          Load Game         #\n"
-            "#                            #\n"
-            "#           Quit             #\n"
-            "#                            #\n"
-            "#                            #\n"
-            "##############################\n"
-    );
-}
-
 void printContinue() {
     printf(
+            "\n"
             "##############################\n"
             "#         Pause Menu         #\n"
             "#                            #\n"
@@ -41,6 +24,7 @@ void printContinue() {
 
 void printSave() {
     printf(
+            "\n"
             "##############################\n"
             "#         Pause Menu         #\n"
             "#                            #\n"
@@ -58,6 +42,7 @@ void printSave() {
 
 void printLoadGame() {
     printf(
+            "\n"
             "##############################\n"
             "#         Pause Menu         #\n"
             "#                            #\n"
@@ -75,6 +60,7 @@ void printLoadGame() {
 
 void printQuitPause() {
     printf(
+            "\n"
             "##############################\n"
             "#         Pause Menu         #\n"
             "#                            #\n"
@@ -107,9 +93,7 @@ int setChoicesMinus(int choice) {
 }
 
 int pauseMenuChange(int choice) {
-    if (choice == 0) {
-        printPauseMenu();
-    } else if (choice == 1) {
+    if (choice == 1) {
         printContinue();
     } else if (choice == 2) {
         printSave();
@@ -145,14 +129,14 @@ bool checkPauseCode(int pauseCode){
     }
 }
 int pauseMenu(char keyEnter, Character *character) {
-    int compt = 0;
+    int compt = 1;
     int pauseCode;
     int cheatReturn;
     bool choiceDone = false;
-    printPauseMenu();
+    printContinue();
     while (!choiceDone) {
         keyEnter = catchInput();
-        if (keyEnter == 'z' && compt != 0) {
+        if (keyEnter == 'z' && compt != 1) {
             compt = setChoicesMinus(compt); 
         } else if (keyEnter == 's') {
             compt = setChoicesPlus(compt);
