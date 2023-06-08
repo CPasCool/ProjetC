@@ -26,42 +26,42 @@ levelChain *move(Character *character, char move, boardElements *board, levelCha
         default:
             break;
     }
-    switch (board->board[coordonees->y][coordonees->x]) {
+    switch (levelChain->current->board[coordonees->y][coordonees->x]) {
         //No collisions
         case ' ':
-            moveCharacter(character, move, board->board, levelChain);
-            board->board[getCharaY(character)][getCharaX(character)] = 'T';
+            moveCharacter(character, move, levelChain->current->board, levelChain);
+            levelChain->current->board[getCharaY(character)][getCharaX(character)] = 'T';
             //There is an attack bonus
             printAll(character);
             break;
         case '1':
             setStrength(character, getStrength(character) + 1);
-            moveCharacter(character, move, board->board, levelChain);
-            board->board[getCharaY(character)][getCharaX(character)] = 'T';
+            moveCharacter(character, move, levelChain->current->board, levelChain);
+            levelChain->current->board[getCharaY(character)][getCharaX(character)] = 'T';
             printAll(character);
             break;
 
             //There is a Defence bonus
         case '2':
             setDefence(character, getDefence(character) + 1);
-            moveCharacter(character, move, board->board, levelChain);
-            board->board[getCharaY(character)][getCharaX(character)] = 'T';
+            moveCharacter(character, move, levelChain->current->board, levelChain);
+            levelChain->current->board[getCharaY(character)][getCharaX(character)] = 'T';
             printAll(character);
             break;
 
             //There is a life bonus
         case '3':
             setMaximumLifePoint(character, 3);
-            moveCharacter(character, move, board->board, levelChain);
-            board->board[getCharaY(character)][getCharaX(character)] = 'T';
+            moveCharacter(character, move, levelChain->current->board, levelChain);
+            levelChain->current->board[getCharaY(character)][getCharaX(character)] = 'T';
             printAll(character);
             break;
 
             //There is a key
         case '!':
             addKeys(character);
-            moveCharacter(character, move, board->board, levelChain);
-            board->board[getCharaY(character)][getCharaX(character)] = 'T';
+            moveCharacter(character, move, levelChain->current->board, levelChain);
+            levelChain->current->board[getCharaY(character)][getCharaX(character)] = 'T';
             printAll(character);
             break;
 
@@ -69,16 +69,16 @@ levelChain *move(Character *character, char move, boardElements *board, levelCha
         case 'o':
             if (getKeys(character) != 0) {
                 removeKeys(character);
-                moveCharacter(character, move, board->board, levelChain);
-                board->board[getCharaY(character)][getCharaX(character)] = 'T';
+                moveCharacter(character, move, levelChain->current->board, levelChain);
+                levelChain->current->board[getCharaY(character)][getCharaX(character)] = 'T';
             }
             break;
 
             //There is a potion
         case 'P':
             setLifePoint(character, getMaximumLifePoint(character));
-            moveCharacter(character, move, board->board, levelChain);
-            board->board[getCharaY(character)][getCharaX(character)] = 'T';
+            moveCharacter(character, move, levelChain->current->board, levelChain);
+            levelChain->current->board[getCharaY(character)][getCharaX(character)] = 'T';
             printAll(character);
             break;
 
@@ -86,14 +86,19 @@ levelChain *move(Character *character, char move, boardElements *board, levelCha
         case 'A':
         case 'B':
         case 'C':
-            monster = getSpecificMonster(board->monstersTab, coordonees,
-                                         board->nbMonsters);
+            printf("%d", levelChain->current->levelNumber);
+            monster = getSpecificMonster(levelChain->current->monstersTab, coordonees,
+                                         levelChain->current->nbMonsters);
+            printf("x = %d, y = %d", coordonees->x, coordonees->y);
+            printf("x = %d, y = %d", getCharaX(levelChain->current->character),
+                   getCharaY(levelChain->current->character));
+            printMonsterStats(monster);
             fightWithMonster(character, monster);
             if (monster->hp <= 0) {
                 printf("You killed %s\n", monster->name);
-                board->aliveMonsters--;
-                moveCharacter(character, move, board->board, levelChain);
-                board->board[getCharaY(character)][getCharaX(character)] = 'T';
+                levelChain->current->aliveMonsters--;
+                moveCharacter(character, move, levelChain->current->board, levelChain);
+                levelChain->current->board[getCharaY(character)][getCharaX(character)] = 'T';
             }
             break;
 
@@ -102,10 +107,10 @@ levelChain *move(Character *character, char move, boardElements *board, levelCha
             printf("You can not go that way\n");
             break;
         case '?':
-            moveCharacter(character, move, board->board, levelChain);
+            moveCharacter(character, move, levelChain->current->board, levelChain);
             levelChain = changeLevel(move, board, character, levelChain);
             board = levelChain->current;
-            board->board[getCharaY(character)][getCharaX(character)] = 'T';
+            levelChain->current->board[getCharaY(character)][getCharaX(character)] = 'T';
             break;
         default:
             break;
