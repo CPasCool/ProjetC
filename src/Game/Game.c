@@ -1,13 +1,6 @@
 #include <stdbool.h>
 #include "stdio.h"
-#include "stdlib.h"
 #include "../../include/src/Game.h"
-#include "../../include/src/menu.h"
-#include "../../include/src/Keyboard.h"
-#include "../../include/src/Move.h"
-#include "../../include/src/Levels.h"
-#include "../../include/src/Board.h"
-#include "../../include/src/FightSystem.h"
 
 
 const int MAXIMUM_CHOICE_MENU = 5;
