@@ -1,7 +1,3 @@
-//
-// Created by benfa on 10/05/2023.
-//
-
 #include <stdio.h>
 #include "TestCharacter.h"
 
