@@ -1,5 +1,6 @@
 #include <stdbool.h>
 #include "stdio.h"
+#include "stdlib.h"
 #include "../../include/src/Game.h"
 
 
@@ -18,7 +19,7 @@ int LaunchGame() {
         int choice = getChoice(menu);
 
         displayMenu(menu);
-        char result = catchInput();
+        char result = 'e';//catchInput();
         if (result == 'z') {
             if (choice != MINIMUM_CHOICE_MENU) {
                 setChoice(menu, choice - 1);

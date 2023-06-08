@@ -195,6 +195,7 @@ levelChain *getLevelBoard(char *levelFile, levelChain *levelChain) {
         }
         fopen_s(&levelpointer, newLevelFilename, "r");
         if (fopen_s(&levelpointer, newLevelFilename, "r") != 0) {
+            printf("%s", levelFile);
             printf("Error opening the file.\n");
             return levelChain;
         }
@@ -222,7 +223,7 @@ levelChain *getLevelBoard(char *levelFile, levelChain *levelChain) {
     int counterLevel = 0;
 
     //read the file util the board ended so until we finished read the other levels name
-    while (line != NULL && counterLine < 34) {
+    while (line != NULL && counterLine < 35) {
         int savePos = 0;
         if (counterLine < 30) {
             //Handle the § character --> -62 = special character ascii then skip the ° symbol because the § is split in UTF-8
@@ -230,6 +231,7 @@ levelChain *getLevelBoard(char *levelFile, levelChain *levelChain) {
             if (*letter == (char) -62 || *letter == 'P' || *letter == '*') {
                 if (*letter != 'P' && *letter != '*') {
                     *letter = (char) fgetc(levelpointer);
+                    *letter = 'P';
                 }
             } else if (*letter == 'A' || *letter == 'B' || *letter == 'C') {
                 if (*letter == 'A') {
@@ -277,9 +279,10 @@ levelChain *getLevelBoard(char *levelFile, levelChain *levelChain) {
                 levels[counterLevel][0] = '\0';
             }
             counterLevel++;
+            printf("%s\n", line);
         }
         // Reset column
-        if (counterLetter - 30 == 0) {
+        if (counterLine < 30 && counterLetter - 30 == 0) {
             counterLine++;
             counterLetter = 0;
         }

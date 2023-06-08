@@ -31,9 +31,10 @@ levelChain *move(Character *character, char move, boardElements *board, levelCha
         case ' ':
             moveCharacter(character, move, levelChain->current->board, levelChain);
             levelChain->current->board[getCharaY(character)][getCharaX(character)] = 'T';
-            //There is an attack bonus
             printAll(character);
             break;
+
+            //There is an attack bonus
         case '1':
             setStrength(character, getStrength(character) + 1);
             moveCharacter(character, move, levelChain->current->board, levelChain);
@@ -105,7 +106,6 @@ levelChain *move(Character *character, char move, boardElements *board, levelCha
         case '?':
             moveCharacter(character, move, levelChain->current->board, levelChain);
             levelChain = changeLevel(move, board, character, levelChain);
-            board = levelChain->current;
             levelChain->current->board[getCharaY(character)][getCharaX(character)] = 'T';
             break;
         default:
@@ -160,6 +160,7 @@ levelChain *changeLevel(char direction, boardElements *boardElements, Character 
             break;
     }
     levelChain = getLevelBoard(boardElements->otherLevels[digitDirection], levelChain);
+    levelChain = levelChain->next;
     return levelChain;
 }
 
