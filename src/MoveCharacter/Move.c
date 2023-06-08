@@ -7,7 +7,7 @@
  * @param character : character to move
  * @return
  */
-int move(Character *character, char move, boardElements *board) {
+levelChain *move(Character *character, char move, boardElements *board, levelChain *levelChain) {
     monster *monster;
     coordonees *coordonees = malloc(sizeof(struct Coordonees));
     switch (move) {
@@ -29,34 +29,39 @@ int move(Character *character, char move, boardElements *board) {
     switch (board->board[coordonees->y][coordonees->x]) {
         //No collisions
         case ' ':
-            moveCharacter(character, move, board->board);
+            moveCharacter(character, move, board->board, levelChain);
+            board->board[getCharaY(character)][getCharaX(character)] = 'T';
             //There is an attack bonus
             printAll(character);
             break;
         case '1':
             setStrength(character, getStrength(character) + 1);
-            moveCharacter(character, move, board->board);
+            moveCharacter(character, move, board->board, levelChain);
+            board->board[getCharaY(character)][getCharaX(character)] = 'T';
             printAll(character);
             break;
 
             //There is a Defence bonus
         case '2':
             setDefence(character, getDefence(character) + 1);
-            moveCharacter(character, move, board->board);
+            moveCharacter(character, move, board->board, levelChain);
+            board->board[getCharaY(character)][getCharaX(character)] = 'T';
             printAll(character);
             break;
 
             //There is a life bonus
         case '3':
-            setMaximumLifePoint(character,  3);
-            moveCharacter(character, move, board->board);
+            setMaximumLifePoint(character, 3);
+            moveCharacter(character, move, board->board, levelChain);
+            board->board[getCharaY(character)][getCharaX(character)] = 'T';
             printAll(character);
             break;
 
             //There is a key
         case '!':
             addKeys(character);
-            moveCharacter(character, move, board->board);
+            moveCharacter(character, move, board->board, levelChain);
+            board->board[getCharaY(character)][getCharaX(character)] = 'T';
             printAll(character);
             break;
 
@@ -64,14 +69,16 @@ int move(Character *character, char move, boardElements *board) {
         case 'o':
             if (getKeys(character) != 0) {
                 removeKeys(character);
-                moveCharacter(character, move, board->board);
+                moveCharacter(character, move, board->board, levelChain);
+                board->board[getCharaY(character)][getCharaX(character)] = 'T';
             }
             break;
 
             //There is a potion
         case 'P':
             setLifePoint(character, getMaximumLifePoint(character));
-            moveCharacter(character, move, board->board);
+            moveCharacter(character, move, board->board, levelChain);
+            board->board[getCharaY(character)][getCharaX(character)] = 'T';
             printAll(character);
             break;
 
@@ -85,7 +92,8 @@ int move(Character *character, char move, boardElements *board) {
             if (monster->hp <= 0) {
                 printf("You killed %s\n", monster->name);
                 board->aliveMonsters--;
-                moveCharacter(character, move, board->board);
+                moveCharacter(character, move, board->board, levelChain);
+                board->board[getCharaY(character)][getCharaX(character)] = 'T';
             }
             break;
 
@@ -93,38 +101,67 @@ int move(Character *character, char move, boardElements *board) {
         case '#':
             printf("You can not go that way\n");
             break;
+        case '?':
+            moveCharacter(character, move, board->board, levelChain);
+            levelChain = changeLevel(move, board, character, levelChain);
+            board = levelChain->current;
+            board->board[getCharaY(character)][getCharaX(character)] = 'T';
+            break;
+        default:
+            break;
+    }
+    return levelChain;
+}
+
+int *moveCharacter(Character *character, char move, char **board, levelChain *levelChain) {
+    levelChain->current->board[getCharaY(character)][getCharaX(character)] = ' ';
+    board[getCharaY(character)][getCharaX(character)] = ' ';
+    switch (move) {
+        case 'z':
+            changeCoordonnes(character, getCharaX(character), getCharaY(character) - 1);
+            break;
+        case 'q':
+            changeCoordonnes(character, getCharaX(character) - 1, getCharaY(character));
+            break;
+        case 's':
+            changeCoordonnes(character, getCharaX(character), getCharaY(character) + 1);
+            break;
+        case 'd':
+            changeCoordonnes(character, getCharaX(character) + 1, getCharaY(character));
+            break;
         default:
             break;
     }
     return 0;
 }
 
-int *moveCharacter(Character *character, char move, char **board) {
-    switch (move) {
+levelChain *changeLevel(char direction, boardElements *boardElements, Character *character, levelChain *levelChain) {
+    int digitDirection = 0;
+    switch (direction) {
         case 'z':
-            board[getCharaY(character)][getCharaX(character)] = ' ';
-            changeCoordonnes(character, getCharaX(character), getCharaY(character) - 1);
-            board[getCharaY(character)][getCharaX(character)] = 'T';
+            digitDirection = 3;
+            changeCoordonnes(character, getCharaX(character), getCharaY(character) + 28);
             break;
         case 'q':
-            board[getCharaY(character)][getCharaX(character)] = ' ';
-            changeCoordonnes(character, getCharaX(character) - 1, getCharaY(character));
-            board[getCharaY(character)][getCharaX(character)] = 'T';
+            digitDirection = 2;
+            changeCoordonnes(character, getCharaX(character) + 28, getCharaY(character));
             break;
+
         case 's':
-            board[getCharaY(character)][getCharaX(character)] = ' ';
-            changeCoordonnes(character, getCharaX(character), getCharaY(character) + 1);
-            board[getCharaY(character)][getCharaX(character)] = 'T';
+            digitDirection = 1;
+            changeCoordonnes(character, getCharaX(character), getCharaY(character) - 28);
             break;
         case 'd':
-            board[getCharaY(character)][getCharaX(character)] = ' ';
-            changeCoordonnes(character, getCharaX(character) + 1, getCharaY(character));
-            board[getCharaY(character)][getCharaX(character)] = 'T';
+            digitDirection = 0;
+            changeCoordonnes(character, getCharaX(character) - 28, getCharaY(character));
             break;
         default:
             break;
     }
-    return 0;
+    levelChain = getLevelBoard(boardElements->otherLevels[digitDirection], levelChain);
+    levelChain = getLevelMonsters(boardElements->otherLevels[digitDirection], boardElements, levelChain);
+    levelChain = getOtherLevels(boardElements->otherLevels[digitDirection], boardElements, levelChain);
+    return levelChain;
 }
 
 monster *getSpecificMonster(monster **monsterTab, coordonees *coordonees, int nbMonster) {
