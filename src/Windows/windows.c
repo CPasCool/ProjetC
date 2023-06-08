@@ -16,7 +16,7 @@ SDL_Window *createWindow() {
         return NULL;
     }
     window = SDL_CreateWindow("Roguelike", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-                              500, 500, SDL_WINDOW_SHOWN);
+                              600, 600, SDL_WINDOW_SHOWN);
     if (NULL == window)
         fprintf(stderr, "Erreur de creation de la fenetre : %s\n", SDL_GetError());
     else
