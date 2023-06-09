@@ -55,7 +55,6 @@ int main(int argc, char *argv[]) {
 
     //Start the game
     //generateBoard();
-    handleEvent(renderer);
 
     status = EXIT_SUCCESS;
     Quit:
