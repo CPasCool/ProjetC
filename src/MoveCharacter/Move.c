@@ -162,7 +162,6 @@ levelChain *changeLevel(char direction, boardElements *boardElements, Character 
             break;
     }
     levelChain = getLevelBoard(levelChain->current->otherLevels[digitDirection], levelChain);
-    levelChain = levelChain->next;
     return levelChain;
 }
 
