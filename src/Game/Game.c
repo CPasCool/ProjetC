@@ -19,7 +19,7 @@ int LaunchGame() {
         int choice = getChoice(menu);
 
         displayMenu(menu);
-        char result = 'e';//catchInput();
+        char result = catchInput();
         if (result == 'z') {
             if (choice != MINIMUM_CHOICE_MENU) {
                 setChoice(menu, choice - 1);
