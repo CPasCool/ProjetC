@@ -130,6 +130,7 @@ int setMaximumLifePoint(Character *character, int newMax) {
 // display stats
 int printLifePoint(Stats *stat) {
     printf("Life total : %d/%d\n", stat->currentLifePoint, stat->maxLifePoint);
+
     return 0;
 }
 
@@ -154,53 +155,5 @@ int printAll(Character *character) {
     printStrength(character->stat);
     printDefence(character->stat);
     printf("x = %d, y = %d\n", getCharaX(character), getCharaY(character));
-    return 0;
-}
-
-/**
- * move the character to the up in board
- * @param character : character to move
- * @return
- */
-int moveUp(Character *character) {
-    // TODO : verifier les collisions
-    // TODO : verifier si il y a un monstre
-    character->coo->y += 1;
-    return 0;
-}
-
-/**
- * move the character to the down in board
- * @param character : character to move
- * @return
- */
-int moveDown(Character *character) {
-    // TODO : verifier les collisions
-    // TODO : verifier si il y a un monstre
-    character->coo->y -= 1;
-    return 0;
-}
-
-/**
- * move the character to the right in board
- * @param character : character to move
- * @return
- */
-int moveRight(Character *character) {
-    // TODO : verifier les collisions
-    // TODO : verifier si il y a un monstre
-    character->coo->x += 1;
-    return 0;
-}
-
-/**
- * move the character to the left in board
- * @param character : character to move
- * @return
- */
-int moveLeft(Character *character) {
-    // TODO : verifier les collisions
-    // TODO : verifier si il y a un monstre
-    character->coo->x += 1;
     return 0;
 }

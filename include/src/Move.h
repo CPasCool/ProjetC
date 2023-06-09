@@ -10,7 +10,7 @@
 
 levelChain *move(Character *character, char move, boardElements *board, levelChain *levelChain);
 
-int *moveCharacter(Character *character, char move, char **board, levelChain *levelChain);
+int *moveCharacter(Character *character, coordonees *coordonees, char **board, levelChain *levelChain);
 
 levelChain *changeLevel(char direction, boardElements *boardElements, Character *character, levelChain *levelChain);
 
