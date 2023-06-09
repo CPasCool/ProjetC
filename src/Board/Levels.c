@@ -33,17 +33,20 @@ levelChain *getLevelBoard(char *levelFile, levelChain *levelChain) {
     // go to correct element or last
     while (levelChain != NULL && levelChain->next != NULL && levelChain->current != NULL &&
            levelChain->current->levelNumber != boardElements->levelNumber) {
+
         levelChain = levelChain->next;
     }
     if (levelChain != NULL && levelChain->next != NULL && levelChain->current != NULL &&
         levelChain->next->current->levelNumber == boardElements->levelNumber &&
         levelChain->current->aliveMonsters != -1 && levelChain->current->nbMonsters != -1 &&
         levelChain->current->monstersTab != NULL && levelChain->current->otherLevels != NULL) {
+
+
         boardElements->board = levelChain->next->current->board;
-        boardElements->otherLevels = levelChain->current->otherLevels;
-        boardElements->nbMonsters = levelChain->current->nbMonsters;
-        boardElements->monstersTab = levelChain->current->monstersTab;
-        boardElements->aliveMonsters = levelChain->current->aliveMonsters;
+        boardElements->otherLevels = levelChain->next->current->otherLevels;
+        boardElements->nbMonsters = levelChain->next->current->nbMonsters;
+        boardElements->monstersTab = levelChain->next->current->monstersTab;
+        boardElements->aliveMonsters = levelChain->next->current->aliveMonsters;
         return levelChain;
     }
     FILE *levelpointer;
@@ -212,18 +215,18 @@ levelChain *getLevelBoard(char *levelFile, levelChain *levelChain) {
     }
     for (int i = 0; i < monsterCount; i++) {
         if (monstersTab[i]->type == 'A') {
-            monstersTab[i] = setMonsterHealth(monstersTab[0], monsters[0]->hp);
-            monstersTab[i] = setMonsterStrength(monstersTab[0], monsters[0]->strength);
-            monstersTab[i] = setMonsterShield(monstersTab[0], monsters[0]->shield);
+            monstersTab[i] = setMonsterHealth(monstersTab[i], monsters[0]->hp);
+            monstersTab[i] = setMonsterStrength(monstersTab[i], monsters[0]->strength);
+            monstersTab[i] = setMonsterShield(monstersTab[i], monsters[0]->shield);
 
         } else if (monstersTab[i]->type == 'B') {
-            monstersTab[i] = setMonsterHealth(monstersTab[1], monsters[1]->hp);
-            monstersTab[i] = setMonsterStrength(monstersTab[1], monsters[1]->strength);
-            monstersTab[i] = setMonsterShield(monstersTab[1], monsters[1]->shield);
+            monstersTab[i] = setMonsterHealth(monstersTab[i], monsters[1]->hp);
+            monstersTab[i] = setMonsterStrength(monstersTab[i], monsters[1]->strength);
+            monstersTab[i] = setMonsterShield(monstersTab[i], monsters[1]->shield);
         } else {
-            monstersTab[i] = setMonsterHealth(monstersTab[2], monsters[2]->hp);
-            monstersTab[i] = setMonsterStrength(monstersTab[2], monsters[2]->strength);
-            monstersTab[i] = setMonsterShield(monstersTab[2], monsters[2]->shield);
+            monstersTab[i] = setMonsterHealth(monstersTab[i], monsters[2]->hp);
+            monstersTab[i] = setMonsterStrength(monstersTab[i], monsters[2]->strength);
+            monstersTab[i] = setMonsterShield(monstersTab[i], monsters[2]->shield);
         }
     }
     fclose(levelpointer);
