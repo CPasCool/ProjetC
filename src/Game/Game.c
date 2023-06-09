@@ -1,5 +1,6 @@
 #include <stdbool.h>
 #include <stdio.h>
+#include "stdlib.h"
 #include "../../include/src/Game.h"
 #include "../../SDL2/SDL_render.h"
 #include "../../include/src/TextureConst.h"
@@ -9,6 +10,7 @@
 
 const int MAXIMUM_CHOICE_MENU = 5;
 const int MINIMUM_CHOICE_MENU = 1;
+
 
 int LaunchGame() {
     printf("Z -> move up\n"
@@ -124,8 +126,6 @@ void play(SDL_Renderer *renderer, SDL_Texture *tile, SDL_Texture *character1, SD
     board->character = character;
     //We get/set every element we have on the file
     levelChain = getLevelBoard("./src/Levels/niveau1.level", levelChain);
-    levelChain = getLevelMonsters("./src/Levels/niveau1.level", board, levelChain);
-    levelChain = getOtherLevels("./src/Levels/niveau1.level", board, levelChain);
 
     //We put the character at is right position
     levelChain->current->board[getCharaY(character)][getCharaX(character)] = 'T';

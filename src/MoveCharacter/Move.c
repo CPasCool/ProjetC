@@ -33,9 +33,10 @@ levelChain *move(Character *character, char move, boardElements *board, levelCha
         case ' ':
             moveCharacter(character, coordonees, levelChain->current->board, levelChain);
             levelChain->current->board[getCharaY(character)][getCharaX(character)] = 'T';
-            //There is an attack bonus
             printAll(character);
             break;
+
+            //There is an attack bonus
         case '1':
             setStrength(character, getStrength(character) + 1);
             moveCharacter(character, coordonees, levelChain->current->board, levelChain);
@@ -88,12 +89,8 @@ levelChain *move(Character *character, char move, boardElements *board, levelCha
         case 'A':
         case 'B':
         case 'C':
-            printf("%d", levelChain->current->levelNumber);
             monster = getSpecificMonster(levelChain->current->monstersTab, coordonees,
                                          levelChain->current->nbMonsters);
-            printf("x = %d, y = %d", coordonees->x, coordonees->y);
-            printf("x = %d, y = %d", getCharaX(levelChain->current->character),
-                   getCharaY(levelChain->current->character));
             printMonsterStats(monster);
             fightWithMonster(character, monster);
             if (monster->hp <= 0) {
@@ -111,7 +108,6 @@ levelChain *move(Character *character, char move, boardElements *board, levelCha
         case '?':
             moveCharacter(character, coordonees, levelChain->current->board, levelChain);
             levelChain = changeLevel(move, board, character, levelChain);
-            board = levelChain->current;
             levelChain->current->board[getCharaY(character)][getCharaX(character)] = 'T';
             break;
         default:
@@ -151,8 +147,7 @@ levelChain *changeLevel(char direction, boardElements *boardElements, Character 
             break;
     }
     levelChain = getLevelBoard(boardElements->otherLevels[digitDirection], levelChain);
-    levelChain = getLevelMonsters(boardElements->otherLevels[digitDirection], boardElements, levelChain);
-    levelChain = getOtherLevels(boardElements->otherLevels[digitDirection], boardElements, levelChain);
+    levelChain = levelChain->next;
     return levelChain;
 }
 
