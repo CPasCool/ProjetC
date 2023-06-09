@@ -105,7 +105,7 @@ levelChain *move(Character *character, char move, boardElements *board, levelCha
             break;
         case '?':
             moveCharacter(character, move, levelChain->current->board, levelChain);
-            levelChain = changeLevel(move, board, character, levelChain);
+            levelChain = changeLevel(move, levelChain->current, character, levelChain);
             levelChain->current->board[getCharaY(character)][getCharaX(character)] = 'T';
             break;
         default:
@@ -116,7 +116,6 @@ levelChain *move(Character *character, char move, boardElements *board, levelCha
 
 int *moveCharacter(Character *character, char move, char **board, levelChain *levelChain) {
     levelChain->current->board[getCharaY(character)][getCharaX(character)] = ' ';
-    board[getCharaY(character)][getCharaX(character)] = ' ';
     switch (move) {
         case 'z':
             changeCoordonnes(character, getCharaX(character), getCharaY(character) - 1);
@@ -143,6 +142,7 @@ levelChain *changeLevel(char direction, boardElements *boardElements, Character 
             digitDirection = 3;
             changeCoordonnes(character, getCharaX(character), getCharaY(character) + 28);
             break;
+
         case 'q':
             digitDirection = 2;
             changeCoordonnes(character, getCharaX(character) + 28, getCharaY(character));
@@ -152,14 +152,16 @@ levelChain *changeLevel(char direction, boardElements *boardElements, Character 
             digitDirection = 1;
             changeCoordonnes(character, getCharaX(character), getCharaY(character) - 28);
             break;
+
         case 'd':
             digitDirection = 0;
             changeCoordonnes(character, getCharaX(character) - 28, getCharaY(character));
             break;
+
         default:
             break;
     }
-    levelChain = getLevelBoard(boardElements->otherLevels[digitDirection], levelChain);
+    levelChain = getLevelBoard(levelChain->current->otherLevels[digitDirection], levelChain);
     levelChain = levelChain->next;
     return levelChain;
 }

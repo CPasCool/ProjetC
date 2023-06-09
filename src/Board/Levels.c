@@ -23,135 +23,6 @@ void getLevelNumber(char *levelFile, boardElements *board) {
     }
 }
 
-void createLevelMonsters(char *levelFile, monster **monsterTab, int nbMonster) {
-    FILE *levelpointer;
-    fopen_s(&levelpointer, levelFile, "r");
-
-    // Send an error if the file does not exist
-    if (fopen_s(&levelpointer, levelFile, "r") != 0) {
-        char *newLevelFilename = malloc(sizeof(char) * 28);
-        newLevelFilename[27] = '\0';
-        char *prefixFile = ".";
-        for (int j = 0; j < 27; j++) {
-            if (j < 1) {
-                newLevelFilename[j] = prefixFile[j];
-            } else {
-                newLevelFilename[j] = levelFile[j - 1];
-            }
-        }
-        fopen_s(&levelpointer, newLevelFilename, "r");
-        if (fopen_s(&levelpointer, newLevelFilename, "r") != 0) {
-            printf("Error opening the file.\n");
-            return;
-        }
-    }
-    int counter = 0;
-    char *line = malloc(sizeof(char) * 32);
-    fgets(line, 32, levelpointer);
-
-    // Check line starting at the 36th because we want to get the monsters stats
-    while (line != NULL) {
-        if (counter > 35 && counter != 40 && counter != 45) {
-            char *value = malloc(sizeof(char) * 4);
-            value[3] = '\0';
-
-            // Get the stat value
-            for (int i = 0; i < 32; i++) {
-                if (line[i] != '\0' && isdigit(line[i])) {
-                    value[0] = line[i];
-                    value[1] = line[i + 1];
-                    value[2] = line[i + 2];
-                    break;
-                }
-            }
-
-            // We know at which line we have which stat, so we check those lines
-            switch (counter) {
-                case 36:
-                case 41:
-                case 46:
-                    if (counter == 36) {
-                        for (int i = 0; i < nbMonster; i++) {
-                            if (monsterTab[i]->type == 'A') {
-                                setMonsterHealth(monsterTab[i], atoi(value));
-                            }
-                        }
-                    } else if (counter == 41) {
-                        for (int i = 0; i < nbMonster; i++) {
-                            if (monsterTab[i]->type == 'B') {
-                                setMonsterHealth(monsterTab[i], atoi(value));
-                            }
-                        }
-                    } else {
-                        for (int i = 0; i < nbMonster; i++) {
-                            if (monsterTab[i]->type == 'C') {
-                                setMonsterHealth(monsterTab[i], atoi(value));
-                            }
-                        }
-                    }
-                    break;
-
-                case 37:
-                case 42:
-                case 47:
-                    if (counter == 37) {
-                        for (int i = 0; i < nbMonster; i++) {
-                            if (monsterTab[i]->type == 'A') {
-                                setMonsterStrength(monsterTab[i], atoi(value));
-                            }
-                        }
-                    } else if (counter == 42) {
-                        for (int i = 0; i < nbMonster; i++) {
-                            if (monsterTab[i]->type == 'B') {
-                                setMonsterStrength(monsterTab[i], atoi(value));
-                            }
-                        }
-                    } else {
-                        for (int i = 0; i < nbMonster; i++) {
-                            if (monsterTab[i]->type == 'C') {
-                                setMonsterStrength(monsterTab[i], atoi(value));
-                            }
-                        }
-                    }
-                    break;
-
-                case 38:
-                case 43:
-                case 48:
-                    if (counter == 38) {
-                        for (int i = 0; i < nbMonster; i++) {
-                            if (monsterTab[i]->type == 'A') {
-                                setMonsterShield(monsterTab[i], atoi(value));
-                            }
-                        }
-                    } else if (counter == 43) {
-                        for (int i = 0; i < nbMonster; i++) {
-                            if (monsterTab[i]->type == 'B') {
-                                setMonsterShield(monsterTab[i], atoi(value));
-                            }
-                        }
-                    } else {
-                        for (int i = 0; i < nbMonster; i++) {
-                            if (monsterTab[i]->type == 'C') {
-                                setMonsterShield(monsterTab[i], atoi(value));
-                            }
-                        }
-                    }
-                    break;
-
-                default:
-                    break;
-            }
-        }
-        line = fgets(line, 32, levelpointer);
-        if (counter < 30 && strcmp(line, "\n") == 0) {
-            line = fgets(line, 32, levelpointer);
-        }
-        counter++;
-    }
-    fclose(levelpointer);
-}
-
 levelChain *getLevelBoard(char *levelFile, levelChain *levelChain) {
     boardElements *boardElements = createBoardElement();
     getLevelNumber(levelFile, boardElements);
@@ -162,17 +33,20 @@ levelChain *getLevelBoard(char *levelFile, levelChain *levelChain) {
     // go to correct element or last
     while (levelChain != NULL && levelChain->next != NULL && levelChain->current != NULL &&
            levelChain->current->levelNumber != boardElements->levelNumber) {
+
         levelChain = levelChain->next;
     }
     if (levelChain != NULL && levelChain->next != NULL && levelChain->current != NULL &&
         levelChain->next->current->levelNumber == boardElements->levelNumber &&
         levelChain->current->aliveMonsters != -1 && levelChain->current->nbMonsters != -1 &&
         levelChain->current->monstersTab != NULL && levelChain->current->otherLevels != NULL) {
+
+
         boardElements->board = levelChain->next->current->board;
-        boardElements->otherLevels = levelChain->current->otherLevels;
-        boardElements->nbMonsters = levelChain->current->nbMonsters;
-        boardElements->monstersTab = levelChain->current->monstersTab;
-        boardElements->aliveMonsters = levelChain->current->aliveMonsters;
+        boardElements->otherLevels = levelChain->next->current->otherLevels;
+        boardElements->nbMonsters = levelChain->next->current->nbMonsters;
+        boardElements->monstersTab = levelChain->next->current->monstersTab;
+        boardElements->aliveMonsters = levelChain->next->current->aliveMonsters;
         return levelChain;
     }
     FILE *levelpointer;
@@ -215,6 +89,10 @@ levelChain *getLevelBoard(char *levelFile, levelChain *levelChain) {
         levels[i] = malloc(sizeof(char) * size);
         levels[i][size - 1] = '\0';
     }
+    monster **monsters = malloc(sizeof(struct Monster) * 3);
+    for (int i = 0; i < 3; i++) {
+        monsters[i] = createNewMonster("A", 0, 0, 0, 'a', createCoordonne(0, 0));
+    }
     char *letter = malloc(sizeof(char));
     char *line = malloc(sizeof(char) * 32);
     int counterLine = 0;
@@ -223,7 +101,7 @@ levelChain *getLevelBoard(char *levelFile, levelChain *levelChain) {
     int counterLevel = 0;
 
     //read the file util the board ended so until we finished read the other levels name
-    while (line != NULL && counterLine < 35) {
+    while (line != NULL && counterLine < 50) {
         int savePos = 0;
         if (counterLine < 30) {
             //Handle the § character --> -62 = special character ascii then skip the ° symbol because the § is split in UTF-8
@@ -253,7 +131,7 @@ levelChain *getLevelBoard(char *levelFile, levelChain *levelChain) {
                 board[counterLine][counterLetter] = *letter;
                 counterLetter++;
             }
-        } else {
+        } else if (counterLine < 35) {
             line = fgets(line, 32, levelpointer);
             if (strcmp(line, "\n") == 0) {
                 line = fgets(line, 32, levelpointer);
@@ -280,6 +158,51 @@ levelChain *getLevelBoard(char *levelFile, levelChain *levelChain) {
             }
             counterLevel++;
             printf("%s\n", line);
+        } else if (counterLine > 35 && counterLine != 40 && counterLine != 45) {
+            char *value = malloc(sizeof(char) * 4);
+            value[3] = '\0';
+
+            // Get the stat value
+            for (int i = 0; i < 32; i++) {
+                if (line[i] != '\0' && isdigit(line[i])) {
+                    value[0] = line[i];
+                    value[1] = line[i + 1];
+                    value[2] = line[i + 2];
+                    break;
+                }
+            }
+            // We know at which line we have which stat, so we check those lines
+            switch (counterLine) {
+                case 36:
+                    setMonsterHealth(monsters[0], atoi(value));
+                    break;
+                case 41:
+                    setMonsterHealth(monsters[1], atoi(value));
+                    break;
+                case 46:
+                    setMonsterHealth(monsters[2], atoi(value));
+                    break;
+                case 37:
+                    setMonsterStrength(monsters[0], atoi(value));
+                    break;
+                case 42:
+                    setMonsterStrength(monsters[1], atoi(value));
+                    break;
+                case 47:
+                    setMonsterStrength(monsters[2], atoi(value));
+                    break;
+                case 38:
+                    setMonsterShield(monsters[0], atoi(value));
+                    break;
+                case 43:
+                    setMonsterShield(monsters[1], atoi(value));
+                    break;
+                case 48:
+                    setMonsterShield(monsters[2], atoi(value));
+                    break;
+                default:
+                    break;
+            }
         }
         // Reset column
         if (counterLine < 30 && counterLetter - 30 == 0) {
@@ -288,6 +211,22 @@ levelChain *getLevelBoard(char *levelFile, levelChain *levelChain) {
         }
         if (counterLine >= 30) {
             counterLine++;
+        }
+    }
+    for (int i = 0; i < monsterCount; i++) {
+        if (monstersTab[i]->type == 'A') {
+            monstersTab[i] = setMonsterHealth(monstersTab[i], monsters[0]->hp);
+            monstersTab[i] = setMonsterStrength(monstersTab[i], monsters[0]->strength);
+            monstersTab[i] = setMonsterShield(monstersTab[i], monsters[0]->shield);
+
+        } else if (monstersTab[i]->type == 'B') {
+            monstersTab[i] = setMonsterHealth(monstersTab[i], monsters[1]->hp);
+            monstersTab[i] = setMonsterStrength(monstersTab[i], monsters[1]->strength);
+            monstersTab[i] = setMonsterShield(monstersTab[i], monsters[1]->shield);
+        } else {
+            monstersTab[i] = setMonsterHealth(monstersTab[i], monsters[2]->hp);
+            monstersTab[i] = setMonsterStrength(monstersTab[i], monsters[2]->strength);
+            monstersTab[i] = setMonsterShield(monstersTab[i], monsters[2]->shield);
         }
     }
     fclose(levelpointer);
@@ -304,9 +243,6 @@ levelChain *getLevelBoard(char *levelFile, levelChain *levelChain) {
     printf("We got the other levels\n");
     printf("We got the board\n");
     printf("Monsters are setted\n");
-    if (monsterCount != 0) {
-        createLevelMonsters(levelFile, monstersTab, monsterCount);
-    }
     if (levelChain == NULL) {
         levelChain = createLevelChain(copyBoardElement(boardElements));
         return levelChain;
