@@ -107,7 +107,7 @@ levelChain *getLevelBoard(char *levelFile, levelChain *levelChain) {
     int counterLevel = 0;
 
     //read the file util the board ended so until we finished read the other levels name
-    while (line != NULL && counterLine < 49) {
+    while (line != NULL && counterLine < 51) {
         int savePos = 0;
         if (counterLine < 30) {
             //Handle the § character --> -62 = special character ascii then skip the ° symbol because the § is split in UTF-8
@@ -137,12 +137,7 @@ levelChain *getLevelBoard(char *levelFile, levelChain *levelChain) {
                 board[counterLine][counterLetter] = *letter;
                 counterLetter++;
             }
-        } else if (counterLine < 34) {
-            printf("%d\n", counterLine);
-            printf("%s\n", line);
-            while (strcmp(line, "\n") == 0 || line[0] == '\r') {
-                line = fgets(line, 32, levelpointer);
-            }
+        } else if (counterLine > 31 && counterLine < 36) {
             for (int i = 0; i < 32; i++) {
                 if (line[i] == ':') {
                     i += 2;
@@ -164,7 +159,7 @@ levelChain *getLevelBoard(char *levelFile, levelChain *levelChain) {
                 levels[counterLevel][0] = '\0';
             }
             counterLevel++;
-        } else if (counterLine > 35 && counterLine != 40 && counterLine != 45) {
+        } else if (counterLine > 37 && counterLine != 42 && counterLine != 47) {
             char *value = malloc(sizeof(char) * 4);
             value[3] = '\0';
 
@@ -179,31 +174,31 @@ levelChain *getLevelBoard(char *levelFile, levelChain *levelChain) {
             }
             // We know at which line we have which stat, so we check those lines
             switch (counterLine) {
-                case 36:
+                case 38:
                     setMonsterHealth(monsters[0], atoi(value));
                     break;
-                case 37:
+                case 39:
                     setMonsterStrength(monsters[0], atoi(value));
                     break;
-                case 38:
+                case 40:
                     setMonsterShield(monsters[0], atoi(value));
                     break;
-                case 41:
+                case 43:
                     setMonsterHealth(monsters[1], atoi(value));
                     break;
-                case 42:
+                case 44:
                     setMonsterStrength(monsters[1], atoi(value));
                     break;
-                case 43:
+                case 45:
                     setMonsterShield(monsters[1], atoi(value));
                     break;
-                case 46:
+                case 48:
                     setMonsterHealth(monsters[2], atoi(value));
                     break;
-                case 47:
+                case 49:
                     setMonsterStrength(monsters[2], atoi(value));
                     break;
-                case 48:
+                case 50:
                     setMonsterShield(monsters[2], atoi(value));
                     break;
                 default:
@@ -211,7 +206,7 @@ levelChain *getLevelBoard(char *levelFile, levelChain *levelChain) {
             }
         }
         // Reset column
-        if (counterLine >= 30) {
+        if (counterLine >=30) {
             line = fgets(line, 32, levelpointer);
             counterLine++;
         }
