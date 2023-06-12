@@ -91,6 +91,11 @@ int addKeys(Character *character) {
     return 0;
 }
 
+int setMaxKeys(Character *character) {
+    character->stat->keys = 999;
+    return 0;
+}
+
 int removeKeys(Character *character) {
     character->stat->keys -= 1;
     return 0;
@@ -148,5 +153,6 @@ int printAll(Character *character) {
     printKeysNumber(character->stat);
     printStrength(character->stat);
     printDefence(character->stat);
+    printf("x = %d, y = %d\n", getCharaX(character), getCharaY(character));
     return 0;
 }

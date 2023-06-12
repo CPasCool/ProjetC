@@ -1,7 +1,3 @@
-//
-// Created by benfa on 10/05/2023.
-//
-
 #ifndef PROJETC_CHARACTER_H
 #define PROJETC_CHARACTER_H
 
@@ -63,5 +59,8 @@ int getCharaX(Character *character);
 
 int getCharaY(Character *character);
 
+int setMaxKeys(Character *character);
+
 int setKeys(Character *character,int keys);
+
 #endif //PROJETC_CHARACTER_H
