@@ -4,25 +4,6 @@
 #include <ctype.h>
 #include "string.h"
 
-void getLevelNumber(char *levelFile, boardElements *board) {
-    int i = 0;
-    while (levelFile[i] != '\0') {
-        if (isdigit(levelFile[i])) {
-            if (isdigit(levelFile[i + 1])) {
-                char *value = "  ";
-                value[0] = levelFile[i];
-                value[1] = levelFile[i + 1];
-                board->levelNumber = atoi(value);
-                return;
-            }
-            board->levelNumber = levelFile[i] - '0';
-
-            return;
-        }
-        i++;
-    }
-}
-
 levelChain *getLevelBoard(char *levelFile, levelChain *levelChain) {
     boardElements *boardElements = createBoardElement();
     getLevelNumber(levelFile, boardElements);
@@ -76,7 +57,6 @@ levelChain *getLevelBoard(char *levelFile, levelChain *levelChain) {
         fopen_s(&levelpointer, newLevelFilename, "r");
         if (fopen_s(&levelpointer, newLevelFilename, "r") != 0) {
             printf("Error opening the file.\n");
-            printf("%s\n", levelFile);
             return levelChain;
         }
     }

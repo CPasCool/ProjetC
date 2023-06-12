@@ -4,49 +4,85 @@
 #include <ctype.h>
 #include "string.h"
 
+void getLevelNumber(char *levelFile, boardElements *board) {
+    int i = 0;
+    while (levelFile[i] != '\0') {
+        if (isdigit(levelFile[i])) {
+            if (isdigit(levelFile[i + 1])) {
+                char *value = "  ";
+                value[0] = levelFile[i];
+                value[1] = levelFile[i + 1];
+                board->levelNumber = atoi(value);
+                return;
+            }
+            board->levelNumber = levelFile[i] - '0';
+
+            return;
+        }
+        i++;
+    }
+}
+
 // La sauvegarde à besoin du board, d'une liste de monstres,d'une liste avec les niveaux et du personnage
 // pour une sauvegarde complète
-int createSave(boardElements *boardElements) {
-    char *levelFile = "../src/Levels/save.txt";
-    FILE* saveFile;
+int createSave(levelChain *levelChain) {
+    char *levelFile = "../src/Levels/save1.txt";
+    FILE *levelPointer;
+    int errorCount = 0;
 
-    if (fopen(levelFile, "w+") == 0) {
-        printf("impossible d'ouvrir le fichier");
-        return 1;
-    }
-    else
-    {
-        saveFile=fopen( levelFile, "w+");
+    levelPointer = fopen(levelFile, "w+");
+    // Send an error if the file does not exist
+    if (fopen(levelFile, "w+") != 0) {
+        errorCount++;
+        char *newLevelFilename = malloc(sizeof(char) * 28);
+        newLevelFilename[27] = '\0';
+        char *prefixFile = ".";
+        for (int j = 0; j < 27; j++) {
+            if (j < 1) {
+                newLevelFilename[j] = prefixFile[j];
+            } else {
+                newLevelFilename[j] = levelFile[j - 1];
+            }
+        }
+        levelPointer = fopen(levelFile, "w+");
+        if (fopen(levelFile, "w+") != 0) {
+            printf("Error opening the file.\n");
+            printf("Fail to save the game");
+            return 0;
+        }
+    } else {
+        levelPointer = fopen(levelFile, "w+");
     }
     for (int i = 0; i < 30; i++) {//on parcours par colonne
         for (int j = 0; j < 30; j++) {
             //on parcours par ligne
-            fprintf(saveFile,"%c", boardElements->board[i][j]);
+            fprintf(levelPointer, "%c", levelChain->current->board[i][j]);
         }
-        fprintf(saveFile, "\n");
+        fprintf(levelPointer, "\n");
     }
     //Une fois le board écrit dans la sauvegarde on écrit les données
-    fprintf(saveFile, "East : %s\nSud : %s\nOuest : %s\nNord : %s\n\n", boardElements->otherLevels[0],
-              boardElements->otherLevels[1], boardElements->otherLevels[2], boardElements->otherLevels[3]);
-    fprintf(saveFile, "Character\nNom : %s.\nMaxPv : %d\nPvActuel : %d\nForce : %d\nArmure : %d\nClé : %d\n"
-                      "CoordonnéeX : %d\nCoordonnéesY : %d\n\n", getName(boardElements->character),
-            getMaximumLifePoint(boardElements->character), getLifePoint(boardElements->character),
-            getStrength(boardElements->character), getDefence(boardElements->character),
-            getKeys(boardElements->character), getCharaX(boardElements->character),
-            getCharaY(boardElements->character));
+    fprintf(levelPointer, "East : %s\nSud : %s\nOuest : %s\nNord : %s\n\n", levelChain->current->otherLevels[0],
+            levelChain->current->otherLevels[1], levelChain->current->otherLevels[2],
+            levelChain->current->otherLevels[3]);
+    fprintf(levelPointer, "Character\nNom : %s.\nMaxPv : %d\nPvActuel : %d\nForce : %d\nArmure : %d\nClé : %d\n"
+                          "CoordonnéeX : %d\nCoordonnéesY : %d\n\n", getName(levelChain->current->character),
+            getMaximumLifePoint(levelChain->current->character), getLifePoint(levelChain->current->character),
+            getStrength(levelChain->current->character), getDefence(levelChain->current->character),
+            getKeys(levelChain->current->character), getCharaX(levelChain->current->character),
+            getCharaY(levelChain->current->character));
     //on utilise la liste des montres pour écrire leurs informations*
-    for (int i = 0; i < boardElements->nbMonsters; i++) {
+    for (int i = 0; i < levelChain->current->nbMonsters; i++) {
 
-        fprintf(saveFile, "%c\nPv : %d\nForce : %d\nArmure : %d\n", boardElements->monstersTab[i]->type,
-                  boardElements->monstersTab[i]->hp, boardElements->monstersTab[i]->strength,
-                  boardElements->monstersTab[i]->shield);
+        fprintf(levelPointer, "%c\nPv : %d\nForce : %d\nArmure : %d\n", levelChain->current->monstersTab[i]->type,
+                levelChain->current->monstersTab[i]->hp, levelChain->current->monstersTab[i]->strength,
+                levelChain->current->monstersTab[i]->shield);
 
     }
     //on écrit les informations du personnage
 
-    fclose(saveFile);
-    printf("game has been saved");
-    return 0;
+    fclose(levelPointer);
+    printf("game saved successfully");
+    return 1;
 }
 
 //comme il n'y a que un seul fichier de sauvegarde pas besoin de paramètre
@@ -59,15 +95,13 @@ void getCharacterSave(boardElements *boardElements) {
     int coordY = 0;
     char *value = malloc(sizeof(char) * 4);
     char *levelFile = "../src/Levels/save.txt";
-    FILE* saveFile;
+    FILE *saveFile;
 
     if (fopen(levelFile, "r") == 0) {
         printf("impossible d'ouvrir le fichier");
         return;
-    }
-    else
-    {
-        saveFile=fopen( levelFile, "r");
+    } else {
+        saveFile = fopen(levelFile, "r");
     }
     char *line = malloc(sizeof(char) * 32);
     while (fgets(line, 32, saveFile)) {
@@ -121,7 +155,7 @@ void getCharacterSave(boardElements *boardElements) {
         }
         changeCoordonnes(personnage, coordX, coordY);
     }
-    boardElements->character=personnage;
+    boardElements->character = personnage;
 }
 
 void getLevelBoardSave(boardElements *boardElements) {
@@ -132,15 +166,13 @@ void getLevelBoardSave(boardElements *boardElements) {
         board[i][30] = '\0';
     }
     char *levelFile = "../src/Levels/save.txt";
-    FILE* saveFile;
+    FILE *saveFile;
 
     if (fopen(levelFile, "r") == 0) {
         printf("impossible d'ouvrir le fichier");
         return;
-    }
-    else
-    {
-        saveFile=fopen( levelFile, "r");
+    } else {
+        saveFile = fopen(levelFile, "r");
     }
     char letter = (char) fgetc(saveFile);
     int counterLine = 0;
@@ -181,15 +213,13 @@ void getOtherLevelsSave(boardElements *boardElements) {
     // Initialize the levels array with empty strings
     int errorCount = 0;
     char *levelFile = "../src/Levels/save.txt";
-    FILE* saveFile;
+    FILE *saveFile;
 
     if (fopen(levelFile, "r") == 0) {
         printf("impossible d'ouvrir le fichier");
         return;
-    }
-    else
-    {
-        saveFile=fopen( levelFile, "r");
+    } else {
+        saveFile = fopen(levelFile, "r");
     }
     int size = 27;
     if (errorCount > 0) {
@@ -264,7 +294,6 @@ void getOtherLevelsSave(boardElements *boardElements) {
     boardElements->otherLevels = levels;
 }
 
-void getMonsterSave(boardElements *boardElements)
-{
+void getMonsterSave(boardElements *boardElements) {
 
 }

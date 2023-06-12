@@ -1,10 +1,5 @@
-//
-// Created by benfa on 24/05/2023.
-//
-
 #include <stdbool.h>
 #include "stdio.h"
-#include "stdlib.h"
 #include "../../include/src/Game.h"
 
 
@@ -36,6 +31,10 @@ int LaunchGame() {
             isChoiced = true;
             if (choice == 1) {
                 play();
+            } else {
+                if (choice == 2) {
+                    displayCredit();
+                }
             }
         }
     } while (!isChoiced);
@@ -75,7 +74,7 @@ void play() {
         displayBoard(levelChain->current->board);
         char input = catchInput();
         if (input == 'p') {
-            if (pauseMenu(input, board->character) == 1) {
+            if (pauseMenu(input, levelChain, board->character) == 1) {
                 inGame = false;
             }
         } else if (input == 'z' || input == 'q' || input == 's' || input == 'd') {
