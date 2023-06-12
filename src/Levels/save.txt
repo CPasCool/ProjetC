@@ -28,65 +28,11 @@
 ##############################
 ##############################
 ##############################
-East : ../src/Levels/niveau3.level
+East : ../src/Levels/niveau3.level###     ####
+#|ʇ#
 Sud : 
 Ouest : 
-Nord : ../src/Levels/niveau2.level 
-
-B
-Pv : 2
-Force : 3
-Armure : 3
-
-B
-Pv : 2
-Force : 3
-Armure : 3
-
-C
-Pv : 5
-Force : 5
-Armure : 0
-
-B
-Pv : 2
-Force : 3
-Armure : 3
-
-C
-Pv : 5
-Force : 5
-Armure : 0
-
-B
-Pv : 2
-Force : 3
-Armure : 3
-
-C
-Pv : 5
-Force : 5
-Armure : 0
-
-A
-Pv : 1
-Force : 1
-Armure : 1
-
-A
-Pv : 1
-Force : 1
-Armure : 1
-
-B
-Pv : 2
-Force : 3
-Armure : 3
-
-A
-Pv : 1
-Force : 1
-Armure : 1
+Nord : ../src/Levels/niveau2.level
 
 Character
 Nom : player.
@@ -97,3 +43,48 @@ Armure : 1
 Clé : 0
 CoordonnéeX : 14
 CoordonnéesY : 14
+
+B
+Pv : 2
+Force : 3
+Armure : 3
+B
+Pv : 2
+Force : 3
+Armure : 3
+C
+Pv : 5
+Force : 5
+Armure : 0
+B
+Pv : 2
+Force : 3
+Armure : 3
+C
+Pv : 5
+Force : 5
+Armure : 0
+B
+Pv : 2
+Force : 3
+Armure : 3
+C
+Pv : 5
+Force : 5
+Armure : 0
+A
+Pv : 1
+Force : 1
+Armure : 1
+A
+Pv : 1
+Force : 1
+Armure : 1
+B
+Pv : 2
+Force : 3
+Armure : 3
+A
+Pv : 1
+Force : 1
+Armure : 1
