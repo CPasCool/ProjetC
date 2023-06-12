@@ -38,7 +38,7 @@ void displayNewGame() {
             "#   3 -    Quit              #\n"
             "#                            #\n"
             "#                            #\n"
-            "#                            #\n"
+            "#        Good luck :)        #\n"
             "#                            #\n"
             "#                            #\n"
             "##############################\n"
@@ -60,6 +60,7 @@ void displaySave() {
             "#   3 -    Quit              #\n"
             "#                            #\n"
             "#                            #\n"
+            "#        Good luck :)        #\n"
             "#                            #\n"
             "#                            #\n"
             "##############################\n"
@@ -79,6 +80,8 @@ void displayChoiceGameQuit() {
             "#  # 3 -    Quit          #  #\n"
             "#  ########################  #\n"
             "#                            #\n"
+            "#                            #\n"
+            "#        Good luck :)        #\n"
             "#                            #\n"
             "#                            #\n"
             "##############################\n"
@@ -101,8 +104,6 @@ void displayPlayMenu() {
             "#   3 -    Quit              #\n"
             "#                            #\n"
             "#                            #\n"
-            "#                            #\n"
-            "#        Good luck :)        #\n"
             "#                            #\n"
             "#                            #\n"
             "#                            #\n"
@@ -127,9 +128,6 @@ void displayCreditMenu() {
             "#                            #\n"
             "#                            #\n"
             "#                            #\n"
-            "#        Good luck :)        #\n"
-            "#                            #\n"
-            "#                            #\n"
             "#                            #\n"
             "##############################\n"
     );
@@ -152,13 +150,31 @@ void displayExitMenu() {
             "#                            #\n"
             "#                            #\n"
             "#                            #\n"
-            "#        Good luck :)        #\n"
-            "#                            #\n"
-            "#                            #\n"
-            "#                            #\n"
             "#                            #\n"
             "##############################\n"
     );
+}
+
+void displayCredit() {
+    printf(
+            "##############################\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#       Jeu réalisé par      #\n"
+            "#      Korentin Kolaczek     #\n"
+            "#       Benoit Fardoux       #\n"
+            "#        Edouard Hoest       #\n"
+            "#      Baptiste Lemattre     #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#     1 - Back to menu       #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "##############################\n");
 }
 
 void displayMenu(choiceMenu *choice) {

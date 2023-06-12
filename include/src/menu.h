@@ -16,8 +16,6 @@ void displayCredit();
 
 void displayChoiceGameQuit();
 
-void menu();
-
 void displayMenuNewGame(int);
 
 #endif
