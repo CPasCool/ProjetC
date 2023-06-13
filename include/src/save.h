@@ -9,4 +9,10 @@
 
 int createSave(levelChain *levelChain);
 
+levelChain *getLevelBoardSave(levelChain *levelChain);
+
+levelChain *getCharacterSave(levelChain *levelChain);
+
+levelChain *getCompliteSave(levelChain *levelChain);
+
 #endif //PROJETC_SAVE_H

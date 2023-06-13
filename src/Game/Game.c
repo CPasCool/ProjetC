@@ -6,11 +6,15 @@
 const int MAXIMUM_CHOICE_MENU = 5;
 const int MINIMUM_CHOICE_MENU = 1;
 
-
+/**
+ * Beginning menu, the player chose what to do
+ * @return
+ */
 int LaunchGame() {
-    printf("Z -> move up\n"
-           "S -> move down\n"
-           "E -> validate choice\n");
+    introduction();
+    printf("Use\nZ to move up\n"
+           "S to move down\n and"
+           "E to validate your choice\n");
 
     choiceMenu *menu = createChoiceMenu();
     bool isChoiced = false;
@@ -41,13 +45,18 @@ int LaunchGame() {
     return 0;
 }
 
+/**
+ * Print the Board
+ */
 void displayBoard(char **board) {
     for (int i = 0; i < 30; i++) {
         printf("%s\n", board[i]);
     }
 }
 
-
+/**
+ * The main loop
+ */
 void play() {
     // affiche les touches
     printf("Z -> move up\n"
@@ -62,13 +71,13 @@ void play() {
     boardElements *board = createBoardElement();
     levelChain *levelChain = NULL;
     board->character = character;
-    //We get/set every element we have on the file
+    //We get/set every element of the level 1
     levelChain = getLevelBoard("./src/Levels/niveau1.level", levelChain);
 
     //We put the character at is right position
     levelChain->current->board[getCharaY(character)][getCharaX(character)] = 'T';
     printf("character is set\n");
-    // boucle de jeu
+    // main loop
     while (inGame) {
         levelChain->current->character = character;
         displayBoard(levelChain->current->board);

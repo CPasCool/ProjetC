@@ -11,11 +11,11 @@ int main() {
     // TESTS
     //testCharacter();
     //testMonster();
-    //generateBoard();
+    //introduction();
     //launchLevelTests();
 
     //Start the game
     LaunchGame();
-    //generateBoard();
+    //introduction();
     return 0;
 }
