@@ -61,4 +61,6 @@ int getCharaY(Character *character);
 
 int setMaxKeys(Character *character);
 
+int setKeys(Character *character,int keys);
+
 #endif //PROJETC_CHARACTER_H

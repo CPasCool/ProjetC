@@ -4,6 +4,8 @@
 #include "../../include/src/Move.h"
 #include "../../include/src/Levels.h"
 #include "../../include/src/Board.h"
+#include "../../include/src/CreateBoard.h"
+
 
 #ifndef PROJETC_GAME_H
 #define PROJETC_GAME_H

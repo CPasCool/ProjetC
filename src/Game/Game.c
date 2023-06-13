@@ -1,17 +1,20 @@
 #include <stdbool.h>
 #include "stdio.h"
-#include "stdlib.h"
 #include "../../include/src/Game.h"
 
 
 const int MAXIMUM_CHOICE_MENU = 5;
 const int MINIMUM_CHOICE_MENU = 1;
 
-
+/**
+ * Beginning menu, the player chose what to do
+ * @return
+ */
 int LaunchGame() {
-    printf("Z -> move up\n"
-           "S -> move down\n"
-           "E -> validate choice\n");
+    introduction();
+    printf("Use\nZ to move up\n"
+           "S to move down\n and"
+           "E to validate your choice\n");
 
     choiceMenu *menu = createChoiceMenu();
     bool isChoiced = false;
@@ -19,7 +22,7 @@ int LaunchGame() {
         int choice = getChoice(menu);
 
         displayMenu(menu);
-        char result = 'e';//catchInput();
+        char result = catchInput();
         if (result == 'z') {
             if (choice != MINIMUM_CHOICE_MENU) {
                 setChoice(menu, choice - 1);
@@ -32,19 +35,28 @@ int LaunchGame() {
             isChoiced = true;
             if (choice == 1) {
                 play();
+            } else {
+                if (choice == 2) {
+                    displayCredit();
+                }
             }
         }
     } while (!isChoiced);
     return 0;
 }
 
+/**
+ * Print the Board
+ */
 void displayBoard(char **board) {
     for (int i = 0; i < 30; i++) {
         printf("%s\n", board[i]);
     }
 }
 
-
+/**
+ * The main loop
+ */
 void play() {
     // affiche les touches
     printf("Z -> move up\n"
@@ -59,19 +71,19 @@ void play() {
     boardElements *board = createBoardElement();
     levelChain *levelChain = NULL;
     board->character = character;
-    //We get/set every element we have on the file
+    //We get/set every element of the level 1
     levelChain = getLevelBoard("./src/Levels/niveau1.level", levelChain);
 
     //We put the character at is right position
     levelChain->current->board[getCharaY(character)][getCharaX(character)] = 'T';
     printf("character is set\n");
-    // boucle de jeu
+    // main loop
     while (inGame) {
         levelChain->current->character = character;
         displayBoard(levelChain->current->board);
         char input = catchInput();
         if (input == 'p') {
-            if (pauseMenu(input, board->character) == 1) {
+            if (pauseMenu(input, levelChain, board->character) == 1) {
                 inGame = false;
             }
         } else if (input == 'z' || input == 'q' || input == 's' || input == 'd') {

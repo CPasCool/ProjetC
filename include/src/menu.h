@@ -10,12 +10,12 @@ choiceMenu *createChoiceMenu();
 
 int getChoice(choiceMenu *);
 
-void displayMenu(choiceMenu*);
+void displayMenu(choiceMenu *);
 
-void menu();
-void newGame();
+void displayCredit();
+
+void displayChoiceGameQuit();
+
 void displayMenuNewGame(int);
-void displayMenuIngame(int);
-void inGame();
 
 #endif
