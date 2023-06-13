@@ -1,6 +1,6 @@
 #include <stdbool.h>
 #include <stdio.h>
-#include "stdlib.h"
+#include <stdlib.h>
 #include "../../include/src/Game.h"
 #include "../../SDL2/SDL_render.h"
 #include "../../include/src/TextureConst.h"
@@ -50,13 +50,18 @@ void displayBoard(char **board, SDL_Renderer *renderer, SDL_Texture *tile, SDL_T
         for (int j = 0; j < 30; j++) {
             SDL_Rect destination = {j * size, i * size, size, size};
             SDL_RenderCopy(renderer, tile, &ground, &destination);
+            SDL_bool asWallUp = SDL_FALSE;
+            SDL_bool asWallDown = SDL_FALSE;
+            SDL_bool asWallLeft = SDL_FALSE;
+            SDL_bool asWallRight = SDL_FALSE;
+
             switch (board[i][j]) {
                 case 'T':
                     SDL_RenderCopy(renderer, Character2, &playerCharacter, &destination);
                     break;
 
                 case '1':
-
+                    SDL_RenderCopy(renderer,tile,&strengthBonus,&destination);
                     break;
 
                     //There is a Defence bonus
@@ -65,6 +70,7 @@ void displayBoard(char **board, SDL_Renderer *renderer, SDL_Texture *tile, SDL_T
                     break;
                     //There is a life bonus
                 case '3':
+                    SDL_RenderCopy(renderer,tile,&heart,&destination);
 
                     break;
 
@@ -77,6 +83,7 @@ void displayBoard(char **board, SDL_Renderer *renderer, SDL_Texture *tile, SDL_T
 
                     //There is a door
                 case 'o':
+                    SDL_RenderCopyEx(renderer, tile, &door, &destination, south, NULL, SDL_FLIP_NONE);
 
                     break;
 
@@ -100,12 +107,53 @@ void displayBoard(char **board, SDL_Renderer *renderer, SDL_Texture *tile, SDL_T
 
                     break;
 
-                    //There is a wall
+                    //There is a northWall
                 case '#':
                     SDL_RenderCopy(renderer, tile, &wallGround, &destination);
+
+                    if (j != 0)
+                        if (board[i][j - 1] != '#') {
+                            asWallLeft = SDL_TRUE;
+                            SDL_RenderCopy(renderer, tile, &westWall, &destination);
+                        }
+                    if (j != 29)
+                        if (board[i][j + 1] != '#') {
+                            asWallRight = SDL_TRUE;
+                            SDL_RenderCopy(renderer, tile, &eastWall, &destination);
+//                            SDL_RenderCopyEx(renderer, tile, &westWall, &destination, west, NULL, SDL_FLIP_NONE);
+                        }
+                    if (i != 0)
+                        if (board[i - 1][j] != '#') {
+                            asWallUp = SDL_TRUE;
+                            SDL_RenderCopy(renderer, tile, &northWall, &destination);
+                        }
+                    if (i != 29) {
+                        if (board[i + 1][j] != '#') {
+                            asWallDown = SDL_TRUE;
+                            SDL_RenderCopy(renderer, tile, &southWall, &destination);
+                        };
+                    }
+                    if (asWallUp && asWallRight && !asWallDown && !asWallLeft) {
+                        SDL_RenderCopyEx(renderer, tile, &externCorner, &destination, east, NULL, SDL_FLIP_NONE);
+                    }
+                    if (asWallUp && asWallLeft && (!asWallDown) && !asWallRight) {
+                        SDL_RenderCopyEx(renderer, tile, &externCorner, &destination, north, NULL, SDL_FLIP_NONE);
+
+                    }
                     break;
 
                 case '?':
+                    if (i == 0)
+                        SDL_RenderCopyEx(renderer, tile, &ladder, &destination, south, NULL, SDL_FLIP_NONE);
+                    else if (j == 0)
+                        SDL_RenderCopyEx(renderer, tile, &ladder, &destination, east, NULL, SDL_FLIP_NONE);
+                    else if (j == 29)
+                        SDL_RenderCopyEx(renderer, tile, &ladder, &destination, west, NULL, SDL_FLIP_NONE);
+                    else if (i == 29)
+                        SDL_RenderCopyEx(renderer, tile, &ladder, &destination, north, NULL, SDL_FLIP_NONE);
+
+//                    SDL_RenderCopy(renderer, tile, &ladder, &destination);
+
                     break;
                 default:
                     break;
@@ -166,7 +214,7 @@ void play(SDL_Renderer *renderer, SDL_Texture *tile, SDL_Texture *character1, SD
                     break;
             }
         if (getLifePoint(character) <= 0) {
-            loadImage(renderer,"assets/Images/deathScreen");
+            loadImage(renderer, "assets/Images/deathScreen");
 
 
             quit = SDL_TRUE;
@@ -176,8 +224,8 @@ void play(SDL_Renderer *renderer, SDL_Texture *tile, SDL_Texture *character1, SD
             printf("Congratulation You finished the level !!!!\n");
         }
         fflush(stdout);
-        }
     }
+}
 //        if (input == 'p') {
 //            if (pauseMenu(input, board->character) == 1) {
 //                inGame = false;

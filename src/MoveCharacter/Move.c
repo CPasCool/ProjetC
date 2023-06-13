@@ -1,6 +1,6 @@
 #include "../../include/src/Move.h"
-#include "stdlib.h"
-#include "stdio.h"
+#include <stdlib.h>
+#include <stdio.h>
 
 /**
  * move the character on the board
@@ -101,7 +101,7 @@ levelChain *move(Character *character, char move, boardElements *board, levelCha
             }
             break;
 
-            //There is a wall
+            //There is a northWall
         case '#':
             printf("You can not go that way\n");
             break;

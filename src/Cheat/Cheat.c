@@ -159,7 +159,7 @@ void printMenuCheat(int choixCheat, char keysActive, char healthActive, char str
     }
 }
 /**
- * cette fonction est la fonction principal d'interfaçage avec le clavier
+ * cette fonction east la fonction principal d'interfaçage avec le clavier
 */
 int cheatMenu(char input, Character *character) {
     bool choiceCheatDone = false;

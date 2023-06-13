@@ -1,5 +1,5 @@
 T = player
-# = wall
+# = northWall
 o = door
 A,B,C = monsters
 § = potion

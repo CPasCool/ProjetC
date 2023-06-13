@@ -35,9 +35,9 @@ int main(int argc, char *argv[]) {
     setBackgroundToWhite(renderer);
 
     // load textures
-    SDL_Texture *tiles = loadImage(renderer, "assets/Images/TileSet.bmp");
+    SDL_Texture *tiles = loadImage(renderer, "assets/Images/v2/Dungeon_Tileset.bmp");
     SDL_Texture *characters = loadImage(renderer, "assets/Images/Character.bmp");
-    SDL_Texture *characters2 = loadImage(renderer, "assets/Images/Character2.bmp");
+    SDL_Texture *characters2 = loadImage(renderer, "assets/Images/v2/Character2.bmp");
 
     // check if import is ok
     if (tiles == NULL || characters == NULL || characters2 == NULL) {
