@@ -8,9 +8,9 @@ struct choice {
     int choice;
 };
 
-void setChoice(choiceMenu *choiceMenu, int choice) {
+void setChoice(choiceMenu *choiceMenu, int choice,SDL_Renderer* renderer, SDL_Texture* background,  TTF_Font * font) {
     choiceMenu->choice = choice;
-    displayMenu(choiceMenu);
+    displayMenu(choiceMenu,renderer,background,font);
 }
 
 

@@ -1,6 +1,6 @@
 #include "../../include/src/Character.h"
 #include <stdlib.h>
-#include "stdio.h"
+#include <stdio.h>
 
 
 typedef struct statistics_ {
@@ -81,10 +81,6 @@ int setLifePoint(Character *character, int newLifePoint) {
     return 0;
 }
 
-int setKeys(Character *character,int keys)
-{
-    character->stat->keys = keys;
-}
 
 int addKeys(Character *character) {
     character->stat->keys += 1;

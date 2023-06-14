@@ -2,6 +2,7 @@
 #include "stdio.h"
 #include "stdlib.h"
 #include "../../include/src/Game.h"
+#include "../../include/src/TextureConst.h"
 
 
 const int MAXIMUM_CHOICE_MENU = 5;
@@ -30,11 +31,11 @@ int LaunchGame(SDL_Renderer *renderer, SDL_Texture *background, SDL_Texture *til
         char result = catchInput();
         if (result == 'z') {
             if (choice != MINIMUM_CHOICE_MENU) {
-                setChoice(menu, choice - 1);
+                setChoice(menu, choice - 1,renderer,background,font);
             }
         } else if (result == 's') {
             if (choice != MAXIMUM_CHOICE_MENU) {
-                setChoice(menu, choice + 1);
+                setChoice(menu, choice + 1,renderer,background,font);
             }
         } else if (result == 'e') {
             isChoiced = true;
@@ -200,8 +201,8 @@ void play(SDL_Renderer *renderer, SDL_Texture *tile, SDL_Texture *characterTextu
             switch (event.key.keysym.scancode) {
                 case SDL_SCANCODE_P:
                 case SDL_SCANCODE_ESCAPE:
-                    if (pauseMenu(input, levelChain, board->character) == 1) {
-                        inGame = false;
+                    if (pauseMenu('p', levelChain, board->character) == 1) {
+                        quit = true;
                     }
                     break;
                 case SDL_SCANCODE_Z:

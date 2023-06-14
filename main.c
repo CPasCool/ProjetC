@@ -51,7 +51,7 @@ int main(int argc, char *argv[]) {
 //    SDL_QueryTexture(tiles, NULL, NULL, &dst.w, &dst.h);
 //    SDL_RenderCopy(renderer, tiles, &wallGround, &dst);
 //    SDL_QueryTexture(texture, NULL, NULL, &dst.w, &dst.h);
-    play(renderer, tiles, characters2);
+    play(renderer, tiles, characters2,window);
 
     //Start the game
     //generateBoard();
