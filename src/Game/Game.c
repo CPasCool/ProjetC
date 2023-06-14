@@ -1,6 +1,5 @@
 #include <stdbool.h>
-#include "stdio.h"
-#include "stdlib.h"
+#include <stdio.h>
 #include "../../include/src/Game.h"
 #include "../../include/src/TextureConst.h"
 
@@ -27,25 +26,38 @@ int LaunchGame(SDL_Renderer *renderer, SDL_Texture *background, SDL_Texture *til
     do {
         int choice = getChoice(menu);
 
-        displayMenu(menu,renderer,background,font);
+        displayMenu(menu, renderer, background, font);
         char result = catchInput();
-        if (result == 'z') {
-            if (choice != MINIMUM_CHOICE_MENU) {
-                setChoice(menu, choice - 1,renderer,background,font);
-            }
-        } else if (result == 's') {
-            if (choice != MAXIMUM_CHOICE_MENU) {
-                setChoice(menu, choice + 1,renderer,background,font);
-            }
-        } else if (result == 'e') {
-            isChoiced = true;
-            if (choice == 1) {
-                play(renderer, tile, characterTexture,window);
-            } else {
-                if (choice == 2) {
-                    displayCredit();
+        SDL_Event event;
+        SDL_PollEvent(&event);
+        if (event.type == SDL_QUIT)
+            return 0;
+        switch (event.type) {
+            case SDL_SCANCODE_Z:
+            case SDL_SCANCODE_UP:
+                if (choice != MINIMUM_CHOICE_MENU) {
+                    setChoice(menu, choice - 1, renderer, background, font);
                 }
-            }
+                break;
+            case SDL_SCANCODE_S:
+            case SDL_SCANCODE_DOWN:
+                if (choice != MAXIMUM_CHOICE_MENU) {
+                    setChoice(menu, choice + 1, renderer, background, font);
+                }
+                break;
+            case SDL_SCANCODE_E:
+            case SDL_SCANCODE_KP_ENTER:
+                isChoiced = true;
+                if (choice == 1) {
+                    play(renderer, tile, characterTexture, window);
+                } else {
+                    if (choice == 2) {
+                        displayCredit();
+                    }
+                }
+                break;
+            default:
+                break;
         }
     } while (!isChoiced);
     return 0;
