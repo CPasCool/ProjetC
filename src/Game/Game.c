@@ -1,18 +1,23 @@
 #include <stdbool.h>
 #include <stdio.h>
-#include <stdlib.h>
 #include "../../include/src/Game.h"
-#include "../../SDL2/SDL_render.h"
 #include "../../include/src/TextureConst.h"
-#include "../../SDL2/SDL_events.h"
 #include "../../include/src/windows.h"
 
 
 const int MAXIMUM_CHOICE_MENU = 5;
 const int MINIMUM_CHOICE_MENU = 1;
 
-
-int LaunchGame() {
+/**
+ * start the game
+ * @param renderer -> renderer of the windows
+ * @param background -> texture of the background
+ * @param font -> font for write text
+ * @param window -> game window for future usage
+ * @return if a error -1 if error
+ */
+int LaunchGame(SDL_Renderer *renderer, SDL_Texture *background, SDL_Texture *tile, SDL_Texture *characterTexture,
+               TTF_Font *font, SDL_Window *window) {
     printf("Z -> move up\n"
            "S -> move down\n"
            "E -> validate choice\n");
@@ -22,7 +27,7 @@ int LaunchGame() {
     do {
         int choice = getChoice(menu);
 
-        displayMenu(menu);
+        displayMenu(menu,renderer,background,font);
         char result = catchInput();
         if (result == 'z') {
             if (choice != MINIMUM_CHOICE_MENU) {
@@ -35,7 +40,7 @@ int LaunchGame() {
         } else if (result == 'e') {
             isChoiced = true;
             if (choice == 1) {
-//                play();
+                play(renderer, tile, characterTexture,window);
                 break;
             }
         }
@@ -43,8 +48,7 @@ int LaunchGame() {
     return 0;
 }
 
-void displayBoard(char **board, SDL_Renderer *renderer, SDL_Texture *tile,
-                  SDL_Texture *Character2) {
+void displayBoard(char **board, SDL_Renderer *renderer, SDL_Texture *tile, SDL_Texture *Character2) {
     int size = 27;
     for (int i = 0; i < 30; i++) {
         for (int j = 0; j < 30; j++) {
@@ -61,7 +65,7 @@ void displayBoard(char **board, SDL_Renderer *renderer, SDL_Texture *tile,
                     break;
 
                 case '1':
-                    SDL_RenderCopy(renderer,tile,&strengthBonus,&destination);
+                    SDL_RenderCopy(renderer, tile, &strengthBonus, &destination);
                     break;
 
                     //There is a Defence bonus
@@ -70,7 +74,7 @@ void displayBoard(char **board, SDL_Renderer *renderer, SDL_Texture *tile,
                     break;
                     //There is a life bonus
                 case '3':
-                    SDL_RenderCopy(renderer,tile,&heart,&destination);
+                    SDL_RenderCopy(renderer, tile, &heart, &destination);
 
                     break;
 
@@ -120,7 +124,6 @@ void displayBoard(char **board, SDL_Renderer *renderer, SDL_Texture *tile,
                         if (board[i][j + 1] != '#') {
                             asWallRight = SDL_TRUE;
                             SDL_RenderCopy(renderer, tile, &eastWall, &destination);
-//                            SDL_RenderCopyEx(renderer, tile, &westWall, &destination, west, NULL, SDL_FLIP_NONE);
                         }
                     if (i != 0)
                         if (board[i - 1][j] != '#') {
@@ -152,20 +155,24 @@ void displayBoard(char **board, SDL_Renderer *renderer, SDL_Texture *tile,
                     else if (i == 29)
                         SDL_RenderCopyEx(renderer, tile, &ladder, &destination, north, NULL, SDL_FLIP_NONE);
 
-//                    SDL_RenderCopy(renderer, tile, &ladder, &destination);
 
                     break;
                 default:
                     break;
             }
         }
-//        printf("%s\n", board[i]);
     }
     SDL_RenderPresent(renderer);
 }
 
-
-void play(SDL_Renderer *renderer, SDL_Texture *tile, SDL_Texture *character2) {
+/**
+ * launch game loop
+ * @param renderer => renderer of the game
+ * @param tile => tile of the game assets
+ * @param characterTexture => tile of the characters
+ * @param window => game windows for resizing (SDL_SetWindowSize(window, h, w);)
+ */
+void play(SDL_Renderer *renderer, SDL_Texture *tile, SDL_Texture *characterTexture, SDL_Window *window) {
     // condition de sortie du jeu
     Character *character = createCharacter("player");
 
@@ -182,7 +189,7 @@ void play(SDL_Renderer *renderer, SDL_Texture *tile, SDL_Texture *character2) {
     // boucle de jeu
     while (!quit) {
         levelChain->current->character = character;
-        displayBoard(levelChain->current->board, renderer, tile, character2);
+        displayBoard(levelChain->current->board, renderer, tile, characterTexture);
         SDL_Event event;
         SDL_PollEvent(&event);
         if (event.type == SDL_QUIT)

@@ -16,8 +16,8 @@ int main(int argc, char *argv[]) {
     //testMonster();
     //generateBoard();
     //launchLevelTests();
-    testCharacter();
-    testMonster();
+//    testCharacter();
+//    testMonster();
     SDL_Window *window = createWindow();
     // Status of exec
     int status = EXIT_FAILURE;
@@ -38,6 +38,7 @@ int main(int argc, char *argv[]) {
     SDL_Texture *tiles = loadImage(renderer, "assets/Images/v2/Dungeon_Tileset.bmp");
     SDL_Texture *characters = loadImage(renderer, "assets/Images/Character.bmp");
     SDL_Texture *characters2 = loadImage(renderer, "assets/Images/v2/Character2.bmp");
+    SDL_Texture *background = loadImage(renderer, "assets/Images/menu.bmp");
     TTF_Font *font = TTF_OpenFont("assets/font/04B_31__.TTF", 32);
 
     // check if import is ok
@@ -51,7 +52,6 @@ int main(int argc, char *argv[]) {
 //    SDL_RenderCopy(renderer, tiles, &wallGround, &dst);
 //    SDL_QueryTexture(texture, NULL, NULL, &dst.w, &dst.h);
     play(renderer, tiles, characters2);
-
 
     //Start the game
     //generateBoard();
@@ -70,6 +70,7 @@ int main(int argc, char *argv[]) {
         SDL_DestroyTexture(characters2);
     if (NULL != font)
         TTF_CloseFont(font);
+    TTF_Quit();
     SDL_Quit();
     printf("%d", status);
     fflush(stdout);

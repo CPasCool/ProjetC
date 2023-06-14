@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include "../../include/src/menu.h"
+#include "../../SDL2/SDL_render.h"
+#include "../../SDL2/SDL_ttf.h"
 
 struct choice {
     int choice;
@@ -342,7 +344,7 @@ void displayExitMenu() {
     );
 }
 
-void displayMenu(choiceMenu *choice) {
+void displayMenu(choiceMenu *choice, SDL_Renderer *renderer, SDL_Texture *background, TTF_Font *font) {
     if (getChoice(choice) == 1) {
         displayPlayMenu();
     } else if (getChoice(choice) == 2) {
