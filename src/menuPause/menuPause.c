@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdbool.h>
 #include "../../include/src/menuPause.h"
 
 
@@ -13,8 +12,6 @@ void printContinue() {
             "#    #     Continue     #    #\n"
             "#    ####################    #\n"
             "#          Save Game         #\n"
-            "#          Load Game         #\n"
-            "#                            #\n"
             "#           Quit             #\n"
             "#                            #\n"
             "##############################\n"
@@ -31,25 +28,6 @@ void printSave() {
             "#    ####################    #\n"
             "#    #     Save Game    #    #\n"
             "#    ####################    #\n"
-            "#          Load Game         #\n"
-            "#           Quit             #\n"
-            "#                            #\n"
-            "#                            #\n"
-            "##############################\n"
-    );
-}
-
-void printLoadGame() {
-    printf(
-            "\n"
-            "##############################\n"
-            "#         Pause Menu         #\n"
-            "#                            #\n"
-            "#          Continue          #\n"
-            "#          Save Game         #\n"
-            "#    ####################    #\n"
-            "#    #     Load Game    #    #\n"
-            "#    ####################    #\n"
             "#           Quit             #\n"
             "#                            #\n"
             "#                            #\n"
@@ -65,7 +43,6 @@ void printQuitPause() {
             "#                            #\n"
             "#          Continue          #\n"
             "#          Save Game         #\n"
-            "#          Load Game         #\n"
             "#    ####################    #\n"
             "#    #      Quit        #    #\n"
             "#    ####################    #\n"
@@ -73,14 +50,6 @@ void printQuitPause() {
             "#                            #\n"
             "##############################\n"
     );
-}
-
-int setCompteur(int Compt) {
-    return Compt += 1;
-}
-
-int setZeroCompt(int Compt) {
-    return 0;
 }
 
 int setChoicesPlus(int choice) {
@@ -97,38 +66,33 @@ int pauseMenuChange(int choice) {
     } else if (choice == 2) {
         printSave();
     } else if (choice == 3) {
-        printLoadGame();
-    } else if (choice == 4) {
         printQuitPause();
     }
     return choice;
 }
-int checkChoices(int choice){
-    if(choice == 1){
+
+int checkChoices(int choice, levelChain *levelChain) {
+    if (choice == 1) {
         return 0;
-    }
-    else if (choice == 2){
+    } else if (choice == 2) {
         //savefonction
-        printf("game saved");
+        createSave(levelChain);
         return 2;
-    } else if (choice == 3){
-        //loadGameFonction
-        printf("load game");
-        return 3;
-    }else if (choice == 4){
+    } else if (choice == 3) {
         return 1;
     }
-    return 0;
+    return -1;
 }
-bool checkPauseCode(int pauseCode){
-    if(pauseCode == 0 || pauseCode == 1){
+
+bool checkPauseCode(int pauseCode) {
+    if (pauseCode == 0 || pauseCode == 1) {
         return true;
-    }else
-    {
+    } else {
         return false;
     }
 }
-int pauseMenu(char keyEnter, Character *character) {
+
+int pauseMenu(char keyEnter, levelChain *levelChain, Character *character) {
     int compt = 1;
     int pauseCode;
     bool choiceDone = false;
@@ -136,13 +100,12 @@ int pauseMenu(char keyEnter, Character *character) {
     while (!choiceDone) {
         keyEnter = catchInput();
         if (keyEnter == 'z' && compt != 1) {
-            compt = setChoicesMinus(compt); 
+            compt = setChoicesMinus(compt);
         } else if (keyEnter == 's') {
             compt = setChoicesPlus(compt);
-            
-        }else if (keyEnter =='e')
-        {
-            pauseCode = checkChoices(compt);
+
+        } else if (keyEnter == 'e') {
+            pauseCode = checkChoices(compt, levelChain);
         }
         if (compt == 9) {
             cheatMenu(' ', character);

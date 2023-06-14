@@ -6,6 +6,8 @@
 #include "../../include/src/Board.h"
 #include "../../SDL2/SDL_render.h"
 #include "../../SDL2/SDL_ttf.h"
+#include "../../include/src/CreateBoard.h"
+
 
 #ifndef PROJETC_GAME_H
 #define PROJETC_GAME_H

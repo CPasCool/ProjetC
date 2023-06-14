@@ -22,6 +22,9 @@ boardElements *createBoardElement() {
     return boardElements;
 }
 
+/**
+ * create a copy of a boardElement
+ * */
 boardElements *copyBoardElement(boardElements *board){
     boardElements *boardElements = malloc(sizeof(struct BoardElements));
     boardElements->board = board->board;

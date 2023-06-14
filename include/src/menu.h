@@ -17,8 +17,10 @@ int getChoice(choiceMenu *);
 void displayMenu(choiceMenu *choice,SDL_Renderer* renderer, SDL_Texture* background,  TTF_Font * font );
 
 void newGame();
+void displayCredit();
+
+void displayChoiceGameQuit();
+
 void displayMenuNewGame(int);
-void displayMenuIngame(int);
-void inGame();
 
 #endif

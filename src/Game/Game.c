@@ -1,8 +1,7 @@
 #include <stdbool.h>
-#include <stdio.h>
+#include "stdio.h"
+#include "stdlib.h"
 #include "../../include/src/Game.h"
-#include "../../include/src/TextureConst.h"
-#include "../../include/src/windows.h"
 
 
 const int MAXIMUM_CHOICE_MENU = 5;
@@ -41,7 +40,10 @@ int LaunchGame(SDL_Renderer *renderer, SDL_Texture *background, SDL_Texture *til
             isChoiced = true;
             if (choice == 1) {
                 play(renderer, tile, characterTexture,window);
-                break;
+            } else {
+                if (choice == 2) {
+                    displayCredit();
+                }
             }
         }
     } while (!isChoiced);
@@ -198,8 +200,9 @@ void play(SDL_Renderer *renderer, SDL_Texture *tile, SDL_Texture *characterTextu
             switch (event.key.keysym.scancode) {
                 case SDL_SCANCODE_P:
                 case SDL_SCANCODE_ESCAPE:
-                    if (pauseMenu('p', board->character) == 1)
-                        quit = true;
+                    if (pauseMenu(input, levelChain, board->character) == 1) {
+                        inGame = false;
+                    }
                     break;
                 case SDL_SCANCODE_Z:
                 case SDL_SCANCODE_UP:
@@ -221,7 +224,7 @@ void play(SDL_Renderer *renderer, SDL_Texture *tile, SDL_Texture *characterTextu
                     break;
             }
         if (getLifePoint(character) <= 0) {
-            loadImage(renderer, "assets/Images/deathScreen");
+//            loadImage(renderer, "assets/Images/deathScreen");
 
 
             quit = SDL_TRUE;

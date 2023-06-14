@@ -1,6 +1,6 @@
 #include "../../include/src/Move.h"
-#include <stdlib.h>
-#include <stdio.h>
+#include "stdlib.h"
+#include "stdio.h"
 
 /**
  * move the character on the board
@@ -12,8 +12,7 @@ levelChain *move(Character *character, char move, boardElements *board, levelCha
     coordonees *coordonees = malloc(sizeof(struct Coordonees));
     switch (move) {
         case 'z':
-            printf("e\n");
-            coordonees = createCoordonne(getCharaX(character), getCharaY(character)- 1);
+            coordonees = createCoordonne(getCharaX(character), getCharaY(character) - 1);
             break;
         case 'q':
             coordonees = createCoordonne(getCharaX(character) - 1, getCharaY(character));
@@ -27,7 +26,6 @@ levelChain *move(Character *character, char move, boardElements *board, levelCha
         default:
             break;
     }
-    printf("x = %d, y = %d\n", coordonees->x, coordonees->y);
     switch (levelChain->current->board[coordonees->y][coordonees->x]) {
         //No collisions
         case ' ':
@@ -96,18 +94,20 @@ levelChain *move(Character *character, char move, boardElements *board, levelCha
             if (monster->hp <= 0) {
                 printf("You killed %s\n", monster->name);
                 levelChain->current->aliveMonsters--;
+                setStrength(character, getStrength(character) + 1);
+                setMaximumLifePoint(character, 1);
                 moveCharacter(character, coordonees, levelChain->current->board, levelChain);
                 levelChain->current->board[getCharaY(character)][getCharaX(character)] = 'T';
             }
             break;
 
-            //There is a northWall
+            //There is a wall
         case '#':
             printf("You can not go that way\n");
             break;
         case '?':
             moveCharacter(character, coordonees, levelChain->current->board, levelChain);
-            levelChain = changeLevel(move, board, character, levelChain);
+            levelChain = changeLevel(move, levelChain->current, character, levelChain);
             levelChain->current->board[getCharaY(character)][getCharaX(character)] = 'T';
             break;
         default:
@@ -118,7 +118,6 @@ levelChain *move(Character *character, char move, boardElements *board, levelCha
 
 int *moveCharacter(Character *character, coordonees *coordonees, char **board, levelChain *levelChain) {
     levelChain->current->board[getCharaY(character)][getCharaX(character)] = ' ';
-    board[getCharaY(character)][getCharaX(character)] = ' ';
     changeCoordonnes(character, coordonees->x, coordonees->y);
     return 0;
 }
@@ -130,6 +129,7 @@ levelChain *changeLevel(char direction, boardElements *boardElements, Character 
             digitDirection = 3;
             changeCoordonnes(character, getCharaX(character), getCharaY(character) + 28);
             break;
+
         case 'q':
             digitDirection = 2;
             changeCoordonnes(character, getCharaX(character) + 28, getCharaY(character));
@@ -139,15 +139,16 @@ levelChain *changeLevel(char direction, boardElements *boardElements, Character 
             digitDirection = 1;
             changeCoordonnes(character, getCharaX(character), getCharaY(character) - 28);
             break;
+
         case 'd':
             digitDirection = 0;
             changeCoordonnes(character, getCharaX(character) - 28, getCharaY(character));
             break;
+
         default:
             break;
     }
-    levelChain = getLevelBoard(boardElements->otherLevels[digitDirection], levelChain);
-    levelChain = levelChain->next;
+    levelChain = getLevelBoard(levelChain->current->otherLevels[digitDirection], levelChain);
     return levelChain;
 }
 
