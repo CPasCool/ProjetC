@@ -8,7 +8,6 @@
 #include "include/src/Game.h"
 #include "SDL2/SDL.h"
 #include "include/src/windows.h"
-#include "src/EventListener/event.h"
 
 int main(int argc, char *argv[]) {
     // TESTS
@@ -50,7 +49,7 @@ int main(int argc, char *argv[]) {
 //    SDL_QueryTexture(tiles, NULL, NULL, &dst.w, &dst.h);
 //    SDL_RenderCopy(renderer, tiles, &wallGround, &dst);
 //    SDL_QueryTexture(texture, NULL, NULL, &dst.w, &dst.h);
-    play(renderer,tiles,characters,characters2);
+    play(renderer,tiles,characters2);
 
 
     //Start the game
@@ -69,6 +68,8 @@ int main(int argc, char *argv[]) {
     if (NULL != characters2)
         SDL_DestroyTexture(characters2);
     SDL_Quit();
+    printf("%d",status);
+    fflush(stdout);
     return status;
     // Start the game
 //    LaunchGame();

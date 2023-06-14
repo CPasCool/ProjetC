@@ -43,7 +43,7 @@ int LaunchGame() {
     return 0;
 }
 
-void displayBoard(char **board, SDL_Renderer *renderer, SDL_Texture *tile, SDL_Texture *Character1,
+void displayBoard(char **board, SDL_Renderer *renderer, SDL_Texture *tile,
                   SDL_Texture *Character2) {
     int size = 27;
     for (int i = 0; i < 30; i++) {
@@ -165,7 +165,7 @@ void displayBoard(char **board, SDL_Renderer *renderer, SDL_Texture *tile, SDL_T
 }
 
 
-void play(SDL_Renderer *renderer, SDL_Texture *tile, SDL_Texture *character1, SDL_Texture *character2) {
+void play(SDL_Renderer *renderer, SDL_Texture *tile, SDL_Texture *character2) {
     // condition de sortie du jeu
     Character *character = createCharacter("player");
 
@@ -182,7 +182,7 @@ void play(SDL_Renderer *renderer, SDL_Texture *tile, SDL_Texture *character1, SD
     // boucle de jeu
     while (!quit) {
         levelChain->current->character = character;
-        displayBoard(levelChain->current->board, renderer, tile, character1, character2);
+        displayBoard(levelChain->current->board, renderer, tile, character2);
         SDL_Event event;
         SDL_PollEvent(&event);
         if (event.type == SDL_QUIT)

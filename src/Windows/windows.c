@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include "../../include/src/windows.h"
+#include "../../SDL2/SDL_ttf.h"
 
 typedef struct button_{
     SDL_Texture* texture;
@@ -21,6 +22,10 @@ SDL_Window *createWindow() {
         fprintf(stderr, "Erreur de creation de la fenetre : %s\n", SDL_GetError());
     else
         printf("The windows has been created\n");
+    if( TTF_Init() == -1 ) {
+        return NULL;
+    }
+
     return window;
 }
 
