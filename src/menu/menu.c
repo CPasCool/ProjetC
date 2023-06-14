@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>   
 #include "../../include/src/menu.h"
 #include "../../SDL2/SDL_render.h"
 #include "../../SDL2/SDL_ttf.h"
@@ -8,9 +9,9 @@ struct choice {
     int choice;
 };
 
-void setChoice(choiceMenu *choiceMenu, int choice,SDL_Renderer* renderer, SDL_Texture* background,  TTF_Font * font) {
+void setChoice(choiceMenu *choiceMenu, int choice, SDL_Renderer *renderer, TTF_Font *font) {
     choiceMenu->choice = choice;
-    displayMenu(choiceMenu,renderer,background,font);
+    displayMenu(choiceMenu, renderer, font);
 }
 
 
@@ -23,9 +24,36 @@ choiceMenu *createChoiceMenu() {
     choiceMenuTmp->choice = 1;
     return choiceMenuTmp;
 }
+/**
+ * first screen of the main menu interface
+ * @param renderer : renderer of the game
+ * @param font : font to write the choices
+ */
+void displayPlayMenu(SDL_Renderer *renderer, TTF_Font *font) {
+    printf(
+            "##############################\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#  ########################  #\n"
+            "#  # 1 -   Play           #  #\n"
+            "#  ########################  #\n"
+            "#   2 -    Credits           #\n"
+            "#   3 -    Quit              #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "#                            #\n"
+            "##############################\n"
+    );
+}
 
 //affichage du menu avant de lancer la partie
-void displayNewGame() {
+void displayNewGame(SDL_Renderer *renderer, TTF_Font *font) {
+
     printf(
             "##############################\n"
             "#                            #\n"
@@ -91,27 +119,6 @@ void displayChoiceGameQuit() {
 }
 
 
-void displayPlayMenu() {
-    printf(
-            "##############################\n"
-            "#                            #\n"
-            "#                            #\n"
-            "#                            #\n"
-            "#                            #\n"
-            "#                            #\n"
-            "#  ########################  #\n"
-            "#  # 1 -   Play           #  #\n"
-            "#  ########################  #\n"
-            "#   2 -    Credits           #\n"
-            "#   3 -    Quit              #\n"
-            "#                            #\n"
-            "#                            #\n"
-            "#                            #\n"
-            "#                            #\n"
-            "#                            #\n"
-            "##############################\n"
-    );
-}
 
 void displayCreditMenu() {
     printf(
@@ -179,9 +186,9 @@ void displayCredit() {
             "##############################\n");
 }
 
-void displayMenu(choiceMenu *choice, SDL_Renderer *renderer, SDL_Texture *background, TTF_Font *font) {
+void displayMenu(choiceMenu *choice, SDL_Renderer *renderer, TTF_Font *font) {
     if (getChoice(choice) == 1) {
-        displayPlayMenu();
+        displayPlayMenu(renderer,font);
     } else if (getChoice(choice) == 2) {
         displayCreditMenu();
     } else {
@@ -189,12 +196,29 @@ void displayMenu(choiceMenu *choice, SDL_Renderer *renderer, SDL_Texture *backgr
     }
 }
 
-void displayMenuNewGame(int choice) {
+void displayMenuNewGame(int choice, SDL_Renderer *renderer,TTF_Font *font) {
     if (choice == 1) {
-        displayNewGame();
+        displayNewGame(renderer, font);
     } else if (choice == 2) {
         displaySave();
     } else {
         displayChoiceGameQuit();
+    }
+}
+
+int useNewGameMenu(SDL_Renderer *renderer, TTF_Font *font) {
+    int choice = 1;
+    char keyEnter;
+    displayMenuNewGame(choice,renderer,font);
+    while (1) {
+        keyEnter = catchInput();
+        if (keyEnter == 'z' && choice != 1) {
+            choice -= 1;
+        } else if (keyEnter == 's' && choice !=3) {
+            choice += 1;
+        } else if (keyEnter == 'e'){
+            return choice;
+        }
+        displayMenuNewGame(choice,renderer,font);
     }
 }

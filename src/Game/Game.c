@@ -15,19 +15,20 @@ const int MINIMUM_CHOICE_MENU = 1;
  * @param window -> game window for future usage
  * @return if a error -1 if error
  */
-int LaunchGame(SDL_Renderer *renderer, SDL_Texture *background, SDL_Texture *tile, SDL_Texture *characterTexture,
-               TTF_Font *font, SDL_Window *window) {
-    printf("Z -> move up\n"
-           "S -> move down\n"
-           "E -> validate choice\n");
+int LaunchGame(SDL_Renderer *renderer, SDL_Texture *tile, SDL_Texture *characterTexture, TTF_Font *font,
+               SDL_Window *window) {
+    introduction();
+    printf("Use\nZ to move up\n"
+           "S to move down\n and"
+           "E to validate your choice\n");
 
     choiceMenu *menu = createChoiceMenu();
     bool isChoiced = false;
+
     do {
         int choice = getChoice(menu);
 
-        displayMenu(menu, renderer, background, font);
-        char result = catchInput();
+        displayMenu(menu, renderer, font);
         SDL_Event event;
         SDL_PollEvent(&event);
         if (event.type == SDL_QUIT)
@@ -36,29 +37,37 @@ int LaunchGame(SDL_Renderer *renderer, SDL_Texture *background, SDL_Texture *til
             case SDL_SCANCODE_Z:
             case SDL_SCANCODE_UP:
                 if (choice != MINIMUM_CHOICE_MENU) {
-                    setChoice(menu, choice - 1, renderer, background, font);
+                    setChoice(menu, choice - 1, renderer, font);
                 }
                 break;
             case SDL_SCANCODE_S:
             case SDL_SCANCODE_DOWN:
                 if (choice != MAXIMUM_CHOICE_MENU) {
-                    setChoice(menu, choice + 1, renderer, background, font);
+                    setChoice(menu, choice + 1, renderer, font);
                 }
                 break;
             case SDL_SCANCODE_E:
             case SDL_SCANCODE_KP_ENTER:
                 isChoiced = true;
                 if (choice == 1) {
-                    play(renderer, tile, characterTexture, window);
+                    int gameChoice = useNewGameMenu(renderer,font);
+                    if (gameChoice == 1) {
+                        play(NULL, renderer, tile, characterTexture);
+                    } else {
+                        play(getCompliteSave(NULL),renderer,tile,characterTexture);
+                    }
                 } else {
                     if (choice == 2) {
                         displayCredit();
+                    }else if (choice == 3){
+                        return 0;
                     }
                 }
                 break;
             default:
                 break;
         }
+        SDL_RenderPresent(renderer);
     } while (!isChoiced);
     return 0;
 }
@@ -187,15 +196,16 @@ void displayBoard(char **board, SDL_Renderer *renderer, SDL_Texture *tile, SDL_T
  * @param characterTexture => tile of the characters
  * @param window => game windows for resizing (SDL_SetWindowSize(window, h, w);)
  */
-void play(SDL_Renderer *renderer, SDL_Texture *tile, SDL_Texture *characterTexture, SDL_Window *window) {
+void play(levelChain *levelChain,SDL_Renderer *renderer, SDL_Texture *tile, SDL_Texture *characterTexture) {
     // condition de sortie du jeu
     Character *character = createCharacter("player");
 
     boardElements *board = createBoardElement();
-    levelChain *levelChain = NULL;
     board->character = character;
-    //We get/set every element we have on the file
-    levelChain = getLevelBoard("./src/Levels/niveau1.level", levelChain);
+    //We get/set every element of the level 1
+    if(levelChain == NULL){
+        levelChain = getLevelBoard("./src/Levels/niveau1.level", levelChain);
+    }
 
     //We put the character at is right position
     levelChain->current->board[getCharaY(character)][getCharaX(character)] = 'T';
@@ -239,19 +249,19 @@ void play(SDL_Renderer *renderer, SDL_Texture *tile, SDL_Texture *characterTextu
                 default:
                     break;
             }
-        if (getLifePoint(character) <= 0) {
+            if (getLifePoint(character) <= 0) {
 //            loadImage(renderer, "assets/Images/deathScreen");
 
 
-            quit = SDL_TRUE;
-            printf("You are dead !\n");
+                quit = SDL_TRUE;
+                printf("You are dead !\n");
+            }
+            if (board->aliveMonsters == 0) {
+                printf("Congratulation You finished the level !!!!\n");
+            }
+            fflush(stdout);
         }
-        if (board->aliveMonsters == 0) {
-            printf("Congratulation You finished the level !!!!\n");
-        }
-        fflush(stdout);
     }
-}
 //        if (input == 'p') {
 //            if (pauseMenu(input, board->character) == 1) {
 //                inGame = false;

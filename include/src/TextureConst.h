@@ -27,6 +27,7 @@ extern const SDL_Rect aMonster;
 extern const SDL_Rect bMonster;
 extern const SDL_Rect cMonster;
 extern const SDL_Rect ladder;
+extern const SDL_Rect background;
 
 extern const double north;
 extern const double west;
