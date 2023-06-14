@@ -49,7 +49,7 @@ void printCheatKey(char keysActive, char healthActive, char strengthActive, char
             "#            CHEAT           #\n"
             "#                            #\n"
             "#  ######################### #\n"
-            "#  #  %c  Max Keys          # #\n"
+            "#  # %c  Max Keys          # #\n"
             "#  ######################### #\n"
             "#    %c  Cheat Max Health     #\n"
             "#    %c  Cheat Max Strength   #\n"
@@ -241,10 +241,10 @@ int cheatMenu(Character *character) {
                 }
                 cheatDefence(character, defenceActive);
             } else if (menuCheatChoice == 5) {
-                if (defenceActive == 'x') {
-                    defenceActive = 'V';
+                if (noHealthActive == 'x') {
+                    noHealthActive = 'V';
                 } else {
-                    defenceActive = 'x';
+                    noHealthActive = 'x';
                 }
                 cheatNoHealth(character, noHealthActive);
             } else if (menuCheatChoice == 6) {
