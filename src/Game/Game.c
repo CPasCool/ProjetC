@@ -217,6 +217,9 @@ void play(SDL_Renderer *renderer, SDL_Texture *tile, SDL_Texture *characterTextu
                         quit = true;
                     }
                     break;
+            case SDL_SCANCODE_M:
+                // TODO : ajouter me menu pour afficher les monstres et leur stats
+                break;
                 case SDL_SCANCODE_Z:
                 case SDL_SCANCODE_UP:
                     levelChain = move(character, 'z', levelChain->current, levelChain);
