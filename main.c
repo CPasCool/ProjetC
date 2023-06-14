@@ -8,6 +8,7 @@
 #include "include/src/Game.h"
 #include "SDL2/SDL.h"
 #include "include/src/windows.h"
+#include "SDL2/SDL_ttf.h"
 
 int main(int argc, char *argv[]) {
     // TESTS
@@ -37,19 +38,19 @@ int main(int argc, char *argv[]) {
     SDL_Texture *tiles = loadImage(renderer, "assets/Images/v2/Dungeon_Tileset.bmp");
     SDL_Texture *characters = loadImage(renderer, "assets/Images/Character.bmp");
     SDL_Texture *characters2 = loadImage(renderer, "assets/Images/v2/Character2.bmp");
+    TTF_Font *font = TTF_OpenFont("assets/font/04B_31__.TTF", 32);
 
     // check if import is ok
-    if (tiles == NULL || characters == NULL || characters2 == NULL) {
+    if (tiles == NULL || characters == NULL || characters2 == NULL || font == NULL) {
         goto Quit;
     }
-
 
 
     SDL_SetRenderTarget(renderer, NULL);
 //    SDL_QueryTexture(tiles, NULL, NULL, &dst.w, &dst.h);
 //    SDL_RenderCopy(renderer, tiles, &wallGround, &dst);
 //    SDL_QueryTexture(texture, NULL, NULL, &dst.w, &dst.h);
-    play(renderer,tiles,characters2);
+    play(renderer, tiles, characters2);
 
 
     //Start the game
@@ -68,7 +69,7 @@ int main(int argc, char *argv[]) {
     if (NULL != characters2)
         SDL_DestroyTexture(characters2);
     SDL_Quit();
-    printf("%d",status);
+    printf("%d", status);
     fflush(stdout);
     return status;
     // Start the game
