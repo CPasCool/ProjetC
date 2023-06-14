@@ -10,7 +10,7 @@
 #ifndef PROJETC_GAME_H
 #define PROJETC_GAME_H
 
-void play();
+void play(levelChain *levelChain);
 
 int LaunchGame();
 

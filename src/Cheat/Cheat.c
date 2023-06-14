@@ -179,7 +179,7 @@ void printMenuCheat(int choixCheat, char keysActive, char healthActive, char str
  * cette fonction est la fonction principal d'interfaçage avec le clavier
  * Elle defini si un cheat est actif ou non via le charactère 'x' ou 'V'
 */
-int cheatMenu(char input, Character *character) {
+int cheatMenu(Character *character) {
     bool choiceCheatDone = false;
     int menuCheatChoice = 1;
     char healthActive = 'x';
@@ -206,7 +206,7 @@ int cheatMenu(char input, Character *character) {
     // affiche si un cheat est activé ou non, si un cheat est desactiver, le joueur recupere les stats de base
     printMenuCheat(menuCheatChoice, keyActive, healthActive, strengthActive, defenceActive, noHealthActive);
     while (choiceCheatDone == false) {
-        input = catchInput();
+        char input = catchInput();
         if (input == 's' && menuCheatChoice != 6) {
             menuCheatChoice += 1;
         } else if (input == 'z' && menuCheatChoice != 1) {

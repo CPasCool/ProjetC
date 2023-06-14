@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>   
 #include "../../include/src/menu.h"
 
 struct choice {
@@ -194,5 +195,24 @@ void displayMenuNewGame(int choice) {
         displaySave();
     } else {
         displayChoiceGameQuit();
+    }
+}
+
+int useNewGameMenu(){
+    int choice = 1;
+    bool choiceDone = false;
+    char keyEnter;
+    displayMenuNewGame(choice);
+    while (!choiceDone) {
+        keyEnter = catchInput();
+        if (keyEnter == 'z' && choice != 1) {
+            choice -= 1;
+        } else if (keyEnter == 's' && choice !=3) {
+            choice += 1;
+        } else if (keyEnter == 'e'){
+            choiceDone = true;
+            return choice;
+        }
+        displayMenuNewGame(choice);
     }
 }

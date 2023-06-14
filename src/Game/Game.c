@@ -34,7 +34,12 @@ int LaunchGame() {
         } else if (result == 'e') {
             isChoiced = true;
             if (choice == 1) {
-                play();
+                int gameChoice = useNewGameMenu();
+                if(gameChoice == 1){
+                    play(NULL);
+                }else{
+                    play(getCompliteSave(NULL));
+                }
             } else {
                 if (choice == 2) {
                     displayCredit();
@@ -57,7 +62,7 @@ void displayBoard(char **board) {
 /**
  * The main loop
  */
-void play() {
+void play(levelChain *levelChain) {
     // affiche les touches
     printf("Z -> move up\n"
            "S -> move down\n"
@@ -69,10 +74,11 @@ void play() {
     Character *character = createCharacter("player");
 
     boardElements *board = createBoardElement();
-    levelChain *levelChain = NULL;
     board->character = character;
     //We get/set every element of the level 1
-    levelChain = getLevelBoard("./src/Levels/niveau1.level", levelChain);
+    if(levelChain == NULL){
+        levelChain = getLevelBoard("./src/Levels/niveau1.level", levelChain);
+    }
 
     //We put the character at is right position
     levelChain->current->board[getCharaY(character)][getCharaX(character)] = 'T';
@@ -83,7 +89,8 @@ void play() {
         displayBoard(levelChain->current->board);
         char input = catchInput();
         if (input == 'p') {
-            if (pauseMenu(input, levelChain, board->character) == 1) {
+            int result = pauseMenu(input, levelChain, board->character);
+            if (result == 1) {
                 inGame = false;
             }
         } else if (input == 'z' || input == 'q' || input == 's' || input == 'd') {
