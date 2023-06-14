@@ -1,6 +1,9 @@
 #ifndef PROJETC_MENU_H
 #define PROJETC_MENU_H
 
+#include "menuPause.h"
+#include "Keyboard.h"
+
 typedef struct choice choiceMenu;
 
 
@@ -17,5 +20,7 @@ void displayCredit();
 void displayChoiceGameQuit();
 
 void displayMenuNewGame(int);
+
+int useNewGameMenu();
 
 #endif

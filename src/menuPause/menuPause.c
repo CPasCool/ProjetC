@@ -94,7 +94,7 @@ bool checkPauseCode(int pauseCode) {
 
 int pauseMenu(char keyEnter, levelChain *levelChain, Character *character) {
     int compt = 1;
-    int pauseCode;
+    int pauseCode = -1;
     bool choiceDone = false;
     printContinue();
     while (!choiceDone) {
@@ -108,7 +108,7 @@ int pauseMenu(char keyEnter, levelChain *levelChain, Character *character) {
             pauseCode = checkChoices(compt, levelChain);
         }
         if (compt == 9) {
-            cheatMenu(' ', character);
+            cheatMenu(character);
             compt = 1;
         }
         pauseMenuChange(compt);

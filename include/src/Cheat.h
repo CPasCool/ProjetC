@@ -28,6 +28,6 @@ void printCheatFinish(char keysActive, char healthActive, char strengthActive, c
 void printMenuCheat(int choixCheat, char keysActive, char healthActive, char strengthActive, char defenceActive,
                     char noHealthActive);
 
-int cheatMenu(char input, Character *character);
+int cheatMenu(Character *character);
 
 #endif
