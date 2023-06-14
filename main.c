@@ -68,6 +68,8 @@ int main(int argc, char *argv[]) {
         SDL_DestroyTexture(characters);
     if (NULL != characters2)
         SDL_DestroyTexture(characters2);
+    if (NULL != font)
+        TTF_CloseFont(font);
     SDL_Quit();
     printf("%d", status);
     fflush(stdout);
