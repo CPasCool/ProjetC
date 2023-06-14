@@ -17,7 +17,6 @@ void displayBoard(char **board, SDL_Renderer *renderer, SDL_Texture *tile,
 void play(levelChain *levelChain ,SDL_Renderer *renderer,SDL_Texture *tile, SDL_Texture *characterTexture );
 
 
-int LaunchGame(SDL_Renderer *renderer, SDL_Texture *tile, SDL_Texture *characterTexture, TTF_Font *font,
-               SDL_Window *window);
+int LaunchGame(SDL_Renderer *renderer, SDL_Texture *tile, SDL_Texture *characterTexture, TTF_Font *font);
 
 #endif //PROJETC_GAME_H

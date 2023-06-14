@@ -10,17 +10,13 @@ const int MINIMUM_CHOICE_MENU = 1;
 /**
  * start the game
  * @param renderer -> renderer of the windows
- * @param background -> texture of the background
- * @param font -> font for write text
- * @param window -> game window for future usage
+ * @param tile -> texture of all the level
+ * @param characterTexture -> texture of character
+ * @param font  -> font for write things
  * @return if a error -1 if error
  */
-int LaunchGame(SDL_Renderer *renderer, SDL_Texture *tile, SDL_Texture *characterTexture, TTF_Font *font,
-               SDL_Window *window) {
+int LaunchGame(SDL_Renderer *renderer, SDL_Texture *tile, SDL_Texture *characterTexture, TTF_Font *font) {
     introduction();
-    printf("Use\nZ to move up\n"
-           "S to move down\n and"
-           "E to validate your choice\n");
 
     choiceMenu *menu = createChoiceMenu();
     bool isChoiced = false;
@@ -33,7 +29,9 @@ int LaunchGame(SDL_Renderer *renderer, SDL_Texture *tile, SDL_Texture *character
         SDL_PollEvent(&event);
         if (event.type == SDL_QUIT)
             return 0;
-        switch (event.type) {
+        else if (event.type == SDL_KEYDOWN){
+
+        switch (event.key.keysym.scancode) {
             case SDL_SCANCODE_Z:
             case SDL_SCANCODE_UP:
                 if (choice != MINIMUM_CHOICE_MENU) {
@@ -60,12 +58,13 @@ int LaunchGame(SDL_Renderer *renderer, SDL_Texture *tile, SDL_Texture *character
                     if (choice == 2) {
                         displayCredit();
                     }else if (choice == 3){
-                        return 0;
+                        return -1;
                     }
                 }
                 break;
             default:
                 break;
+        }
         }
         SDL_RenderPresent(renderer);
     } while (!isChoiced);
