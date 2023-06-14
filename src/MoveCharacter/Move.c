@@ -52,7 +52,7 @@ levelChain *move(Character *character, char move, boardElements *board, levelCha
 
             //There is a life bonus
         case '3':
-            setMaximumLifePoint(character, 3);
+            setMaximumLifePoint(character, getMaximumLifePoint(character) + 3);
             moveCharacter(character, coordonees, levelChain->current->board, levelChain);
             levelChain->current->board[getCharaY(character)][getCharaX(character)] = 'T';
             printAll(character);
@@ -95,7 +95,7 @@ levelChain *move(Character *character, char move, boardElements *board, levelCha
                 printf("You killed %s\n", monster->name);
                 levelChain->current->aliveMonsters--;
                 setStrength(character, getStrength(character) + 1);
-                setMaximumLifePoint(character, 1);
+                setMaximumLifePoint(character, getMaximumLifePoint(character) + 1);
                 moveCharacter(character, coordonees, levelChain->current->board, levelChain);
                 levelChain->current->board[getCharaY(character)][getCharaX(character)] = 'T';
             }
