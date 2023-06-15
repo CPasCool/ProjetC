@@ -5,6 +5,7 @@
 #include "../../include/src/Levels.h"
 #include "../../include/src/Board.h"
 #include "../../include/src/CreateBoard.h"
+#include "../../include/src/Dijkstra.h"
 
 
 #ifndef PROJETC_GAME_H

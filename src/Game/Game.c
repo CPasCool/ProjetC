@@ -95,12 +95,7 @@ void play(levelChain *levelChain) {
             }
         } else if (input == 'z' || input == 'q' || input == 's' || input == 'd') {
             levelChain = move(character, input, levelChain->current, levelChain);
-        } else if (input == 'm') {
-            printf("Here are all monsters\n");
-            for (int i = 0; i < levelChain->current->nbMonsters; i++) {
-                printMonsterStats(levelChain->current->monstersTab[i]);
-                printf("\n");
-            }
+            printMonsterStats(getMonsterBirdly(levelChain));
         } else {
             printf("Stop doing this shit !\n");
         }
