@@ -1,6 +1,4 @@
-#include "include/src/CreateBoard.h"
 #include <stdio.h>
-#include "Tests/Character/TestCharacter.h"
 #include "Tests/Monsters/MonstersTests.h"
 #include "include/src/Levels.h"
 #include "include/src/Monster.h"
@@ -39,7 +37,7 @@ int main(int argc, char *argv[]) {
     SDL_Texture *characters = loadImage(renderer, "assets/Images/Character.bmp");
     SDL_Texture *characters2 = loadImage(renderer, "assets/Images/v2/Character2.bmp");
     SDL_Texture *background = loadImage(renderer, "assets/Images/menu.bmp");
-    TTF_Font *font = TTF_OpenFont("assets/font/04B_31__.TTF", 32);
+    TTF_Font *font = TTF_OpenFont("assets/font/04B_31__.TTF", 24);
 
     // check if import is ok
     if (tiles == NULL || characters == NULL || characters2 == NULL || font == NULL) {
@@ -51,9 +49,8 @@ int main(int argc, char *argv[]) {
 //    SDL_QueryTexture(tiles, NULL, NULL, &dst.w, &dst.h);
 //    SDL_RenderCopy(renderer, tiles, &wallGround, &dst);
 //    SDL_QueryTexture(texture, NULL, NULL, &dst.w, &dst.h);
-    SDL_RenderCopy(renderer,background,NULL,NULL);
-    SDL_RenderPresent(renderer);
-    LaunchGame(renderer,tiles,characters2,font);
+
+    LaunchGame(renderer,tiles,characters2,font,background);
 //    play(NULL,renderer, tiles, characters2);
 
     //Start the game
