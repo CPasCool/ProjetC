@@ -4,6 +4,8 @@
 #ifndef PROJETC_MONSTERSTESTS_H
 #define PROJETC_MONSTERSTESTS_H
 
+#include "../../include/src/Monster.h"
+
 int testMonster();
 int testName(monster* monster, const char* name);
 int testStrength(monster* monster, int str);

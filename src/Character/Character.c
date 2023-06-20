@@ -1,6 +1,6 @@
 #include "../../include/src/Character.h"
 #include <stdlib.h>
-#include "stdio.h"
+#include <stdio.h>
 
 
 typedef struct statistics_ {
@@ -44,7 +44,7 @@ int getLifePoint(Character *character) {
 }
 
 int getMaximumLifePoint(Character *character) {
-    return character->stat->maxLifePoint;
+    return character->stat->currentLifePoint;
 }
 
 char *getName(Character *character) {
@@ -63,16 +63,16 @@ int getDefence(Character *character) {
     return character->stat->defence;
 }
 
+coordonees *getCoo(Character *character) {
+    return character->coo;
+}
+
 int getCharaX(Character *character) {
-    return character->coo->x;
+    return getCoo(character)->x;
 }
 
 int getCharaY(Character *character) {
-    return character->coo->y;
-}
-
-coordonees *getCoo(Character *character) {
-    return character->coo;
+    return getCoo(character)->y;
 }
 
 // setters
@@ -81,10 +81,6 @@ int setLifePoint(Character *character, int newLifePoint) {
     return 0;
 }
 
-int setKeys(Character *character,int keys)
-{
-    character->stat->keys = keys;
-}
 
 int addKeys(Character *character) {
     character->stat->keys += 1;
@@ -98,6 +94,11 @@ int setMaxKeys(Character *character) {
 
 int removeKeys(Character *character) {
     character->stat->keys -= 1;
+    return 0;
+}
+
+int setKeys(Character *character, int keyNumber) {
+    character->stat->keys = keyNumber;
     return 0;
 }
 
@@ -122,14 +123,15 @@ int changeCoordonnes(Character *character, int x, int y) {
     return 0;
 }
 
-int setMaximumLifePoint(Character *character, int addedMax) {
-    character->stat->maxLifePoint = character->stat->maxLifePoint + addedMax;
+int setMaximumLifePoint(Character *character, int newMax) {
+    character->stat->maxLifePoint = newMax;
     return 0;
 }
 
 // display stats
 int printLifePoint(Stats *stat) {
     printf("Life total : %d/%d\n", stat->currentLifePoint, stat->maxLifePoint);
+
     return 0;
 }
 
