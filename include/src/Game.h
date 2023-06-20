@@ -7,6 +7,7 @@
 #include "../../SDL2/SDL_render.h"
 #include "../../SDL2/SDL_ttf.h"
 #include "../../include/src/CreateBoard.h"
+#include "../../include/src/Dijkstra.h"
 
 
 #ifndef PROJETC_GAME_H
