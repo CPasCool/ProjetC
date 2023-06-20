@@ -19,8 +19,8 @@ int LaunchGame(SDL_Renderer *renderer, SDL_Texture *tile, SDL_Texture *character
     introduction();
 
     choiceMenu *menu = createChoiceMenu();
-    bool isChoiced = false;
-    SDL_RenderCopy(renderer,background,NULL,NULL);
+    SDL_Rect destRect = {0,0,810,810};
+    SDL_RenderCopy(renderer,background,NULL,&destRect);
     SDL_RenderPresent(renderer);
     SDL_Event event;
     while (true) {
@@ -35,7 +35,7 @@ int LaunchGame(SDL_Renderer *renderer, SDL_Texture *tile, SDL_Texture *character
             switch (event.key.keysym.scancode) {
                 case SDL_SCANCODE_Z:
                 case SDL_SCANCODE_UP:
-                    SDL_RenderCopy(renderer,background,NULL,NULL);
+                    SDL_RenderCopy(renderer,background,NULL,&destRect);
                     SDL_RenderPresent(renderer);
                     if (choice != MINIMUM_CHOICE_MENU) {
                         setChoice(menu, choice - 1, renderer, font);
@@ -43,7 +43,7 @@ int LaunchGame(SDL_Renderer *renderer, SDL_Texture *tile, SDL_Texture *character
                     break;
                 case SDL_SCANCODE_S:
                 case SDL_SCANCODE_DOWN:
-                    SDL_RenderCopy(renderer,background,NULL,NULL);
+                    SDL_RenderCopy(renderer,background,NULL,&destRect);
                     SDL_RenderPresent(renderer);
                     if (choice != MAXIMUM_CHOICE_MENU) {
                         setChoice(menu, choice + 1, renderer, font);
@@ -51,9 +51,8 @@ int LaunchGame(SDL_Renderer *renderer, SDL_Texture *tile, SDL_Texture *character
                     break;
                 case SDL_SCANCODE_E:
                 case SDL_SCANCODE_RETURN:
-                    isChoiced = true;
                     if (choice == 1) {
-                        SDL_RenderCopy(renderer,background,NULL,NULL);
+                        SDL_RenderCopy(renderer,background,NULL,&destRect);
                         SDL_RenderPresent(renderer);
                         int gameChoice = useNewGameMenu(renderer, font,background);
                         if (gameChoice == 1) {
@@ -64,16 +63,16 @@ int LaunchGame(SDL_Renderer *renderer, SDL_Texture *tile, SDL_Texture *character
                             play(getCompliteSave(NULL), renderer, tile, characterTexture);
                         } else if (gameChoice == -1)
                             return 0;
-                        SDL_RenderCopy(renderer,background,NULL,NULL);
+                        SDL_RenderCopy(renderer,background,NULL,&destRect);
                         SDL_RenderPresent(renderer);
                     } else {
                         if (choice == 2) {
-                            SDL_RenderCopy(renderer,background,NULL,NULL);
+                            SDL_RenderCopy(renderer,background,NULL,&destRect);
                             displayCredit(renderer,font);
                             SDL_RenderPresent(renderer);
                             if (inCredit())
                                 return 1;
-                            SDL_RenderCopy(renderer,background,NULL,NULL);
+                            SDL_RenderCopy(renderer,background,NULL,&destRect);
                             SDL_RenderPresent(renderer);
                         } else if (choice == 3) {
                             return 1;

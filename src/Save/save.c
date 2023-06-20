@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
-#include "string.h"
+#include <string.h>
 
 
 /**
@@ -246,7 +246,6 @@ levelChain *getLevelBoardSave(levelChain *levelChain) {
     int counterLine = 0;
     int counterLetter = 0;
     int monsterCount = 0;
-    int monstersFullySetCount = 0;
     int counterLevel = 0;
 
     //read the file util the board ended so until we finished read the other levels name

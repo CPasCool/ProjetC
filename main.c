@@ -30,7 +30,7 @@ int main(int argc, char *argv[]) {
     // set the icon of the current window
     setIcon(window);
     // set background color
-    setBackgroundToWhite(renderer);
+//    setBackgroundToWhite(renderer);
 
     // load textures
     SDL_Texture *tiles = loadImage(renderer, "assets/Images/v2/Dungeon_Tileset.bmp");
