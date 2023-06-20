@@ -57,11 +57,11 @@ int LaunchGame(SDL_Renderer *renderer, SDL_Texture *tile, SDL_Texture *character
                         SDL_RenderPresent(renderer);
                         int gameChoice = useNewGameMenu(renderer, font,background);
                         if (gameChoice == 1) {
-                          if(play(NULL, renderer, tile, characterTexture)){
+                          if(play(NULL, renderer, tile, characterTexture,font)){
                               return 0;
                           };
                         } else if (gameChoice == 2) {
-                            play(getCompliteSave(NULL), renderer, tile, characterTexture);
+                            play(getCompliteSave(NULL), renderer, tile, characterTexture,font);
                         } else if (gameChoice == -1)
                             return 0;
                         SDL_RenderCopy(renderer,background,NULL,NULL);
@@ -219,7 +219,7 @@ void displayBoard(char **board, SDL_Renderer *renderer, SDL_Texture *tile, SDL_T
  * @param characterTexture => tile of the characters
  * @param window => game windows for resizing (SDL_SetWindowSize(window, h, w);)
  */
-int play(levelChain *levelChain, SDL_Renderer *renderer, SDL_Texture *tile, SDL_Texture *characterTexture) {
+int play(levelChain *levelChain, SDL_Renderer *renderer, SDL_Texture *tile, SDL_Texture *characterTexture,TTF_Font* font) {
     // condition de sortie du jeu
     Character *character = createCharacter("player");
     boardElements *board = createBoardElement();
@@ -245,12 +245,9 @@ int play(levelChain *levelChain, SDL_Renderer *renderer, SDL_Texture *tile, SDL_
             switch (event.key.keysym.scancode) {
                 case SDL_SCANCODE_P:
                 case SDL_SCANCODE_ESCAPE:
-                    if (pauseMenu('p', levelChain, board->character) == 1) {
-                        quit = true;
+                    if (pauseMenu('p', levelChain, board->character,renderer,font) == 1) {
+                        return 1;
                     }
-                    break;
-                case SDL_SCANCODE_M:
-                    // TODO : ajouter me menu pour afficher les monstres et leur stats
                     break;
                 case SDL_SCANCODE_Z:
                 case SDL_SCANCODE_UP:
